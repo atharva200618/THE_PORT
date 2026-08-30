@@ -21,6 +21,31 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static frontend files if dist exists
+const DIST_PATH = path.join(process.cwd(), 'dist');
+if (fs.existsSync(DIST_PATH)) {
+  app.use(express.static(DIST_PATH));
+}
+
+// Root Status & Health Route
+app.get('/', (req, res) => {
+  const indexHtml = path.join(DIST_PATH, 'index.html');
+  if (fs.existsSync(indexHtml)) {
+    return res.sendFile(indexHtml);
+  }
+  res.json({
+    name: 'The Port API',
+    status: 'online',
+    version: '1.0.0',
+    engine: 'Universal Apple iWork & Microsoft Office Passage Engine',
+    endpoints: {
+      health: '/api/health',
+      convert: 'POST /api/convert',
+      workerStatus: '/api/worker/status'
+    }
+  });
+});
+
 // Multer storage configuration for uploads
 const uploadStorage = multer.diskStorage({
   destination: (req, file, cb) => {
