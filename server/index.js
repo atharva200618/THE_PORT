@@ -177,6 +177,10 @@ const CONVERT_SCRIPT = path.join(process.cwd(), 'convert.sh');
 let isJobProcessing = false;
 
 async function processNextJobDirectly() {
+  if (process.platform !== 'darwin') {
+    // On Linux (Render cloud), wait for connected Mac Worker daemon
+    return;
+  }
   if (isJobProcessing) return;
   const job = db.getNextPendingJob();
   if (!job) return;
