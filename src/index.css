@@ -1,0 +1,462 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #EAEAEB;
+  --surface: #F2F2F4;
+  --card: #FFFFFF;
+  --dark: #161618;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--dark);
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* AVERO Deep Inset Bar */
+/* AVERO Deep Inset Bar with Glowing Hover Ring */
+.avero-inset-bar {
+  background: #E1E1E4;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 2px rgba(0, 0, 0, 0.16),
+    0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: all 0.35s ease;
+}
+
+.avero-inset-bar:hover {
+  background: #E5E5E8;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.12),
+    0 0 30px rgba(59, 130, 246, 0.22),
+    0 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+/* AVERO Raised White Pill Badge */
+.avero-pill-badge {
+  background: #FFFFFF;
+  box-shadow: 
+    0 2px 5px rgba(0, 0, 0, 0.08),
+    0 1px 1px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: all 0.25s ease;
+}
+
+.avero-pill-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 0 12px rgba(255, 255, 255, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* AVERO Glossy Circular Arrow Button */
+.avero-circle-glossy {
+  background: radial-gradient(circle at 35% 30%, #525258 0%, #202024 60%, #0F0F12 100%);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.4),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* AVERO 3D Liquid Dark Button with Glowing Halo */
+.avero-dark-glossy,
+.glossy-dark-btn {
+  background: linear-gradient(180deg, #44444A 0%, #222226 48%, #161619 52%, #0E0E10 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.3s ease;
+}
+
+.avero-dark-glossy:hover,
+.glossy-dark-btn:hover {
+  background: linear-gradient(180deg, #4E4E55 0%, #2A2A2E 48%, #1C1C20 52%, #121215 100%) !important;
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 0 22px rgba(255, 255, 255, 0.45),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.6) !important;
+}
+
+.avero-dark-glossy:active,
+.glossy-dark-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* AVERO 3D Soft Light Button with White Glow Aura */
+.avero-light-glossy {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E8E8EC 100%);
+  box-shadow: 
+    0 6px 18px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.avero-light-glossy:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F3 100%);
+  box-shadow: 
+    0 10px 28px rgba(0, 0, 0, 0.08),
+    0 0 20px rgba(255, 255, 255, 0.95),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.avero-light-glossy:active {
+  transform: scale(0.97);
+}
+
+/* AVERO Bottom Highlights Bar */
+.avero-bottom-bar {
+  background: #ECECEF;
+  border-top: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 -4px 16px rgba(0, 0, 0, 0.02);
+}
+
+/* AVERO 1:1 Permanent 3D Soft Clay Card (3D Popping on Mobile & Desktop by Default) */
+.avero-clay-card {
+  position: relative;
+  background: #ECECEF;
+  border-radius: 1.75rem;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 
+    8px 16px 28px -2px rgba(0, 0, 0, 0.12),
+    3px 6px 12px rgba(0, 0, 0, 0.07),
+    inset 0 1.5px 1.5px #FFFFFF;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mobile Tactile Touch Active State */
+.avero-clay-card:active {
+  transform: translateY(1px) translateX(1px);
+  box-shadow: 
+    4px 8px 16px -2px rgba(0, 0, 0, 0.1),
+    inset 0 1.5px 1.5px #FFFFFF;
+}
+
+/* Desktop Hover Elevation Boost */
+@media (hover: hover) {
+  .avero-clay-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.85rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(59, 130, 246, 0.3), rgba(16, 185, 129, 0.3), rgba(255, 255, 255, 0.9));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(10px);
+  }
+
+  .avero-clay-card:hover {
+    transform: translateY(-4px) translateX(-2px);
+    background: #F7F7FA;
+    border-color: #FFFFFF;
+    box-shadow: 
+      14px 24px 40px -4px rgba(0, 0, 0, 0.15),
+      5px 10px 18px rgba(0, 0, 0, 0.08),
+      inset 0 1.5px 1.5px #FFFFFF;
+  }
+
+  .avero-clay-card:hover::after {
+    opacity: 1;
+  }
+}
+
+.clay-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.02);
+}
+
+.clay-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 26px 50px -12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+/* River Stream Marquee & Mask */
+.river-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+@keyframes riverMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-river {
+  display: flex;
+  width: max-content;
+  animation: riverMarquee 22s linear infinite;
+}
+
+.animate-river:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #EAEAEB;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4C4C8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A0A0A5;
+}
+
+/* ==============================================================================
+   WORKSPACE KINETIC GLOW & 3D AURA EFFECTS
+   ============================================================================== */
+
+/* Office / Paper Stage Dynamic Amber Aura */
+.avero-paper-card {
+  background: #ECECEF;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    10px 20px 32px -4px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    inset 0 2px 2px #FFFFFF;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.avero-paper-card:hover,
+.avero-paper-card.active-stage {
+  box-shadow: 
+    12px 24px 44px -4px rgba(0, 0, 0, 0.15),
+    0 0 32px -4px rgba(245, 158, 11, 0.22),
+    inset 0 2px 2px #FFFFFF;
+}
+
+/* Apple iWork Stage Dynamic Sapphire Aura */
+.avero-glass-card {
+  background: #ECECEF;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    10px 20px 32px -4px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    inset 0 2px 2px #FFFFFF;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.avero-glass-card:hover,
+.avero-glass-card.active-stage {
+  box-shadow: 
+    12px 24px 44px -4px rgba(0, 0, 0, 0.15),
+    0 0 32px -4px rgba(37, 99, 235, 0.22),
+    inset 0 2px 2px #FFFFFF;
+}
+
+/* Deep 3D Carved-Out Inset Dropzone */
+.avero-inset-dropzone {
+  background: #E3E3E7;
+  box-shadow: 
+    inset 2px 3px 6px rgba(0, 0, 0, 0.12),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
+    0 1px 1px rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.avero-inset-dropzone:hover {
+  background: #DFDFE3;
+  box-shadow: 
+    inset 3px 4px 8px rgba(0, 0, 0, 0.15),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.95);
+}
+
+/* Kinetic Radar Ripple Animation */
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+}
+
+.animate-radar {
+  animation: radarPulse 3s ease-in-out infinite;
+}
+
+/* Kinetic Gate Rotating Energy Halo */
+@keyframes gateHaloRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-gate-halo {
+  animation: gateHaloRotate 8s linear infinite;
+}
+
+/* ==============================================================================
+   HIGH-VISIBILITY AUTOMATIC INBUILT ANIMATIONS & GLOW EFFECTS
+   ============================================================================== */
+
+/* Auto Ambient Breathing Glow for Mobile Screens */
+@keyframes ambientBreathAmber {
+  0%, 100% {
+    box-shadow: 10px 20px 32px -4px rgba(0, 0, 0, 0.12), 0 0 20px 2px rgba(245, 158, 11, 0.22), inset 0 2px 2px #FFFFFF;
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: 14px 28px 48px -4px rgba(0, 0, 0, 0.16), 0 0 38px 6px rgba(245, 158, 11, 0.4), inset 0 2px 2px #FFFFFF;
+    border-color: rgba(245, 158, 11, 0.75);
+  }
+}
+
+@keyframes ambientBreathSapphire {
+  0%, 100% {
+    box-shadow: 10px 20px 32px -4px rgba(0, 0, 0, 0.12), 0 0 20px 2px rgba(37, 99, 235, 0.22), inset 0 2px 2px #FFFFFF;
+    border-color: rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 14px 28px 48px -4px rgba(0, 0, 0, 0.16), 0 0 38px 6px rgba(37, 99, 235, 0.4), inset 0 2px 2px #FFFFFF;
+    border-color: rgba(59, 130, 246, 0.75);
+  }
+}
+
+.animate-breath-amber {
+  animation: ambientBreathAmber 4s ease-in-out infinite;
+}
+
+.animate-breath-sapphire {
+  animation: ambientBreathSapphire 4s ease-in-out infinite;
+}
+
+/* 3.5s Cyclic Liquid Light-Sheen Sweep across Glossy Elements */
+@keyframes lightSheenSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  30%, 100% {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+
+.sheen-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.sheen-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  animation: lightSheenSweep 4s ease-in-out infinite;
+}
+
+/* Smooth Card Levitation Physics */
+@keyframes cardLevitate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-levitate {
+  animation: cardLevitate 4s ease-in-out infinite;
+}
+
+/* Gentle 3D Floating Drift for Badges */
+@keyframes floatingDrift {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-float-drift {
+  animation: floatingDrift 3s ease-in-out infinite;
+}
+
+/* Animated Ambient Background Glowing Orbs */
+@keyframes orbDriftLeft {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(25px, -20px) scale(1.15);
+    opacity: 0.55;
+  }
+}
+
+@keyframes orbDriftRight {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-25px, 20px) scale(1.15);
+    opacity: 0.55;
+  }
+}
+
+.animate-orb-amber {
+  animation: orbDriftLeft 7s ease-in-out infinite;
+}
+
+.animate-orb-sapphire {
+  animation: orbDriftRight 7s ease-in-out infinite;
+}
+
+/* Touch Hide Scrollbar Utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+

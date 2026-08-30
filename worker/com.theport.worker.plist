@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.theport.worker</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/caffeinate</string>
+        <string>-s</string>
+        <string>/usr/local/bin/node</string>
+        <string>/Users/atharvaupadhyay/Downloads/convert/worker/worker.js</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>BACKEND_URL</key>
+        <string>http://localhost:3001</string>
+        <key>POLL_INTERVAL_MS</key>
+        <string>3000</string>
+    </dict>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/atharvaupadhyay/Downloads/convert</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/atharvaupadhyay/Downloads/convert/worker/launchd_stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/atharvaupadhyay/Downloads/convert/worker/launchd_stderr.log</string>
+</dict>
+</plist>

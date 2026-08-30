@@ -1,0 +1,344 @@
+[2026-08-30T06:01:34.339Z] [INFO] ========================================================
+[2026-08-30T06:01:34.343Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-08-30T06:01:34.343Z] [INFO]  Backend Target: http://localhost:3001
+[2026-08-30T06:01:34.343Z] [INFO]  Poll Interval: 3000ms
+[2026-08-30T06:01:34.343Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-08-30T06:01:34.343Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-08-30T06:01:34.343Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-08-30T06:01:34.343Z] [INFO] ========================================================
+[2026-08-30T06:01:34.410Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:37.349Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:40.352Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:43.348Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:46.352Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:49.350Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:52.351Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:55.353Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:01:58.355Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:01.358Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:04.358Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:07.360Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:10.360Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:13.362Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:16.361Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:19.363Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:22.367Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:25.367Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:28.368Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:31.369Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:34.371Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:37.370Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:40.372Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:43.373Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:46.374Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:49.373Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:52.375Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:55.375Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:02:58.377Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:01.376Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:04.378Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:07.378Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:10.380Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:13.380Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:16.380Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:19.386Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:22.384Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:25.385Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:28.386Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:31.385Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:34.387Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:37.388Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:40.389Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:43.390Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:46.390Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:49.391Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:52.391Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:55.393Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:03:58.394Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:01.395Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:04.396Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:07.398Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:10.400Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:13.400Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:16.401Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:19.402Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:22.403Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:25.404Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:28.406Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:31.407Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:34.408Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:37.409Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:40.410Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:43.408Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:46.411Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:49.412Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:52.412Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:55.414Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:04:58.414Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:01.415Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:04.415Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:07.416Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:10.418Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:13.418Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:16.419Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:19.421Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:22.421Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:25.422Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:28.423Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:31.422Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:34.424Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:37.424Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:40.427Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:43.427Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:46.426Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:49.427Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:52.430Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:55.430Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:58.432Z] [WARN] Backend poll returned HTTP 404
+[2026-08-30T06:05:58.872Z] [INFO] Shutting down Mac Worker Daemon gracefully...
+[2026-08-30T06:05:58.873Z] [INFO] Shutting down Mac Worker Daemon gracefully...
+[2026-08-30T06:05:59.874Z] [INFO] Worker stopped.
+[2026-08-30T06:07:30.032Z] [INFO] ========================================================
+[2026-08-30T06:07:30.037Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-08-30T06:07:30.037Z] [INFO]  Backend Target: http://localhost:3001
+[2026-08-30T06:07:30.037Z] [INFO]  Poll Interval: 3000ms
+[2026-08-30T06:07:30.037Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-08-30T06:07:30.037Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-08-30T06:07:30.037Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-08-30T06:07:30.037Z] [INFO] ========================================================
+[2026-08-30T06:08:24.060Z] [INFO] === Starting Job [job_1788070101805_3bc5fbd2] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:08:24.060Z] [INFO] Downloading source file for job job_1788070101805_3bc5fbd2...
+[2026-08-30T06:08:24.077Z] [INFO] Executing conversion for job job_1788070101805_3bc5fbd2...
+[2026-08-30T06:08:24.078Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070101805_3bc5fbd2.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070101805_3bc5fbd2.pages"}
+[2026-08-30T06:08:32.868Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070101805_3bc5fbd2.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070101805_3bc5fbd2.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:08:32.869Z] [INFO] Uploading converted output for job job_1788070101805_3bc5fbd2...
+[2026-08-30T06:08:32.886Z] [INFO] === Job [job_1788070101805_3bc5fbd2] COMPLETED Successfully ===
+[2026-08-30T06:10:30.097Z] [INFO] === Starting Job [job_1788070229672_9e52ab8a] === | {"name":"resume_test.pages","source":"pages","target":"docx"}
+[2026-08-30T06:10:30.098Z] [INFO] Downloading source file for job job_1788070229672_9e52ab8a...
+[2026-08-30T06:10:30.110Z] [INFO] Executing conversion for job job_1788070229672_9e52ab8a...
+[2026-08-30T06:10:30.110Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070229672_9e52ab8a.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070229672_9e52ab8a.docx"}
+[2026-08-30T06:10:36.263Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070229672_9e52ab8a.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070229672_9e52ab8a.docx\nDone."}
+[2026-08-30T06:10:36.264Z] [INFO] Uploading converted output for job job_1788070229672_9e52ab8a...
+[2026-08-30T06:10:36.271Z] [INFO] === Job [job_1788070229672_9e52ab8a] COMPLETED Successfully ===
+[2026-08-30T06:13:06.142Z] [INFO] === Starting Job [job_1788070384092_5716c227] === | {"name":"resume_test.pages","source":"pages","target":"pdf"}
+[2026-08-30T06:13:06.143Z] [INFO] Downloading source file for job job_1788070384092_5716c227...
+[2026-08-30T06:13:06.156Z] [INFO] Executing conversion for job job_1788070384092_5716c227...
+[2026-08-30T06:13:06.156Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070384092_5716c227.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070384092_5716c227.pdf"}
+[2026-08-30T06:13:12.939Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788070384092_5716c227.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788070384092_5716c227.pdf\nDone."}
+[2026-08-30T06:13:12.940Z] [INFO] Uploading converted output for job job_1788070384092_5716c227...
+[2026-08-30T06:13:12.950Z] [INFO] === Job [job_1788070384092_5716c227] COMPLETED Successfully ===
+[2026-08-30T06:30:36.563Z] [INFO] === Starting Job [job_1788071436148_37cf187c] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"docx"}
+[2026-08-30T06:30:36.564Z] [INFO] Downloading source file for job job_1788071436148_37cf187c...
+[2026-08-30T06:30:36.572Z] [INFO] Executing conversion for job job_1788071436148_37cf187c...
+[2026-08-30T06:30:36.573Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071436148_37cf187c.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071436148_37cf187c.docx"}
+[2026-08-30T06:30:37.766Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071436148_37cf187c.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071436148_37cf187c.docx\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:30:37.766Z] [INFO] Uploading converted output for job job_1788071436148_37cf187c...
+[2026-08-30T06:30:37.769Z] [INFO] === Job [job_1788071436148_37cf187c] COMPLETED Successfully ===
+[2026-08-30T06:36:30.679Z] [INFO] === Starting Job [job_1788071788927_9725053b] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:36:30.681Z] [INFO] Downloading source file for job job_1788071788927_9725053b...
+[2026-08-30T06:36:30.688Z] [INFO] Executing conversion for job job_1788071788927_9725053b...
+[2026-08-30T06:36:30.689Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071788927_9725053b.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071788927_9725053b.pages"}
+[2026-08-30T06:36:37.415Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071788927_9725053b.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071788927_9725053b.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:36:37.416Z] [INFO] Uploading converted output for job job_1788071788927_9725053b...
+[2026-08-30T06:36:37.427Z] [INFO] === Job [job_1788071788927_9725053b] COMPLETED Successfully ===
+[2026-08-30T06:37:09.688Z] [INFO] === Starting Job [job_1788071827826_37d11169] === | {"name":"final4.docx","source":"docx","target":"pages"}
+[2026-08-30T06:37:09.689Z] [INFO] Downloading source file for job job_1788071827826_37d11169...
+[2026-08-30T06:37:09.694Z] [INFO] Executing conversion for job job_1788071827826_37d11169...
+[2026-08-30T06:37:09.694Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071827826_37d11169.docx","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071827826_37d11169.pages"}
+[2026-08-30T06:37:15.792Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788071827826_37d11169.docx -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788071827826_37d11169.pages\nDone."}
+[2026-08-30T06:37:15.793Z] [INFO] Uploading converted output for job job_1788071827826_37d11169...
+[2026-08-30T06:37:15.806Z] [INFO] === Job [job_1788071827826_37d11169] COMPLETED Successfully ===
+[2026-08-30T06:40:18.742Z] [INFO] === Starting Job [job_1788072017433_6b91b00a] === | {"name":"final5.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:40:18.744Z] [INFO] Downloading source file for job job_1788072017433_6b91b00a...
+[2026-08-30T06:40:18.750Z] [INFO] Executing conversion for job job_1788072017433_6b91b00a...
+[2026-08-30T06:40:18.750Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072017433_6b91b00a.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072017433_6b91b00a.pages"}
+[2026-08-30T06:40:26.347Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072017433_6b91b00a.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072017433_6b91b00a.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:40:26.348Z] [INFO] Uploading converted output for job job_1788072017433_6b91b00a...
+[2026-08-30T06:40:26.359Z] [INFO] === Job [job_1788072017433_6b91b00a] COMPLETED Successfully ===
+[2026-08-30T06:42:54.792Z] [INFO] === Starting Job [job_1788072172662_89a69c96] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:42:54.793Z] [INFO] Downloading source file for job job_1788072172662_89a69c96...
+[2026-08-30T06:42:54.802Z] [INFO] Executing conversion for job job_1788072172662_89a69c96...
+[2026-08-30T06:42:54.802Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072172662_89a69c96.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072172662_89a69c96.pages"}
+[2026-08-30T06:43:01.918Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072172662_89a69c96.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072172662_89a69c96.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:43:01.919Z] [INFO] Uploading converted output for job job_1788072172662_89a69c96...
+[2026-08-30T06:43:01.936Z] [INFO] === Job [job_1788072172662_89a69c96] COMPLETED Successfully ===
+[2026-08-30T06:43:03.793Z] [INFO] === Starting Job [job_1788072182738_a92930bc] === | {"name":"final4.docx","source":"docx","target":"pages"}
+[2026-08-30T06:43:03.794Z] [INFO] Downloading source file for job job_1788072182738_a92930bc...
+[2026-08-30T06:43:03.799Z] [INFO] Executing conversion for job job_1788072182738_a92930bc...
+[2026-08-30T06:43:03.799Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072182738_a92930bc.docx","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072182738_a92930bc.pages"}
+[2026-08-30T06:43:09.796Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072182738_a92930bc.docx -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072182738_a92930bc.pages\nDone."}
+[2026-08-30T06:43:09.796Z] [INFO] Uploading converted output for job job_1788072182738_a92930bc...
+[2026-08-30T06:43:09.805Z] [INFO] === Job [job_1788072182738_a92930bc] COMPLETED Successfully ===
+[2026-08-30T06:43:57.810Z] [INFO] === Starting Job [job_1788072237065_ca9b117f] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:43:57.810Z] [INFO] Downloading source file for job job_1788072237065_ca9b117f...
+[2026-08-30T06:43:57.817Z] [INFO] Executing conversion for job job_1788072237065_ca9b117f...
+[2026-08-30T06:43:57.817Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072237065_ca9b117f.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072237065_ca9b117f.pages"}
+[2026-08-30T06:44:04.744Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072237065_ca9b117f.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072237065_ca9b117f.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:44:04.744Z] [INFO] Uploading converted output for job job_1788072237065_ca9b117f...
+[2026-08-30T06:44:04.753Z] [INFO] === Job [job_1788072237065_ca9b117f] COMPLETED Successfully ===
+[2026-08-30T06:44:36.836Z] [INFO] === Starting Job [job_1788072276528_406c7646] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:44:36.836Z] [INFO] Downloading source file for job job_1788072276528_406c7646...
+[2026-08-30T06:44:36.842Z] [INFO] Executing conversion for job job_1788072276528_406c7646...
+[2026-08-30T06:44:36.843Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072276528_406c7646.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072276528_406c7646.pages"}
+[2026-08-30T06:44:42.878Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072276528_406c7646.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072276528_406c7646.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:44:42.879Z] [INFO] Uploading converted output for job job_1788072276528_406c7646...
+[2026-08-30T06:44:42.890Z] [INFO] === Job [job_1788072276528_406c7646] COMPLETED Successfully ===
+[2026-08-30T06:50:57.958Z] [INFO] === Starting Job [job_1788072657454_814b363d] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T06:50:57.959Z] [INFO] Downloading source file for job job_1788072657454_814b363d...
+[2026-08-30T06:50:57.966Z] [INFO] Executing conversion for job job_1788072657454_814b363d...
+[2026-08-30T06:50:57.967Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072657454_814b363d.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072657454_814b363d.pages"}
+[2026-08-30T06:51:05.169Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788072657454_814b363d.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788072657454_814b363d.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T06:51:05.170Z] [INFO] Uploading converted output for job job_1788072657454_814b363d...
+[2026-08-30T06:51:05.183Z] [INFO] === Job [job_1788072657454_814b363d] COMPLETED Successfully ===
+[2026-08-30T06:57:07.076Z] [INFO] === Starting Job [job_1788073025774_1dbeb426] === | {"name":"Executive_Strategic_Brief.docx","source":"docx","target":"pdf"}
+[2026-08-30T06:57:07.078Z] [INFO] Downloading source file for job job_1788073025774_1dbeb426...
+[2026-08-30T06:57:07.086Z] [INFO] Executing conversion for job job_1788073025774_1dbeb426...
+[2026-08-30T06:57:07.086Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073025774_1dbeb426.docx","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073025774_1dbeb426.pdf"}
+[2026-08-30T06:57:15.115Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073025774_1dbeb426.docx -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073025774_1dbeb426.pdf\nconvert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073025774_1dbeb426.docx as a Writer document -> /private/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073025774_1dbeb426.pdf using filter : writer_pdf_Export\nDone."}
+[2026-08-30T06:57:15.115Z] [INFO] Uploading converted output for job job_1788073025774_1dbeb426...
+[2026-08-30T06:57:15.119Z] [INFO] === Job [job_1788073025774_1dbeb426] COMPLETED Successfully ===
+[2026-08-30T07:00:10.134Z] [INFO] === Starting Job [job_1788073208199_da4ac213] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T07:00:10.136Z] [INFO] Downloading source file for job job_1788073208199_da4ac213...
+[2026-08-30T07:00:10.144Z] [INFO] Executing conversion for job job_1788073208199_da4ac213...
+[2026-08-30T07:00:10.145Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073208199_da4ac213.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073208199_da4ac213.pages"}
+[2026-08-30T07:00:18.072Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073208199_da4ac213.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073208199_da4ac213.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T07:00:18.072Z] [INFO] Uploading converted output for job job_1788073208199_da4ac213...
+[2026-08-30T07:00:18.083Z] [INFO] === Job [job_1788073208199_da4ac213] COMPLETED Successfully ===
+[2026-08-30T07:03:34.195Z] [INFO] === Starting Job [job_1788073411360_9017c3cf] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T07:03:34.197Z] [INFO] Downloading source file for job job_1788073411360_9017c3cf...
+[2026-08-30T07:03:34.204Z] [INFO] Executing conversion for job job_1788073411360_9017c3cf...
+[2026-08-30T07:03:34.204Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073411360_9017c3cf.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073411360_9017c3cf.pages"}
+[2026-08-30T07:03:41.191Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073411360_9017c3cf.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073411360_9017c3cf.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T07:03:41.192Z] [INFO] Uploading converted output for job job_1788073411360_9017c3cf...
+[2026-08-30T07:03:41.207Z] [INFO] === Job [job_1788073411360_9017c3cf] COMPLETED Successfully ===
+[2026-08-30T07:06:31.260Z] [INFO] === Starting Job [job_1788073588839_1425689a] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T07:06:31.261Z] [INFO] Downloading source file for job job_1788073588839_1425689a...
+[2026-08-30T07:06:31.272Z] [INFO] Executing conversion for job job_1788073588839_1425689a...
+[2026-08-30T07:06:31.273Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073588839_1425689a.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073588839_1425689a.pages"}
+[2026-08-30T07:06:37.980Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073588839_1425689a.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073588839_1425689a.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T07:06:37.981Z] [INFO] Uploading converted output for job job_1788073588839_1425689a...
+[2026-08-30T07:06:37.995Z] [INFO] === Job [job_1788073588839_1425689a] COMPLETED Successfully ===
+[2026-08-30T07:08:43.296Z] [INFO] === Starting Job [job_1788073720488_9b382001] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T07:08:43.297Z] [INFO] Downloading source file for job job_1788073720488_9b382001...
+[2026-08-30T07:08:43.312Z] [INFO] Executing conversion for job job_1788073720488_9b382001...
+[2026-08-30T07:08:43.312Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073720488_9b382001.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073720488_9b382001.pages"}
+[2026-08-30T07:08:50.181Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073720488_9b382001.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073720488_9b382001.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T07:08:50.181Z] [INFO] Uploading converted output for job job_1788073720488_9b382001...
+[2026-08-30T07:08:50.190Z] [INFO] === Job [job_1788073720488_9b382001] COMPLETED Successfully ===
+[2026-08-30T07:10:19.324Z] [INFO] === Starting Job [job_1788073816768_c6407e7d] === | {"name":"Untitled.pages","source":"pages","target":"pdf"}
+[2026-08-30T07:10:19.325Z] [INFO] Downloading source file for job job_1788073816768_c6407e7d...
+[2026-08-30T07:10:19.339Z] [INFO] Executing conversion for job job_1788073816768_c6407e7d...
+[2026-08-30T07:10:19.340Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073816768_c6407e7d.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073816768_c6407e7d.pdf"}
+[2026-08-30T07:10:26.030Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073816768_c6407e7d.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073816768_c6407e7d.pdf\nDone."}
+[2026-08-30T07:10:26.031Z] [INFO] Uploading converted output for job job_1788073816768_c6407e7d...
+[2026-08-30T07:10:26.042Z] [INFO] === Job [job_1788073816768_c6407e7d] COMPLETED Successfully ===
+[2026-08-30T07:10:49.331Z] [INFO] === Starting Job [job_1788073849157_6eaf55d6] === | {"name":"Untitled.pages","source":"pages","target":"pdf"}
+[2026-08-30T07:10:49.332Z] [INFO] Downloading source file for job job_1788073849157_6eaf55d6...
+[2026-08-30T07:10:49.337Z] [INFO] Executing conversion for job job_1788073849157_6eaf55d6...
+[2026-08-30T07:10:49.337Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073849157_6eaf55d6.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073849157_6eaf55d6.pdf"}
+[2026-08-30T07:10:56.053Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788073849157_6eaf55d6.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788073849157_6eaf55d6.pdf\nDone."}
+[2026-08-30T07:10:56.054Z] [INFO] Uploading converted output for job job_1788073849157_6eaf55d6...
+[2026-08-30T07:10:56.063Z] [INFO] === Job [job_1788073849157_6eaf55d6] COMPLETED Successfully ===
+[2026-08-30T07:14:37.415Z] [INFO] === Starting Job [job_1788074076650_d6da5f1d] === | {"name":"Untitled.pages","source":"pages","target":"pdf"}
+[2026-08-30T07:14:37.417Z] [INFO] Downloading source file for job job_1788074076650_d6da5f1d...
+[2026-08-30T07:14:37.425Z] [INFO] Executing conversion for job job_1788074076650_d6da5f1d...
+[2026-08-30T07:14:37.425Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074076650_d6da5f1d.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074076650_d6da5f1d.pdf"}
+[2026-08-30T07:14:44.408Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074076650_d6da5f1d.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074076650_d6da5f1d.pdf\nDone."}
+[2026-08-30T07:14:44.409Z] [INFO] Uploading converted output for job job_1788074076650_d6da5f1d...
+[2026-08-30T07:14:44.419Z] [INFO] === Job [job_1788074076650_d6da5f1d] COMPLETED Successfully ===
+[2026-08-30T07:15:31.439Z] [INFO] === Starting Job [job_1788074130951_fd3fc032] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-08-30T07:15:31.440Z] [INFO] Downloading source file for job job_1788074130951_fd3fc032...
+[2026-08-30T07:15:31.448Z] [INFO] Executing conversion for job job_1788074130951_fd3fc032...
+[2026-08-30T07:15:31.448Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074130951_fd3fc032.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074130951_fd3fc032.pages"}
+[2026-08-30T07:15:38.550Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074130951_fd3fc032.pdf -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074130951_fd3fc032.pages\n  (PDF -> Pages needs a DOCX intermediate step)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\nDone."}
+[2026-08-30T07:15:38.550Z] [INFO] Uploading converted output for job job_1788074130951_fd3fc032...
+[2026-08-30T07:15:38.564Z] [INFO] === Job [job_1788074130951_fd3fc032] COMPLETED Successfully ===
+[2026-08-30T07:21:04.547Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:07.540Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:10.542Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:13.544Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:16.544Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:19.546Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:22.546Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:25.548Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T07:21:43.553Z] [INFO] === Starting Job [job_1788074502980_313547f4] === | {"name":"Untitled.pages","source":"pages","target":"pdf"}
+[2026-08-30T07:21:43.554Z] [INFO] Downloading source file for job job_1788074502980_313547f4...
+[2026-08-30T07:21:43.563Z] [INFO] Executing conversion for job job_1788074502980_313547f4...
+[2026-08-30T07:21:43.563Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074502980_313547f4.pages","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074502980_313547f4.pdf"}
+[2026-08-30T07:21:50.498Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788074502980_313547f4.pages -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788074502980_313547f4.pdf\nDone."}
+[2026-08-30T07:21:50.499Z] [INFO] Uploading converted output for job job_1788074502980_313547f4...
+[2026-08-30T07:21:50.511Z] [INFO] === Job [job_1788074502980_313547f4] COMPLETED Successfully ===
+[2026-08-30T08:52:52.396Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T09:25:55.957Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T12:39:46.095Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:18:56.298Z] [INFO] === Starting Job [job_1788095934386_3131a181] === | {"name":"Compiler Design Lab Submission 2.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:18:56.300Z] [INFO] Downloading source file for job job_1788095934386_3131a181...
+[2026-08-30T13:18:56.310Z] [INFO] Executing conversion for job job_1788095934386_3131a181...
+[2026-08-30T13:18:56.310Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788095934386_3131a181.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788095934386_3131a181.pages"}
+[2026-08-30T13:19:01.245Z] [ERROR] Subprocess conversion failed | {"code":0,"errorMsg":"[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788095934386_3131a181.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.68s.\n38:46: execution error: Pages Creator Studio got an error: Application isn’t running. (-600)"}
+[2026-08-30T13:19:01.246Z] [ERROR] === Job [job_1788095934386_3131a181] FAILED === | {"error":"[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788095934386_3131a181.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.68s.\n38:46: execution error: Pages Creator Studio got an error: Application isn’t running. (-600)"}
+[2026-08-30T13:27:59.472Z] [INFO] === Starting Job [job_1788096477677_ead67b70] === | {"name":"Compiler Design Lab Submission 2.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:27:59.474Z] [INFO] Downloading source file for job job_1788096477677_ead67b70...
+[2026-08-30T13:27:59.482Z] [INFO] Executing conversion for job job_1788096477677_ead67b70...
+[2026-08-30T13:27:59.482Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096477677_ead67b70.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096477677_ead67b70.pages"}
+[2026-08-30T13:28:13.536Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096477677_ead67b70.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096477677_ead67b70.pages (pages)\n  (PDF -> Pages via LibreOffice DOCX intermediate)\nconvert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096477677_ead67b70.pdf as a Writer document -> /private/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096477677_ead67b70.docx using filter : Office Open XML Text\nDone."}
+[2026-08-30T13:28:13.538Z] [INFO] Uploading converted output for job job_1788096477677_ead67b70...
+[2026-08-30T13:28:13.558Z] [INFO] === Job [job_1788096477677_ead67b70] COMPLETED Successfully ===
+[2026-08-30T13:33:52.617Z] [INFO] ========================================================
+[2026-08-30T13:33:52.619Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-08-30T13:33:52.619Z] [INFO]  Backend Target: http://localhost:3001
+[2026-08-30T13:33:52.619Z] [INFO]  Poll Interval: 3000ms
+[2026-08-30T13:33:52.619Z] [INFO]  Watchdog Timeout: 30s
+[2026-08-30T13:33:52.619Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-08-30T13:33:52.619Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-08-30T13:33:52.619Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-08-30T13:33:52.620Z] [INFO] ========================================================
+[2026-08-30T13:33:52.658Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:33:55.625Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:33:58.624Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:01.625Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:04.627Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:07.627Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:10.627Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:13.628Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:16.630Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:19.630Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:22.630Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:25.632Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T13:34:40.339Z] [INFO] ========================================================
+[2026-08-30T13:34:40.342Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-08-30T13:34:40.342Z] [INFO]  Backend Target: http://localhost:3001
+[2026-08-30T13:34:40.342Z] [INFO]  Poll Interval: 3000ms
+[2026-08-30T13:34:40.342Z] [INFO]  Watchdog Timeout: 30s
+[2026-08-30T13:34:40.342Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-08-30T13:34:40.342Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-08-30T13:34:40.342Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-08-30T13:34:40.342Z] [INFO] ========================================================
+[2026-08-30T13:35:55.371Z] [INFO] === Starting Job [job_1788096953910_377cccc0] === | {"name":"Compiler Design Lab Submission 2.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:35:55.373Z] [INFO] Downloading source file for job job_1788096953910_377cccc0...
+[2026-08-30T13:35:55.380Z] [INFO] Executing conversion for job job_1788096953910_377cccc0...
+[2026-08-30T13:35:55.381Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096953910_377cccc0.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096953910_377cccc0.pages"}
+[2026-08-30T13:36:04.704Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096953910_377cccc0.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096953910_377cccc0.pages (pages)\n  (PDF -> Pages via pdf2docx high-fidelity intermediate)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096953910_377cccc0.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.67s.\nDone."}
+[2026-08-30T13:36:04.705Z] [INFO] Uploading converted output for job job_1788096953910_377cccc0...
+[2026-08-30T13:36:04.730Z] [INFO] === Job [job_1788096953910_377cccc0] COMPLETED Successfully ===
+[2026-08-30T13:36:31.377Z] [INFO] === Starting Job [job_1788096990459_320c3786] === | {"name":"Computer Networks Lab QP 4.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:36:31.378Z] [INFO] Downloading source file for job job_1788096990459_320c3786...
+[2026-08-30T13:36:31.388Z] [INFO] Executing conversion for job job_1788096990459_320c3786...
+[2026-08-30T13:36:31.388Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096990459_320c3786.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096990459_320c3786.pages"}
+[2026-08-30T13:36:39.157Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096990459_320c3786.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788096990459_320c3786.pages (pages)\n  (PDF -> Pages via pdf2docx high-fidelity intermediate)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788096990459_320c3786.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.40s.\nDone."}
+[2026-08-30T13:36:39.157Z] [INFO] Uploading converted output for job job_1788096990459_320c3786...
+[2026-08-30T13:36:39.174Z] [INFO] === Job [job_1788096990459_320c3786] COMPLETED Successfully ===
+[2026-08-30T13:42:04.480Z] [INFO] === Starting Job [job_1788097324439_a98a0048] === | {"name":"Computer Networks Lab QP 4.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:42:04.481Z] [INFO] Downloading source file for job job_1788097324439_a98a0048...
+[2026-08-30T13:42:04.486Z] [INFO] Executing conversion for job job_1788097324439_a98a0048...
+[2026-08-30T13:42:04.487Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097324439_a98a0048.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788097324439_a98a0048.pages"}
+[2026-08-30T13:42:10.816Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097324439_a98a0048.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788097324439_a98a0048.pages (pages)\n  (PDF -> Pages via pdf2docx high-fidelity intermediate)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097324439_a98a0048.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.40s.\nDone."}
+[2026-08-30T13:42:10.816Z] [INFO] Uploading converted output for job job_1788097324439_a98a0048...
+[2026-08-30T13:42:10.828Z] [INFO] === Job [job_1788097324439_a98a0048] COMPLETED Successfully ===
+[2026-08-30T13:43:25.509Z] [INFO] === Starting Job [job_1788097405385_b939dfa7] === | {"name":"Computer Networks Lab Submission 3.pdf","source":"pdf","target":"pages"}
+[2026-08-30T13:43:25.510Z] [INFO] Downloading source file for job job_1788097405385_b939dfa7...
+[2026-08-30T13:43:25.520Z] [INFO] Executing conversion for job job_1788097405385_b939dfa7...
+[2026-08-30T13:43:25.521Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097405385_b939dfa7.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788097405385_b939dfa7.pages"}
+[2026-08-30T13:43:34.430Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097405385_b939dfa7.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788097405385_b939dfa7.pages (pages)\n  (PDF -> Pages via pdf2docx high-fidelity intermediate)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097405385_b939dfa7.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/17) Page 1\n[INFO] (2/17) Page 2\n[INFO] (3/17) Page 3\n[INFO] (4/17) Page 4\n[INFO] (5/17) Page 5\n[INFO] (6/17) Page 6\n[INFO] (7/17) Page 7\n[INFO] (8/17) Page 8\n[INFO] (9/17) Page 9\n[INFO] (10/17) Page 10\n[INFO] (11/17) Page 11\n[INFO] (12/17) Page 12\n[INFO] (13/17) Page 13\n[INFO] (14/17) Page 14\n[INFO] (15/17) Page 15\n[INFO] (16/17) Page 16\n[INFO] (17/17) Page 17\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/17) Page 1\n[INFO] (2/17) Page 2\n[INFO] (3/17) Page 3\n[INFO] (4/17) Page 4\n[INFO] (5/17) Page 5\n[INFO] (6/17) Page 6\n[INFO] (7/17) Page 7\n[INFO] (8/17) Page 8\n[INFO] (9/17) Page 9\n[INFO] (10/17) Page 10\n[INFO] (11/17) Page 11\n[INFO] (12/17) Page 12\n[INFO] (13/17) Page 13\n[INFO] (14/17) Page 14\n[INFO] (15/17) Page 15\n[INFO] (16/17) Page 16\n[INFO] (17/17) Page 17\n[INFO] Terminated in 2.06s.\nDone."}
+[2026-08-30T13:43:34.431Z] [INFO] Uploading converted output for job job_1788097405385_b939dfa7...
+[2026-08-30T13:43:34.471Z] [INFO] === Job [job_1788097405385_b939dfa7] COMPLETED Successfully ===
