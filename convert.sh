@@ -26,6 +26,7 @@ if [ ! -x "$SOFFICE" ] && command -v soffice >/dev/null 2>&1; then
 fi
 
 ENGINE_SCRIPT="$DIR/pdf_converter_engine.py"
+MEDIA_SCRIPT="$DIR/media_pdf_engine.py"
 
 # Helper: pre-launch an Apple app and wait for it to be fully ready
 pre_launch_app() {
@@ -39,6 +40,33 @@ pre_launch_app() {
         sleep 0.5
     fi
 }
+
+# ==============================================================================
+# 0. IMAGE & PDF UTILITIES (JPG/PNG -> PDF, PDF -> JPG/ZIP, PDF Compress, PDF -> MD/TXT)
+# ==============================================================================
+if [ "$IN_EXT" = "jpg" ] || [ "$IN_EXT" = "jpeg" ] || [ "$IN_EXT" = "png" ] || [ "$IN_EXT" = "webp" ] || [ "$IN_EXT" = "heic" ]; then
+    if [ "$OUT_EXT" = "pdf" ]; then
+        echo "  (Image -> PDF via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" img2pdf "$INPUT" "$OUTPUT"
+        exit 0
+    fi
+fi
+
+if [ "$IN_EXT" = "pdf" ]; then
+    if [ "$OUT_EXT" = "jpg" ] || [ "$OUT_EXT" = "jpeg" ] || [ "$OUT_EXT" = "png" ] || [ "$OUT_EXT" = "zip" ]; then
+        echo "  (PDF -> Image/ZIP via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" pdf2img "$INPUT" "$OUTPUT"
+        exit 0
+    elif [ "$OUT_EXT" = "md" ] || [ "$OUT_EXT" = "txt" ]; then
+        echo "  (PDF -> Markdown/Text via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" pdf2md "$INPUT" "$OUTPUT"
+        exit 0
+    elif [ "$OUT_EXT" = "pdf" ] || [ "$OUT_EXT" = "compressed" ]; then
+        echo "  (PDF -> Compressed PDF via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" compress "$INPUT" "$OUTPUT"
+        exit 0
+    fi
+fi
 
 # ==============================================================================
 # 1. APPLE PAGES SUITE (.pages <-> .docx, .pdf)

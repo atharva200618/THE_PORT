@@ -12,9 +12,14 @@ import storage, { UPLOADS_DIR, OUTPUTS_DIR, cleanExpiredFilesAndJobs } from './s
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// 25MB max file size limit
-const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024;
-const ALLOWED_EXTENSIONS = new Set(['docx', 'doc', 'pdf', 'pages', 'key', 'pptx', 'ppt', 'numbers', 'xlsx', 'xls', 'csv']);
+// 50MB max file size limit
+const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024;
+const ALLOWED_EXTENSIONS = new Set([
+  'docx', 'doc', 'pdf', 'pages', 'key', 'pptx', 'ppt', 
+  'numbers', 'xlsx', 'xls', 'csv', 
+  'jpg', 'jpeg', 'png', 'webp', 'heic', 
+  'zip', 'txt', 'md', 'compress', 'compressed'
+]);
 
 // Middlewares
 app.use(cors());
@@ -36,8 +41,8 @@ app.get('/', (req, res) => {
   res.json({
     name: 'The Port API',
     status: 'online',
-    version: '1.0.0',
-    engine: 'Universal Apple iWork & Microsoft Office Passage Engine',
+    version: '2.0.0',
+    engine: 'Universal Apple iWork, Office & Media Passage Engine',
     endpoints: {
       health: '/api/health',
       convert: 'POST /api/convert',
@@ -64,7 +69,7 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     const ext = (file.originalname.split('.').pop() || '').toLowerCase();
     if (!ALLOWED_EXTENSIONS.has(ext)) {
-      return cb(new Error(`Unsupported file extension '.${ext}'. Allowed: .docx, .pdf, .pages, .key, .pptx, .numbers, .xlsx, .csv`));
+      return cb(new Error(`Unsupported file extension '.${ext}'. Allowed: documents, spreadsheets, presentations, and images.`));
     }
     cb(null, true);
   }
@@ -84,10 +89,12 @@ const outputStorage = multer.diskStorage({
 
 const outputUpload = multer({
   storage: outputStorage,
-  limits: { fileSize: MAX_FILE_SIZE_BYTES * 2 }
+  limits: { fileSize: MAX_FILE_SIZE_BYTES }
 });
 
-// Helper to determine target format
+/**
+ * Resolves the target format for a given source extension
+ */
 function resolveTargetFormat(sourceExt, requestedFormat) {
   if (requestedFormat) {
     const cleaned = requestedFormat.toLowerCase().replace(/^\./, '');
@@ -95,6 +102,8 @@ function resolveTargetFormat(sourceExt, requestedFormat) {
       return cleaned;
     }
   }
+  // Image to PDF
+  if (['jpg', 'jpeg', 'png', 'webp', 'heic'].includes(sourceExt)) return 'pdf';
   // Default routing
   if (sourceExt === 'pages') return 'docx';
   if (sourceExt === 'key') return 'pptx';
@@ -117,7 +126,7 @@ app.post('/api/convert', (req, res) => {
     if (err instanceof multer.MulterError) {
       if (err.code === 'LIMIT_FILE_SIZE') {
         return res.status(400).json({
-          error: 'File is too large. Maximum file size is 25MB.'
+          error: 'File is too large. Maximum file size is 50MB.'
         });
       }
       return res.status(400).json({ error: `Upload error: ${err.message}` });
@@ -131,10 +140,11 @@ app.post('/api/convert', (req, res) => {
 
     const originalName = req.file.originalname;
     const sourceExt = (originalName.split('.').pop() || '').toLowerCase();
-    const requestedFormat = req.body.targetFormat || req.body.target || req.query.targetFormat;
-    const targetFormat = resolveTargetFormat(sourceExt, requestedFormat);
+    const requestedFormat = (req.body.targetFormat || req.body.target || req.query.targetFormat || '').toLowerCase();
+    const isCompressAction = requestedFormat === 'compress' || requestedFormat === 'compressed';
+    const targetFormat = isCompressAction ? 'pdf' : resolveTargetFormat(sourceExt, requestedFormat);
 
-    if (sourceExt === targetFormat) {
+    if (sourceExt === targetFormat && !isCompressAction) {
       // Clean up uploaded file
       fs.unlinkSync(req.file.path);
       return res.status(400).json({

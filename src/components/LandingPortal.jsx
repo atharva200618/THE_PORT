@@ -377,7 +377,27 @@ export default function LandingPortal({
             onClick={() => onSelectSample('pages')}
           />
 
-          {/* Tool 2: Keynote to PowerPoint */}
+          {/* Tool 2: Multiple Images to PDF */}
+          <SpotlightPassageCard
+            SourceIcon={AdobePdfIcon}
+            TargetIcon={ApplePagesIcon}
+            title="Photos & Images to PDF"
+            desc="Merge multiple JPG, PNG, WebP, and HEIC photos into a single high-resolution, perfectly ordered PDF document with A4 auto-fit."
+            tag="Multi-Image Binder"
+            onClick={() => onSelectSample('jpg')}
+          />
+
+          {/* Tool 3: Smart PDF Compressor */}
+          <SpotlightPassageCard
+            SourceIcon={AdobePdfIcon}
+            TargetIcon={AdobePdfIcon}
+            title="Smart PDF Compressor"
+            desc="Compress oversized PDF documents by 50% to 80% with lossless vector text preservation for email, exams, and job portals."
+            tag="Shrink 50-80%"
+            onClick={() => onSelectSample('compress')}
+          />
+
+          {/* Tool 4: Keynote to PowerPoint */}
           <SpotlightPassageCard
             SourceIcon={AppleKeynoteIcon}
             TargetIcon={MicrosoftPowerPointIcon}
@@ -387,7 +407,7 @@ export default function LandingPortal({
             onClick={() => onSelectSample('key')}
           />
 
-          {/* Tool 3: Numbers to Excel */}
+          {/* Tool 5: Numbers to Excel */}
           <SpotlightPassageCard
             SourceIcon={AppleNumbersIcon}
             TargetIcon={MicrosoftExcelIcon}
@@ -397,33 +417,13 @@ export default function LandingPortal({
             onClick={() => onSelectSample('numbers')}
           />
 
-          {/* Tool 4: Word to Apple Pages */}
-          <SpotlightPassageCard
-            SourceIcon={MicrosoftWordIcon}
-            TargetIcon={ApplePagesIcon}
-            title="Word (.docx) to Apple Pages"
-            desc="Seamlessly import Microsoft Word files directly into native Apple Pages packages for editing on macOS, iPad, and iPhone."
-            tag="Native Package"
-            onClick={() => onSelectSample('docx')}
-          />
-
-          {/* Tool 5: PowerPoint to Keynote */}
-          <SpotlightPassageCard
-            SourceIcon={MicrosoftPowerPointIcon}
-            TargetIcon={AppleKeynoteIcon}
-            title="PowerPoint (.pptx) to Keynote"
-            desc="Pass PowerPoint presentations into Apple Keynote's cinematic vector stage with fluid hardware-accelerated transitions."
-            tag="M1 Accelerated"
-            onClick={() => onSelectSample('pptx')}
-          />
-
-          {/* Tool 6: PDF to Pages & DOCX */}
+          {/* Tool 6: PDF to High-Res Images & Pages */}
           <SpotlightPassageCard
             SourceIcon={AdobePdfIcon}
             TargetIcon={ApplePagesIcon}
-            title="PDF to Pages & Word"
-            desc="Reverse-engineer static PDF documents into fully editable Apple Pages vector packages and Microsoft Word DOCX formats."
-            tag="Reverse Engine"
+            title="PDF to Pages & High-Res Images"
+            desc="Reverse-engineer PDF files into editable Apple Pages documents or extract individual 300 DPI image pages in a ZIP."
+            tag="High-Res Vector"
             onClick={() => onSelectSample('pdf')}
           />
 

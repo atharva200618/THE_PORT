@@ -458,6 +458,22 @@ export default function App() {
                   <span className="hidden sm:inline">Presentations</span>
                   <span className="sm:hidden">Slides</span>
                 </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveMode('utilities');
+                    setSelectedTargetFormat('pdf');
+                  }}
+                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
+                    activeMode === 'utilities'
+                      ? 'bg-white text-[#161618] shadow-sm'
+                      : 'text-[#71717A] hover:text-[#161618]'
+                  }`}
+                >
+                  <span className="hidden sm:inline">PDF & Tools</span>
+                  <span className="sm:hidden">Tools</span>
+                </button>
               </div>
 
               {/* Right Controls (Add Files - NO WRAPPING, single line) */}
