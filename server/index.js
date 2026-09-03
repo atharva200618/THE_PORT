@@ -561,6 +561,30 @@ try {
   console.error('[Initial Cleanup Error]:', err);
 }
 
+// ==============================================================================
+// SELF-PING KEEP-ALIVE (Prevents Render Free Tier Cold Start)
+// Pings own /api/health every 9 minutes — Render spins down after 15 min idle
+// ==============================================================================
+const KEEP_ALIVE_INTERVAL_MS = 9 * 60 * 1000; // 9 minutes
+
+if (process.env.RENDER) {
+  const SELF_URL = process.env.RENDER_EXTERNAL_URL
+    ? `https://${process.env.RENDER_EXTERNAL_URL}`
+    : `https://the-port.onrender.com`;
+
+  setInterval(async () => {
+    try {
+      const res = await fetch(`${SELF_URL}/api/health`);
+      const data = await res.json();
+      console.log(`[KeepAlive] Self-ping OK — uptime: ${Math.round(data.uptime)}s`);
+    } catch (err) {
+      console.warn(`[KeepAlive] Self-ping failed: ${err.message}`);
+    }
+  }, KEEP_ALIVE_INTERVAL_MS);
+
+  console.log(`[KeepAlive] Anti-cold-start cron active — pinging every 9 min`);
+}
+
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`========================================================`);
