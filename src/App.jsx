@@ -190,8 +190,8 @@ export default function App() {
         progressPercent: 40
       });
 
-      const pollInterval = 1000;
-      const maxAttempts = 60;
+      const pollInterval = 1500;
+      const maxAttempts = 80; // 120 seconds total
       let attempts = 0;
 
       while (attempts < maxAttempts) {
@@ -199,14 +199,14 @@ export default function App() {
         attempts++;
 
         const jobStatus = await fetchJobStatus(job.jobId);
-        if (jobStatus.status === 'processing') {
+        if (jobStatus.status === 'processing' || jobStatus.status === 'pending') {
           setActiveConversion({
             statusText: ['pages', 'key', 'numbers'].includes(resolvedTarget)
               ? `${prefix}Synthesizing Apple iWork vector canvas…` 
               : resolvedTarget === 'docx' || resolvedTarget === 'xlsx' || resolvedTarget === 'pptx'
               ? `${prefix}Mapping OpenXML baseline grid…`
               : `${prefix}Rendering PDF vector layout…`,
-            progressPercent: Math.min(85, 40 + attempts * 8)
+            progressPercent: Math.min(92, 40 + attempts * 4)
           });
         } else if (jobStatus.status === 'done') {
           result = {
@@ -271,6 +271,17 @@ export default function App() {
           console.error(`Error converting ${curFile.name}:`, fileErr);
           setErrorMessage(fileErr.message);
           triggerHaptic('error');
+          // Keep workspace active by adding a failed entry
+          setConversions((prev) => [{
+            id: `fail_${Date.now()}`,
+            originalName: curFile.name,
+            originalSize: '',
+            sourceFormat: (curFile.name.split('.').pop() || '').toLowerCase(),
+            targetFormat: target,
+            status: 'failed',
+            error: fileErr.message,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          }, ...prev]);
         }
       }
       setStagedFiles([]);
