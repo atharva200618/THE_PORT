@@ -46,9 +46,9 @@ if [ "$IN_EXT" = "pdf" ] && [ "$OUT_EXT" = "pages" ]; then
     "$PYTHON_BIN" "$ENGINE_SCRIPT" "$INPUT" "$TEMP_DOCX" 2>&1
 
     if [ -f "$TEMP_DOCX" ]; then
-        pre_launch_app "Pages" "/Applications/Pages.app"
+        pre_launch_app "Pages" "/Applications/Pages Creator Studio.app"
         osascript -e "
-        tell application \"/Applications/Pages.app\"
+        tell application \"/Applications/Pages Creator Studio.app\"
             activate
             delay 3
             open POSIX file \"$TEMP_DOCX\"
@@ -61,9 +61,9 @@ if [ "$IN_EXT" = "pdf" ] && [ "$OUT_EXT" = "pages" ]; then
     fi
 
 elif [ "$OUT_EXT" = "pages" ]; then
-    pre_launch_app "Pages" "/Applications/Pages.app"
+    pre_launch_app "Pages" "/Applications/Pages Creator Studio.app"
     osascript -e "
-    tell application \"/Applications/Pages.app\"
+    tell application \"/Applications/Pages Creator Studio.app\"
         activate
         delay 3
         open POSIX file \"$INPUT\"
@@ -74,9 +74,9 @@ elif [ "$OUT_EXT" = "pages" ]; then
     end tell" 2>&1
 
 elif [ "$IN_EXT" = "pages" ] && [ "$OUT_EXT" = "pdf" ]; then
-    pre_launch_app "Pages" "/Applications/Pages.app"
+    pre_launch_app "Pages" "/Applications/Pages Creator Studio.app"
     osascript -e "
-    tell application \"/Applications/Pages.app\"
+    tell application \"/Applications/Pages Creator Studio.app\"
         activate
         delay 3
         open POSIX file \"$INPUT\"
@@ -87,9 +87,9 @@ elif [ "$IN_EXT" = "pages" ] && [ "$OUT_EXT" = "pdf" ]; then
     end tell" 2>&1
 
 elif [ "$IN_EXT" = "pages" ] && [ "$OUT_EXT" = "docx" ]; then
-    pre_launch_app "Pages" "/Applications/Pages.app"
+    pre_launch_app "Pages" "/Applications/Pages Creator Studio.app"
     osascript -e "
-    tell application \"/Applications/Pages.app\"
+    tell application \"/Applications/Pages Creator Studio.app\"
         activate
         delay 3
         open POSIX file \"$INPUT\"
