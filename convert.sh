@@ -1,6 +1,6 @@
 #!/bin/bash
 # Usage: ./convert.sh input_file output_file
-# The Port — Native Apple Silicon Conversion Engine
+# The Port — Native Apple Silicon 2026 High-Fidelity Precision Conversion Engine
 
 INPUT="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 OUTPUT_DIR="$(cd "$(dirname "$2")" && pwd)"
@@ -11,7 +11,11 @@ OUT_EXT="$(echo "${OUTPUT##*.}" | tr '[:upper:]' '[:lower:]')"
 
 echo "Converting: $INPUT ($IN_EXT) -> $OUTPUT ($OUT_EXT)"
 
-PYTHON_BIN="/tmp/pdf2docx_env/bin/python"
+DIR="$(cd "$(dirname "$0")" && pwd)"
+PYTHON_BIN="$DIR/venv/bin/python"
+if [ ! -x "$PYTHON_BIN" ]; then
+    PYTHON_BIN="/tmp/pdf2docx_env/bin/python"
+fi
 if [ ! -x "$PYTHON_BIN" ]; then
     PYTHON_BIN="python3"
 fi
@@ -21,19 +25,18 @@ if [ ! -x "$SOFFICE" ] && command -v soffice >/dev/null 2>&1; then
     SOFFICE="soffice"
 fi
 
-ENGINE_SCRIPT="$(cd "$(dirname "$0")" && pwd)/pdf_converter_engine.py"
+ENGINE_SCRIPT="$DIR/pdf_converter_engine.py"
 
 # Helper: pre-launch an Apple app and wait for it to be fully ready
 pre_launch_app() {
     local APP_NAME="$1"
     local APP_PATH="$2"
-    # Check if already running
     if ! pgrep -x "$APP_NAME" > /dev/null 2>&1; then
         echo "  [Engine] Pre-launching $APP_NAME..."
         open -a "$APP_PATH" 2>/dev/null
-        sleep 5
+        sleep 4
     else
-        sleep 1
+        sleep 0.5
     fi
 }
 
@@ -41,7 +44,7 @@ pre_launch_app() {
 # 1. APPLE PAGES SUITE (.pages <-> .docx, .pdf)
 # ==============================================================================
 if [ "$IN_EXT" = "pdf" ] && [ "$OUT_EXT" = "pages" ]; then
-    echo "  (PDF -> Pages via Precision Engine)"
+    echo "  (PDF -> Pages via 2026 Precision Engine)"
     TEMP_DOCX="$OUTPUT_DIR/.tmp_$(basename "${INPUT%.*}")_$$.docx"
     "$PYTHON_BIN" "$ENGINE_SCRIPT" "$INPUT" "$TEMP_DOCX" 2>&1
 
@@ -50,11 +53,11 @@ if [ "$IN_EXT" = "pdf" ] && [ "$OUT_EXT" = "pages" ]; then
         osascript -e "
         tell application \"/Applications/Pages Creator Studio.app\"
             activate
-            delay 3
-            open POSIX file \"$TEMP_DOCX\"
-            delay 4
-            save front document in POSIX file \"$OUTPUT\"
             delay 2
+            open POSIX file \"$TEMP_DOCX\"
+            delay 3
+            save front document in POSIX file \"$OUTPUT\"
+            delay 1
             close front document saving no
         end tell" 2>&1
         rm -f "$TEMP_DOCX"
@@ -65,11 +68,11 @@ elif [ "$OUT_EXT" = "pages" ]; then
     osascript -e "
     tell application \"/Applications/Pages Creator Studio.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        save front document in POSIX file \"$OUTPUT\"
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        save front document in POSIX file \"$OUTPUT\"
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -78,11 +81,11 @@ elif [ "$IN_EXT" = "pages" ] && [ "$OUT_EXT" = "pdf" ]; then
     osascript -e "
     tell application \"/Applications/Pages Creator Studio.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as PDF
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as PDF with properties {image quality:Best}
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -91,16 +94,21 @@ elif [ "$IN_EXT" = "pages" ] && [ "$OUT_EXT" = "docx" ]; then
     osascript -e "
     tell application \"/Applications/Pages Creator Studio.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as Microsoft Word
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as Microsoft Word
+        delay 1
         close front document saving no
     end tell" 2>&1
 
+    # Polish generated DOCX
+    if [ -f "$OUTPUT" ]; then
+        "$PYTHON_BIN" -c "from pdf_converter_engine import refine_docx_document; refine_docx_document('$OUTPUT')" 2>/dev/null || true
+    fi
+
 elif [ "$IN_EXT" = "pdf" ] && [ "$OUT_EXT" = "docx" ]; then
-    echo "  (PDF -> Word via Precision Engine)"
+    echo "  (PDF -> Word via 2026 Precision Engine)"
     "$PYTHON_BIN" "$ENGINE_SCRIPT" "$INPUT" "$OUTPUT" 2>&1
 
 # ==============================================================================
@@ -111,11 +119,11 @@ elif [ "$OUT_EXT" = "key" ]; then
     osascript -e "
     tell application \"/Applications/Keynote.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        save front document in POSIX file \"$OUTPUT\"
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        save front document in POSIX file \"$OUTPUT\"
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -124,11 +132,11 @@ elif [ "$IN_EXT" = "key" ] && [ "$OUT_EXT" = "pptx" ]; then
     osascript -e "
     tell application \"/Applications/Keynote.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as Microsoft PowerPoint
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as Microsoft PowerPoint
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -137,11 +145,11 @@ elif [ "$IN_EXT" = "key" ] && [ "$OUT_EXT" = "pdf" ]; then
     osascript -e "
     tell application \"/Applications/Keynote.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as PDF
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as PDF with properties {all stages:true, image quality:Best}
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -153,11 +161,11 @@ elif [ "$OUT_EXT" = "numbers" ]; then
     osascript -e "
     tell application \"/Applications/Numbers.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        save front document in POSIX file \"$OUTPUT\"
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        save front document in POSIX file \"$OUTPUT\"
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -166,11 +174,11 @@ elif [ "$IN_EXT" = "numbers" ] && [ "$OUT_EXT" = "xlsx" ]; then
     osascript -e "
     tell application \"/Applications/Numbers.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as Microsoft Excel
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as Microsoft Excel
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -179,11 +187,11 @@ elif [ "$IN_EXT" = "numbers" ] && [ "$OUT_EXT" = "csv" ]; then
     osascript -e "
     tell application \"/Applications/Numbers.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as CSV
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as CSV
+        delay 1
         close front document saving no
     end tell" 2>&1
 
@@ -192,11 +200,11 @@ elif [ "$IN_EXT" = "numbers" ] && [ "$OUT_EXT" = "pdf" ]; then
     osascript -e "
     tell application \"/Applications/Numbers.app\"
         activate
-        delay 3
-        open POSIX file \"$INPUT\"
-        delay 4
-        export front document to POSIX file \"$OUTPUT\" as PDF
         delay 2
+        open POSIX file \"$INPUT\"
+        delay 3
+        export front document to POSIX file \"$OUTPUT\" as PDF with properties {image quality:Best}
+        delay 1
         close front document saving no
     end tell" 2>&1
 
