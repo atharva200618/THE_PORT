@@ -19,7 +19,7 @@ export default function PaperTerritory({
     ? ['xlsx', 'xls', 'csv']
     : activeMode === 'presentations'
     ? ['pptx', 'ppt']
-    : ['docx', 'doc', 'pdf'];
+    : ['docx', 'doc', 'pdf', 'png', 'jpg', 'jpeg', 'webp', 'heic', 'heif', 'bmp', 'tiff'];
 
   const paperStaged = stagedFiles.filter(f => {
     const ext = (f.name.split('.').pop() || '').toLowerCase();
@@ -31,6 +31,7 @@ export default function PaperTerritory({
 
   // Single active extension if only 1 file
   const activeExt = displayFile ? (displayFile.name.split('.').pop() || '').toLowerCase() : acceptedExts[0];
+  const isImageFile = ['png', 'jpg', 'jpeg', 'webp', 'heic', 'heif', 'bmp', 'tiff'].includes(activeExt);
 
   // Determine available target formats dynamically
   let targetOptions = [];
@@ -45,6 +46,10 @@ export default function PaperTerritory({
       { format: 'key', label: isBatch ? 'Convert All to Keynote' : 'Convert to Keynote', badge: '.key', desc: 'Apple Keynote Presentation' },
       { format: 'pdf', label: isBatch ? 'Convert All to PDF Slides' : 'Convert to PDF Slides', badge: '.pdf', desc: 'Slide Deck PDF Export' }
     ];
+  } else if (isImageFile) {
+    targetOptions = [
+      { format: 'pdf', label: isBatch ? 'Merge All into 1 PDF' : 'Convert to PDF', badge: '.pdf', desc: 'High-Res Multi-Image PDF Document' }
+    ];
   } else {
     // Documents mode
     const docxCount = paperStaged.filter(f => ['docx', 'doc'].includes((f.name.split('.').pop() || '').toLowerCase())).length;
@@ -58,7 +63,8 @@ export default function PaperTerritory({
     } else if (activeExt === 'pdf') {
       targetOptions = [
         { format: 'pages', label: isBatch ? 'Convert All to Pages' : 'Convert to Pages', badge: '.pages', desc: 'Apple Pages Vector Canvas' },
-        { format: 'docx', label: isBatch ? 'Convert All to Word' : 'Convert to Word', badge: '.docx', desc: 'Microsoft Word OpenXML' }
+        { format: 'docx', label: isBatch ? 'Convert All to Word' : 'Convert to Word', badge: '.docx', desc: 'Microsoft Word OpenXML' },
+        { format: 'compress', label: 'Compress PDF', badge: 'Save 70%', desc: 'Reduce File Size (Lossless Vector)' }
       ];
     } else {
       targetOptions = [
@@ -84,10 +90,18 @@ export default function PaperTerritory({
         icon: Presentation,
         samples: [{ ext: 'pptx', label: 'Pitch_Deck.pptx' }]
       }
+    : activeMode === 'utilities'
+    ? {
+        title: 'Images & PDF Tools',
+        sub: 'Screenshots, Photos (.png, .jpg, .heic) & PDF Tools',
+        desc: 'Multi-screenshot PDF binding, smart PDF compression, and high-res extraction.',
+        icon: FileText,
+        samples: [{ ext: 'jpg', label: 'Screenshot_Batch.jpg' }, { ext: 'pdf', label: 'Report_Compress.pdf' }]
+      }
     : {
-        title: 'Word & PDF Space',
-        sub: 'Microsoft Word (.docx) & Adobe PDF (.pdf)',
-        desc: 'Linear typographic documents, OpenXML formatting baselines, and print layouts.',
+        title: 'Word, PDF & Image Space',
+        sub: 'Word (.docx), PDF (.pdf), Screenshots & Photos (.png, .jpg)',
+        desc: 'Linear typographic documents, OpenXML formatting baselines, and multi-image binders.',
         icon: FileText,
         samples: [{ ext: 'docx', label: 'Document.docx' }, { ext: 'pdf', label: 'Document.pdf' }]
       };

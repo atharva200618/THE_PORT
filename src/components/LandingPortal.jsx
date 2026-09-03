@@ -257,7 +257,7 @@ export default function LandingPortal({
               <input
                 type="file"
                 multiple
-                accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv"
+                accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"
                 className="hidden"
                 onChange={(e) => {
                   if (e.target.files && e.target.files.length > 0) {
@@ -269,7 +269,7 @@ export default function LandingPortal({
 
               <div className="flex items-center gap-3 text-[#71717A] text-xs sm:text-base font-medium truncate">
                 <span className="truncate">
-                  {isDraggingOver ? 'Release document…' : 'Drop your document here (.pages, .docx, .key, .xlsx, .pdf)...'}
+                  {isDraggingOver ? 'Release files…' : 'Drop your document, images or screenshots (.pdf, .docx, .png, .jpg)...'}
                 </span>
               </div>
 
@@ -289,11 +289,11 @@ export default function LandingPortal({
             {/* 2 Prominent 3D Action Buttons */}
             <div className="flex items-center justify-center gap-4 flex-wrap pt-2">
               <label className="cursor-pointer avero-dark-glossy text-white px-8 sm:px-10 py-3.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all">
-                <span>Select File</span>
+                <span>Select Files</span>
                 <input
                   type="file"
                   multiple
-                  accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv"
+                  accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"
                   className="hidden"
                   onChange={(e) => {
                     if (e.target.files && e.target.files.length > 0) {

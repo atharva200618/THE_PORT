@@ -363,7 +363,7 @@ export default function App() {
         ref={fileInputRef}
         type="file"
         multiple
-        accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv"
+        accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"
         className="hidden"
         onChange={(e) => {
           if (e.target.files && e.target.files.length > 0) {
