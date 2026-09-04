@@ -174,15 +174,16 @@ router.post('/convert', (req, res) => {
 
 /**
  * GET /api/jobs/next
- * Used by the Mac worker to pick up the oldest pending job
+ * Used by the Mac worker to pick up the oldest pending job (supports ?type=apple or ?type=non_apple)
  */
 router.get('/next', (req, res) => {
-  const job = db.getNextPendingJob();
+  const filter = req.query.type || req.query.lane || (req.query.non_apple_only === 'true' ? 'non_apple' : 'any');
+  const job = db.getNextPendingJob(filter);
   if (!job) {
     return res.json({ job: null });
   }
 
-  console.log(`[Worker API] Dispatched job ${job.id} to Mac Worker (${job.sourceFormat} -> ${job.targetFormat})`);
+  console.log(`[Worker API] Dispatched job ${job.id} to Mac Worker (${job.sourceFormat} -> ${job.targetFormat}) [Filter: ${filter}]`);
 
   return res.json({
     job: {

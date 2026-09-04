@@ -245,13 +245,61 @@ export function useConversionQueue(soundEnabled = true) {
     [files, soundEnabled]
   );
 
-  // Convert all idle / error files sequentially
+  // Helper to identify if a job touches Apple GUI apps (Pages, Keynote, Numbers)
+  const isAppleJob = useCallback((item) => {
+    const src = (item.sourceFormat || '').toLowerCase();
+    const tgt = (item.targetFormat || '').toLowerCase();
+    return ['pages', 'key', 'numbers'].includes(src) || ['pages', 'key', 'numbers'].includes(tgt);
+  }, []);
+
+  // Convert all idle / error files: Parallel for LibreOffice/Python, Serial for Apple GUI apps
   const startAllConversions = useCallback(async () => {
-    const idleFiles = files.filter((f) => f.status === 'idle' || f.status === 'error');
-    for (const item of idleFiles) {
-      await startConversion(item.id);
-    }
-  }, [files, startConversion]);
+    const pendingFiles = files.filter((f) => f.status === 'idle' || f.status === 'error');
+    if (pendingFiles.length === 0) return;
+
+    const appleJobs = pendingFiles.filter(isAppleJob);
+    const parallelJobs = pendingFiles.filter((f) => !isAppleJob(f));
+
+    // 1. Run non-Apple parallel jobs (concurrency pool of 3)
+    const runParallelBatch = async () => {
+      if (parallelJobs.length === 0) return;
+      const CONCURRENCY_LIMIT = 3;
+      const executing = new Set();
+
+      for (const job of parallelJobs) {
+        const promise = (async () => {
+          activeJobsRef.current.add(job.id);
+          try {
+            await startConversion(job.id);
+          } finally {
+            activeJobsRef.current.delete(job.id);
+            executing.delete(promise);
+          }
+        })();
+
+        executing.add(promise);
+        if (executing.size >= CONCURRENCY_LIMIT) {
+          await Promise.race(executing);
+        }
+      }
+      await Promise.all(executing);
+    };
+
+    // 2. Run Apple jobs strictly sequentially (one by one) to protect GUI stability
+    const runAppleBatch = async () => {
+      for (const job of appleJobs) {
+        activeJobsRef.current.add(job.id);
+        try {
+          await startConversion(job.id);
+        } finally {
+          activeJobsRef.current.delete(job.id);
+        }
+      }
+    };
+
+    // Parallel batch and Apple batch run alongside each other, with Apple jobs strictly serialized
+    await Promise.all([runParallelBatch(), runAppleBatch()]);
+  }, [files, startConversion, isAppleJob]);
 
   // Delete conversion from server and state
   const deleteConversion = useCallback(async (id) => {

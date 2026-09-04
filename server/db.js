@@ -62,17 +62,22 @@ export function getJobById(id) {
 }
 
 /**
- * Atomically retrieves the oldest pending job and marks it as 'processing'
+ * Atomically retrieves the oldest pending job matching an optional lane filter and marks it as 'processing'
+ * @param {string} filter - 'apple' | 'non_apple' | 'any'
  */
-export function getNextPendingJob() {
-  // SQLite transaction for atomic update
-  const findStmt = db.prepare(`
-    SELECT * FROM jobs 
-    WHERE status = 'pending' 
-    ORDER BY created_at ASC 
-    LIMIT 1
-  `);
+export function getNextPendingJob(filter = 'any') {
+  let query = `SELECT * FROM jobs WHERE status = 'pending'`;
 
+  if (filter === 'apple') {
+    query += ` AND (source_format IN ('pages', 'key', 'numbers') OR target_format IN ('pages', 'key', 'numbers'))`;
+  } else if (filter === 'non_apple') {
+    query += ` AND (source_format NOT IN ('pages', 'key', 'numbers') AND target_format NOT IN ('pages', 'key', 'numbers'))`;
+  }
+
+  query += ` ORDER BY created_at ASC LIMIT 1`;
+
+  // SQLite transaction for atomic update
+  const findStmt = db.prepare(query);
   const row = findStmt.get();
   if (!row) return null;
 

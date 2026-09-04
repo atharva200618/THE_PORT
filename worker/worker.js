@@ -208,7 +208,10 @@ async function sendHeartbeat() {
         platform: 'macOS Apple Silicon (M1)',
         arch: os.arch(),
         uptime: os.uptime(),
-        hostname: os.hostname()
+        hostname: os.hostname(),
+        isAppleBusy,
+        activeParallelJobs,
+        maxParallelSlots: MAX_PARALLEL_SLOTS
       })
     });
   } catch {
@@ -260,60 +263,104 @@ async function processJob(job) {
 }
 
 /**
- * Main polling loop
+ * Dual-Lane Polling Engine:
+ *  - Lane 1: Apple GUI Lane (Pages / Keynote / Numbers) -> Strictly Serial (1 at a time)
+ *  - Lane 2: Non-Apple Parallel Lane (LibreOffice / Python / Media) -> Concurrent Slots
  */
 let isRunning = true;
-let isBusy = false;
+let isAppleBusy = false;
+let activeParallelJobs = 0;
+const MAX_PARALLEL_SLOTS = 2;
 
-async function pollQueue() {
-  if (!isRunning || isBusy) return;
+// Lane 1: Poll & execute Apple GUI jobs (Pages, Keynote, Numbers)
+async function pollAppleQueue() {
+  if (!isRunning || isAppleBusy) return;
 
   try {
-    const response = await fetch(`${BACKEND_URL}/api/jobs/next`);
-    if (!response.ok) {
-      log('warn', `Backend poll returned HTTP ${response.status}`);
-      return;
-    }
+    const response = await fetch(`${BACKEND_URL}/api/jobs/next?type=apple`);
+    if (!response.ok) return;
 
     const data = await response.json();
     if (data && data.job) {
-      isBusy = true;
+      isAppleBusy = true;
+      log('info', `[Lane 1: Apple Serial] Claimed job ${data.job.id} (${data.job.sourceFormat} -> ${data.job.targetFormat})`);
       try {
         await processJob(data.job);
       } finally {
-        isBusy = false;
+        isAppleBusy = false;
       }
-      // If we just processed a job, check for another one immediately
-      setImmediate(pollQueue);
+      setImmediate(pollAppleQueue);
       return;
     }
   } catch (err) {
-    log('warn', `Polling connection error: ${err.message}`);
+    log('warn', `Apple queue polling error: ${err.message}`);
   }
+}
+
+// Lane 2: Poll & execute Non-Apple Parallel jobs (LibreOffice, Python, Images)
+async function pollParallelQueue() {
+  if (!isRunning || activeParallelJobs >= MAX_PARALLEL_SLOTS) return;
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/jobs/next?type=non_apple`);
+    if (!response.ok) return;
+
+    const data = await response.json();
+    if (data && data.job) {
+      activeParallelJobs++;
+      log('info', `[Lane 2: Non-Apple Parallel (${activeParallelJobs}/${MAX_PARALLEL_SLOTS})] Claimed job ${data.job.id} (${data.job.sourceFormat} -> ${data.job.targetFormat})`);
+
+      // Execute asynchronously in background slot
+      processJob(data.job)
+        .catch((err) => {
+          log('error', `Parallel job ${data.job.id} execution error:`, { error: err.message });
+        })
+        .finally(() => {
+          activeParallelJobs--;
+          log('info', `[Lane 2: Non-Apple Parallel] Slot freed. Active: ${activeParallelJobs}/${MAX_PARALLEL_SLOTS}`);
+          setImmediate(pollParallelQueue);
+        });
+
+      // If more parallel slots available, poll for next parallel job immediately
+      if (activeParallelJobs < MAX_PARALLEL_SLOTS) {
+        setImmediate(pollParallelQueue);
+      }
+      return;
+    }
+  } catch (err) {
+    log('warn', `Parallel queue polling error: ${err.message}`);
+  }
+}
+
+// Combined polling trigger
+function pollAllQueues() {
+  pollAppleQueue();
+  pollParallelQueue();
 }
 
 function startDaemon() {
   verifyConvertScript();
 
   log('info', '========================================================');
-  log('info', ' The Port — Mac Worker Daemon Started');
+  log('info', ' The Port — Mac Worker Daemon Started (Dual-Lane Mode)');
   log('info', ` Backend Target: ${BACKEND_URL}`);
   log('info', ` Poll Interval: ${POLL_INTERVAL_MS}ms`);
   log('info', ` Watchdog Timeout: ${CONVERT_TIMEOUT_MS / 1000}s`);
   log('info', ` Convert Script: ${CONVERT_SCRIPT}`);
   log('info', ` Temp Storage: ${WORKER_TEMP_DIR}`);
   log('info', ` Log File: ${LOG_FILE}`);
+  log('info', ` Parallel Non-Apple Slots: ${MAX_PARALLEL_SLOTS}`);
   log('info', '========================================================');
 
-  // Start polling interval
-  const timer = setInterval(pollQueue, POLL_INTERVAL_MS);
+  // Start polling interval for both lanes
+  const timer = setInterval(pollAllQueues, POLL_INTERVAL_MS);
 
   // Start heartbeat interval
   const heartbeatTimer = setInterval(sendHeartbeat, HEARTBEAT_INTERVAL_MS);
   sendHeartbeat();
 
-  // Initial poll
-  pollQueue();
+  // Initial poll on both lanes
+  pollAllQueues();
 
   // Graceful shutdown handlers
   const shutdown = () => {
