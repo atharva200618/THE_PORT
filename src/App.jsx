@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import LandingPortal from './components/LandingPortal';
-import PaperTerritory from './components/PaperTerritory';
-import GlassTerritory from './components/GlassTerritory';
+import TerritoryPanel from './components/territory/TerritoryPanel';
+import { paperConfig, glassConfig } from './components/territory/territoryConfig';
 import TheGate from './components/TheGate';
 import StatusStrip from './components/StatusStrip';
 import MobileActionBar from './components/MobileActionBar';
@@ -535,7 +535,8 @@ export default function App() {
               
               {/* LEFT: PAPER TERRITORY */}
               <div className="flex-1 flex flex-col">
-                <PaperTerritory
+                <TerritoryPanel
+                  config={paperConfig}
                   activeFile={sourceTerritory === 'paper' ? activeFile : null}
                   stagedFiles={stagedFiles}
                   onFileSelect={handleAppendFiles}
@@ -567,7 +568,8 @@ export default function App() {
 
               {/* RIGHT: GLASS TERRITORY */}
               <div className="flex-1 flex flex-col">
-                <GlassTerritory
+                <TerritoryPanel
+                  config={glassConfig}
                   activeFile={sourceTerritory === 'glass' ? activeFile : null}
                   stagedFiles={stagedFiles}
                   onFileSelect={handleAppendFiles}
