@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import {
   submitConversionJob,
+  submitMergePdfsJob,
   fetchJobStatus,
   getDownloadUrl,
   simulateClientConversion,
@@ -9,6 +10,22 @@ import {
 } from '../utils/api';
 import { sounds } from '../utils/audio';
 import { triggerHaptic } from '../utils/haptics';
+
+/**
+ * Format appropriate output name based on target format
+ */
+export const formatOutputName = (filename = '', targetFormat = '') => {
+  const baseName = filename.replace(/\.[^/.]+$/, '');
+  const fmt = targetFormat.toLowerCase();
+  if (fmt === 'split') return `${baseName}_pages.zip`;
+  if (fmt === 'compress') return `${baseName}_compressed.pdf`;
+  if (fmt === 'rotate') return `${baseName}_rotated.pdf`;
+  if (fmt === 'watermark') return `${baseName}_watermarked.pdf`;
+  if (fmt === 'protect') return `${baseName}_protected.pdf`;
+  if (fmt === 'unprotect') return `${baseName}_unprotected.pdf`;
+  if (fmt === 'ocr') return `${baseName}_ocr.pdf`;
+  return `${baseName}.${targetFormat}`;
+};
 
 /**
  * Determine sensible default target format based on source extension
@@ -34,7 +51,7 @@ export function useConversionQueue(soundEnabled = true) {
   const activeJobsRef = useRef(new Set());
 
   // Add / Append new files to the staging queue (deduplicating by name + size)
-  const addFiles = useCallback((incoming) => {
+  const addFiles = useCallback((incoming, overrideTarget) => {
     const list = Array.isArray(incoming) ? incoming : [incoming];
     if (list.length === 0) return;
 
@@ -47,7 +64,7 @@ export function useConversionQueue(soundEnabled = true) {
         const exists = updated.some(f => f.name === name && f.file?.size === size);
         if (!exists) {
           const sourceExt = (name.split('.').pop() || '').toLowerCase();
-          const targetExt = getDefaultTargetFormat(name);
+          const targetExt = overrideTarget || getDefaultTargetFormat(name);
           updated.push({
             id: `file_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
             file: fileObj,
@@ -61,7 +78,7 @@ export function useConversionQueue(soundEnabled = true) {
             error: null,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             originalSize: size ? formatBytes(size) : '',
-            outputName: `${name.replace(/\.[^/.]+$/, '')}.${targetExt}`
+            outputName: formatOutputName(name, targetExt)
           });
         }
       }
@@ -87,7 +104,7 @@ export function useConversionQueue(soundEnabled = true) {
           return {
             ...f,
             targetFormat: newTargetFormat,
-            outputName: `${f.name.replace(/\.[^/.]+$/, '')}.${newTargetFormat}`
+            outputName: formatOutputName(f.name, newTargetFormat)
           };
         }
         return f;
@@ -141,6 +158,18 @@ export function useConversionQueue(soundEnabled = true) {
               ? 'Synthesizing Apple iWork vector canvas…'
               : targetFormat === 'docx' || targetFormat === 'xlsx' || targetFormat === 'pptx'
               ? 'Mapping OpenXML baseline grid…'
+              : targetFormat === 'compress'
+              ? 'Optimizing & compressing PDF streams…'
+              : targetFormat === 'split'
+              ? 'Splitting PDF pages into ZIP archive…'
+              : targetFormat === 'rotate'
+              ? 'Applying 90° clockwise rotation…'
+              : targetFormat === 'watermark'
+              ? 'Embedding centered watermark layer…'
+              : targetFormat === 'protect'
+              ? 'Applying 128-bit AES encryption…'
+              : targetFormat === 'ocr'
+              ? 'Extracting & synthesizing OCR layer…'
               : 'Rendering high-fidelity vector layout…';
 
             setFiles((prev) =>
@@ -153,7 +182,7 @@ export function useConversionQueue(soundEnabled = true) {
           } else if (jobStatus.status === 'done') {
             result = {
               downloadUrl: getDownloadUrl(jobStatus.id),
-              outputName: `${jobStatus.originalName.replace(/\.[^/.]+$/, '')}.${jobStatus.targetFormat}`
+              outputName: formatOutputName(jobStatus.originalName || name, jobStatus.targetFormat)
             };
             break;
           } else if (jobStatus.status === 'failed') {
@@ -190,7 +219,10 @@ export function useConversionQueue(soundEnabled = true) {
           name.includes('Architectural') ||
           name.includes('Product') ||
           name.includes('Financial') ||
-          name.includes('Showcase');
+          name.includes('Showcase') ||
+          name.includes('Contract') ||
+          name.includes('Receipt') ||
+          name.includes('Invoice');
 
         if (isSample) {
           try {
@@ -212,7 +244,7 @@ export function useConversionQueue(soundEnabled = true) {
                       progress: 100,
                       statusText: 'Conversion complete',
                       downloadUrl: simResult.downloadUrl,
-                      outputName: `${name.replace(/\.[^/.]+$/, '')}.${targetFormat}`
+                      outputName: formatOutputName(name, targetFormat)
                     }
                   : f
               )
@@ -301,6 +333,113 @@ export function useConversionQueue(soundEnabled = true) {
     await Promise.all([runParallelBatch(), runAppleBatch()]);
   }, [files, startConversion, isAppleJob]);
 
+  // Multi-PDF Merge operation
+  const mergePdfs = useCallback(
+    async (outputName = 'Merged_Collection.pdf') => {
+      const pdfFiles = files.filter((f) => f.sourceFormat === 'pdf' && f.file);
+      if (pdfFiles.length < 2) return;
+
+      const mergeId = `merge_${Date.now()}`;
+      const totalBytes = pdfFiles.reduce((acc, f) => acc + (f.file?.size || 0), 0);
+
+      const mergeCard = {
+        id: mergeId,
+        file: null,
+        name: outputName,
+        sourceFormat: 'pdf',
+        targetFormat: 'pdf',
+        status: 'converting',
+        progress: 25,
+        statusText: `Merging ${pdfFiles.length} PDF documents…`,
+        downloadUrl: null,
+        error: null,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        originalSize: formatBytes(totalBytes),
+        outputName: outputName
+      };
+
+      setFiles((prev) => [mergeCard, ...prev]);
+      if (soundEnabled) sounds.playGateTransit();
+
+      try {
+        const res = await submitMergePdfsJob(
+          pdfFiles.map((f) => f.file),
+          outputName
+        );
+
+        if (res.status === 'done') {
+          setFiles((prev) =>
+            prev.map((f) =>
+              f.id === mergeId
+                ? {
+                    ...f,
+                    status: 'done',
+                    progress: 100,
+                    statusText: 'Merge complete',
+                    downloadUrl: res.downloadUrl,
+                    outputName: res.outputName || outputName
+                  }
+                : f
+            )
+          );
+          if (soundEnabled) sounds.playSnap();
+          triggerHaptic('success');
+        } else if (res.jobId) {
+          const pollInterval = 1500;
+          const maxAttempts = 60;
+          let attempts = 0;
+          let done = false;
+
+          while (attempts < maxAttempts) {
+            await new Promise((r) => setTimeout(r, pollInterval));
+            attempts++;
+            const jobStatus = await fetchJobStatus(res.jobId);
+            if (jobStatus.status === 'done') {
+              setFiles((prev) =>
+                prev.map((f) =>
+                  f.id === mergeId
+                    ? {
+                        ...f,
+                        status: 'done',
+                        progress: 100,
+                        statusText: 'Merge complete',
+                        downloadUrl: getDownloadUrl(jobStatus.id),
+                        outputName: outputName
+                      }
+                    : f
+                )
+              );
+              if (soundEnabled) sounds.playSnap();
+              triggerHaptic('success');
+              done = true;
+              break;
+            } else if (jobStatus.status === 'failed') {
+              throw new Error(jobStatus.error || 'Merge failed.');
+            }
+          }
+          if (!done) throw new Error('Merge timed out.');
+        }
+      } catch (err) {
+        console.error('Merge error:', err);
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === mergeId
+              ? {
+                  ...f,
+                  status: 'error',
+                  progress: 0,
+                  statusText: 'Merge failed',
+                  error: err.message
+                }
+              : f
+          )
+        );
+        triggerHaptic('error');
+      }
+    },
+    [files, soundEnabled]
+  );
+
   // Delete conversion from server and state
   const deleteConversion = useCallback(async (id) => {
     try {
@@ -310,42 +449,83 @@ export function useConversionQueue(soundEnabled = true) {
   }, []);
 
   // Quick sample loader
-  const selectSample = useCallback((format) => {
-    let name = 'Executive_Strategic_Brief.docx';
-    let size = 284000;
-    if (format === 'pdf') {
-      name = 'Architectural_Blueprint.pdf';
-      size = 512000;
-    } else if (format === 'compress') {
-      name = 'Oversized_Report_To_Compress.pdf';
-      size = 8500000;
-    } else if (format === 'jpg' || format === 'png') {
-      name = 'Screenshot_Portfolio_Batch.jpg';
-      size = 1450000;
-    } else if (format === 'pages') {
-      name = 'Product_Marketing_Brief.pages';
-      size = 720000;
-    } else if (format === 'xlsx') {
-      name = 'Annual_Financial_Model.xlsx';
-      size = 450000;
-    } else if (format === 'csv') {
-      name = 'Global_Metrics_Export.csv';
-      size = 180000;
-    } else if (format === 'numbers') {
-      name = 'Q4_Operating_Budget.numbers';
-      size = 890000;
-    } else if (format === 'pptx') {
-      name = 'Series_A_Pitch_Deck.pptx';
-      size = 1200000;
-    } else if (format === 'key') {
-      name = 'Apple_Keynote_Showcase.key';
-      size = 1600000;
-    }
+  const selectSample = useCallback(
+    (format) => {
+      if (format === 'merge') {
+        const sampleFile1 = new File(['The Port Sample PDF Document 1'], 'Annual_Report_Part1.pdf', {
+          type: 'application/pdf'
+        });
+        Object.defineProperty(sampleFile1, 'size', { value: 380000 });
+        const sampleFile2 = new File(['The Port Sample PDF Document 2'], 'Annual_Report_Part2.pdf', {
+          type: 'application/pdf'
+        });
+        Object.defineProperty(sampleFile2, 'size', { value: 420000 });
+        addFiles([sampleFile1, sampleFile2]);
+        return;
+      }
 
-    const sampleFile = new File(['The Port Sample Document Content'], name, { type: 'application/octet-stream' });
-    Object.defineProperty(sampleFile, 'size', { value: size });
-    addFiles([sampleFile]);
-  }, [addFiles]);
+      let name = 'Executive_Strategic_Brief.docx';
+      let size = 284000;
+      let targetOverride = null;
+
+      if (format === 'pdf') {
+        name = 'Architectural_Blueprint.pdf';
+        size = 512000;
+      } else if (format === 'compress') {
+        name = 'Oversized_Report_To_Compress.pdf';
+        size = 8500000;
+        targetOverride = 'compress';
+      } else if (format === 'split') {
+        name = 'Multi_Page_Contract.pdf';
+        size = 520000;
+        targetOverride = 'split';
+      } else if (format === 'rotate') {
+        name = 'Scanned_Receipt_Sideways.pdf';
+        size = 310000;
+        targetOverride = 'rotate';
+      } else if (format === 'watermark') {
+        name = 'Confidential_Brief_Draft.pdf';
+        size = 440000;
+        targetOverride = 'watermark';
+      } else if (format === 'protect') {
+        name = 'Q4_Executive_Financials.pdf';
+        size = 680000;
+        targetOverride = 'protect';
+      } else if (format === 'ocr') {
+        name = 'Scanned_Paper_Invoice.pdf';
+        size = 920000;
+        targetOverride = 'ocr';
+      } else if (format === 'jpg' || format === 'png') {
+        name = 'Screenshot_Portfolio_Batch.jpg';
+        size = 1450000;
+      } else if (format === 'pages') {
+        name = 'Product_Marketing_Brief.pages';
+        size = 720000;
+      } else if (format === 'xlsx') {
+        name = 'Annual_Financial_Model.xlsx';
+        size = 450000;
+      } else if (format === 'csv') {
+        name = 'Global_Metrics_Export.csv';
+        size = 180000;
+      } else if (format === 'numbers') {
+        name = 'Q4_Operating_Budget.numbers';
+        size = 890000;
+      } else if (format === 'pptx') {
+        name = 'Series_A_Pitch_Deck.pptx';
+        size = 1200000;
+      } else if (format === 'key') {
+        name = 'Apple_Keynote_Showcase.key';
+        size = 1600000;
+      }
+
+      const sampleFile = new File(['The Port Sample Document Content'], name, {
+        type: 'application/octet-stream'
+      });
+      Object.defineProperty(sampleFile, 'size', { value: size });
+      addFiles([sampleFile], targetOverride);
+    },
+    [addFiles]
+  );
 
   const isConverting = files.some((f) => f.status === 'converting');
 
@@ -358,6 +538,7 @@ export function useConversionQueue(soundEnabled = true) {
     setTargetFormat,
     startConversion,
     startAllConversions,
+    mergePdfs,
     deleteConversion,
     selectSample,
     isConverting

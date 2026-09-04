@@ -27,7 +27,12 @@ export function getAvailableTargets(sourceFormat = '') {
     return [
       { format: 'pages', label: 'Apple Pages', badge: '.pages', Icon: ApplePagesIcon },
       { format: 'docx', label: 'Microsoft Word', badge: '.docx', Icon: MicrosoftWordIcon },
-      { format: 'compress', label: 'Compress PDF', badge: '-75%', Icon: AdobePdfIcon }
+      { format: 'compress', label: 'Compress PDF', badge: '-75%', Icon: AdobePdfIcon },
+      { format: 'split', label: 'Split Pages', badge: '.zip', Icon: AdobePdfIcon },
+      { format: 'rotate', label: 'Rotate 90°', badge: '.pdf', Icon: AdobePdfIcon },
+      { format: 'watermark', label: 'Watermark', badge: '.pdf', Icon: AdobePdfIcon },
+      { format: 'protect', label: 'Protect Password', badge: '.pdf', Icon: AdobePdfIcon },
+      { format: 'ocr', label: 'OCR Searchable', badge: '.pdf', Icon: AdobePdfIcon }
     ];
   }
   if (ext === 'pages') {

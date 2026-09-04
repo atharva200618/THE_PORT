@@ -342,3 +342,663 @@
 [2026-08-30T13:43:34.430Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097405385_b939dfa7.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788097405385_b939dfa7.pages (pages)\n  (PDF -> Pages via pdf2docx high-fidelity intermediate)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788097405385_b939dfa7.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/17) Page 1\n[INFO] (2/17) Page 2\n[INFO] (3/17) Page 3\n[INFO] (4/17) Page 4\n[INFO] (5/17) Page 5\n[INFO] (6/17) Page 6\n[INFO] (7/17) Page 7\n[INFO] (8/17) Page 8\n[INFO] (9/17) Page 9\n[INFO] (10/17) Page 10\n[INFO] (11/17) Page 11\n[INFO] (12/17) Page 12\n[INFO] (13/17) Page 13\n[INFO] (14/17) Page 14\n[INFO] (15/17) Page 15\n[INFO] (16/17) Page 16\n[INFO] (17/17) Page 17\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/17) Page 1\n[INFO] (2/17) Page 2\n[INFO] (3/17) Page 3\n[INFO] (4/17) Page 4\n[INFO] (5/17) Page 5\n[INFO] (6/17) Page 6\n[INFO] (7/17) Page 7\n[INFO] (8/17) Page 8\n[INFO] (9/17) Page 9\n[INFO] (10/17) Page 10\n[INFO] (11/17) Page 11\n[INFO] (12/17) Page 12\n[INFO] (13/17) Page 13\n[INFO] (14/17) Page 14\n[INFO] (15/17) Page 15\n[INFO] (16/17) Page 16\n[INFO] (17/17) Page 17\n[INFO] Terminated in 2.06s.\nDone."}
 [2026-08-30T13:43:34.431Z] [INFO] Uploading converted output for job job_1788097405385_b939dfa7...
 [2026-08-30T13:43:34.471Z] [INFO] === Job [job_1788097405385_b939dfa7] COMPLETED Successfully ===
+[2026-08-30T14:31:24.929Z] [INFO] ========================================================
+[2026-08-30T14:31:24.937Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-08-30T14:31:24.937Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-08-30T14:31:24.937Z] [INFO]  Poll Interval: 3000ms
+[2026-08-30T14:31:24.937Z] [INFO]  Watchdog Timeout: 30s
+[2026-08-30T14:31:24.937Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-08-30T14:31:24.937Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-08-30T14:31:24.937Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-08-30T14:31:24.937Z] [INFO] ========================================================
+[2026-08-30T14:31:52.082Z] [INFO] === Starting Job [job_1788100311185_3a365ee0] === | {"name":"Live_Cloud_Test.pdf","source":"pdf","target":"pages"}
+[2026-08-30T14:31:52.083Z] [INFO] Downloading source file for job job_1788100311185_3a365ee0...
+[2026-08-30T14:31:52.207Z] [INFO] Executing conversion for job job_1788100311185_3a365ee0...
+[2026-08-30T14:31:52.208Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788100311185_3a365ee0.pages"}
+[2026-08-30T14:31:53.869Z] [ERROR] Subprocess conversion failed | {"code":0,"errorMsg":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788100311185_3a365ee0.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] Words count: 0. It might be a scanned pdf, which is not supported yet.\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf\nTraceback (most recent call last):\n  File \"/Users/atharvaupadhyay/Downloads/convert/pdf_converter_engine.py\", line 64, in <module>\n    convert_pdf_to_docx(sys.argv[1], sys.argv[2])\n  File \"/Users/atharvaupadhyay/Downloads/convert/pdf_converter_engine.py\", line 43, in convert_pdf_to_docx\n    cv.convert(output_docx, **tuning_settings)\n  File \"/private/tmp/pdf2docx_env/lib/python3.11/site-packages/pdf2docx/converter.py\", line 355, in convert\n    self.parse(start, end, pages, **settings).make_docx(docx_filename, **settings)\n  File \"/private/tmp/pdf2docx_env/lib/python3.11/site-packages/pdf2docx/converter.py\", line 211, in make_docx\n    raise ConversionException('No parsed pages. Please parse page first.')\npdf2docx.converter.ConversionException: No parsed pages. Please parse page first.\nWarning: Output file /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788100311185_3a365ee0.pages was not generated directly.\nDone."}
+[2026-08-30T14:31:53.869Z] [ERROR] === Job [job_1788100311185_3a365ee0] FAILED === | {"error":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788100311185_3a365ee0.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] Words count: 0. It might be a scanned pdf, which is not supported yet.\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788100311185_3a365ee0.pdf\nTraceback (most recent call last):\n  File \"/Users/atharvaupadhyay/Downloads/convert/pdf_converter_engine.py\", line 64, in <module>\n    convert_pdf_to_docx(sys.argv[1], sys.argv[2])\n  File \"/Users/atharvaupadhyay/Downloads/convert/pdf_converter_engine.py\", line 43, in convert_pdf_to_docx\n    cv.convert(output_docx, **tuning_settings)\n  File \"/private/tmp/pdf2docx_env/lib/python3.11/site-packages/pdf2docx/converter.py\", line 355, in convert\n    self.parse(start, end, pages, **settings).make_docx(docx_filename, **settings)\n  File \"/private/tmp/pdf2docx_env/lib/python3.11/site-packages/pdf2docx/converter.py\", line 211, in make_docx\n    raise ConversionException('No parsed pages. Please parse page first.')\npdf2docx.converter.ConversionException: No parsed pages. Please parse page first.\nWarning: Output file /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788100311185_3a365ee0.pages was not generated directly.\nDone."}
+[2026-08-30T15:45:52.601Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T15:45:53.192Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:18:02.034Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:18:04.641Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:41.445Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:41.695Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:44.441Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:47.440Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:50.445Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:53.447Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:56.442Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:30:59.448Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:02.451Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:05.452Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:08.455Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:11.451Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:14.455Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:17.457Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:20.458Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:23.460Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T17:31:26.458Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:41.521Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:44.357Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:47.353Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:50.357Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:53.359Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:56.360Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:31:59.363Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:02.365Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:05.368Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:08.370Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:11.371Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:14.373Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:17.374Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:20.374Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:23.375Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:32:26.375Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:32.713Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:35.719Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:38.713Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:41.714Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:44.914Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:47.792Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:50.775Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:53.766Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:56.788Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:59.739Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:41:59.761Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:02.738Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:02.777Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:05.738Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:05.778Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:08.739Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:08.778Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:11.740Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:11.797Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:14.768Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:14.808Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:17.732Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:17.739Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:20.727Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:20.739Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:23.727Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:23.740Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:26.732Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:26.744Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:29.730Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:29.742Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:32.732Z] [WARN] Polling connection error: fetch failed
+[2026-08-30T18:42:32.744Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T06:24:18.048Z] [INFO] ========================================================
+[2026-09-03T06:24:18.054Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T06:24:18.054Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T06:24:18.054Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T06:24:18.054Z] [INFO]  Watchdog Timeout: 30s
+[2026-09-03T06:24:18.054Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T06:24:18.054Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T06:24:18.054Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T06:24:18.054Z] [INFO] ========================================================
+[2026-09-03T06:44:03.565Z] [INFO] === Starting Job [job_1788417840771_e5efd229] === | {"name":"atul.pdf","source":"pdf","target":"pages"}
+[2026-09-03T06:44:03.571Z] [INFO] Downloading source file for job job_1788417840771_e5efd229...
+[2026-09-03T06:44:05.635Z] [INFO] Executing conversion for job job_1788417840771_e5efd229...
+[2026-09-03T06:44:05.636Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788417840771_e5efd229.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788417840771_e5efd229.pages"}
+[2026-09-03T06:44:35.648Z] [ERROR] Subprocess timed out after 30s. Killing process and recovering...
+[2026-09-03T06:44:35.661Z] [ERROR] === Job [job_1788417840771_e5efd229] FAILED === | {"error":"Conversion timed out after 30s. Check if document has complex layout or password protection."}
+[2026-09-03T06:44:57.602Z] [INFO] === Starting Job [job_1788417896407_95dd9b59] === | {"name":"case_study_review_1.pdf","source":"pdf","target":"pages"}
+[2026-09-03T06:44:57.603Z] [INFO] Downloading source file for job job_1788417896407_95dd9b59...
+[2026-09-03T06:44:57.812Z] [INFO] Executing conversion for job job_1788417896407_95dd9b59...
+[2026-09-03T06:44:57.813Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788417896407_95dd9b59.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788417896407_95dd9b59.pages"}
+[2026-09-03T06:45:19.294Z] [ERROR] Subprocess conversion failed | {"code":0,"errorMsg":"105:232: execution error: Pages got an error: Connection is invalid. (-609)"}
+[2026-09-03T06:45:19.294Z] [ERROR] === Job [job_1788417896407_95dd9b59] FAILED === | {"error":"105:232: execution error: Pages got an error: Connection is invalid. (-609)"}
+[2026-09-03T06:49:15.673Z] [INFO] === Starting Job [job_1788418154184_ac92b982] === | {"name":"CN_ASSESSMENT_4.pdf","source":"pdf","target":"pages"}
+[2026-09-03T06:49:15.674Z] [INFO] Downloading source file for job job_1788418154184_ac92b982...
+[2026-09-03T06:49:16.385Z] [INFO] Executing conversion for job job_1788418154184_ac92b982...
+[2026-09-03T06:49:16.386Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418154184_ac92b982.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418154184_ac92b982.pages"}
+[2026-09-03T06:49:46.390Z] [ERROR] Subprocess timed out after 30s. Killing process and recovering...
+[2026-09-03T06:49:46.395Z] [ERROR] === Job [job_1788418154184_ac92b982] FAILED === | {"error":"Conversion timed out after 30s. Check if document has complex layout or password protection."}
+[2026-09-03T06:52:49.198Z] [INFO] ========================================================
+[2026-09-03T06:52:49.206Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T06:52:49.206Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T06:52:49.206Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T06:52:49.207Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T06:52:49.207Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T06:52:49.207Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T06:52:49.207Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T06:52:49.207Z] [INFO] ========================================================
+[2026-09-03T06:56:16.465Z] [INFO] === Starting Job [job_1788418575891_e6750a07] === | {"name":"atul.pdf","source":"pdf","target":"pages"}
+[2026-09-03T06:56:16.471Z] [INFO] Downloading source file for job job_1788418575891_e6750a07...
+[2026-09-03T06:56:18.547Z] [INFO] Executing conversion for job job_1788418575891_e6750a07...
+[2026-09-03T06:56:18.547Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418575891_e6750a07.pages"}
+[2026-09-03T06:56:32.374Z] [ERROR] Subprocess conversion failed | {"code":0,"errorMsg":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418575891_e6750a07.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] Terminated in 8.66s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788418575891_e6750a07_2889.docx\n64:72: execution error: Can’t get application \"/Applications/Pages.app\". (-1728)\nWarning: Output file /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418575891_e6750a07.pages was not generated directly.\nDone."}
+[2026-09-03T06:56:32.374Z] [ERROR] === Job [job_1788418575891_e6750a07] FAILED === | {"error":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418575891_e6750a07.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] Terminated in 8.66s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788418575891_e6750a07.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788418575891_e6750a07_2889.docx\n64:72: execution error: Can’t get application \"/Applications/Pages.app\". (-1728)\nWarning: Output file /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788418575891_e6750a07.pages was not generated directly.\nDone."}
+[2026-09-03T07:02:33.538Z] [INFO] ========================================================
+[2026-09-03T07:02:33.547Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:02:33.547Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:02:33.547Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:02:33.548Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:02:33.548Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:02:33.548Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:02:33.548Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:02:33.548Z] [INFO] ========================================================
+[2026-09-03T07:03:49.966Z] [INFO] === Starting Job [job_1788419029740_3da3311d] === | {"name":"atul.pdf","source":"pdf","target":"pages"}
+[2026-09-03T07:03:49.968Z] [INFO] Downloading source file for job job_1788419029740_3da3311d...
+[2026-09-03T07:03:52.013Z] [INFO] Executing conversion for job job_1788419029740_3da3311d...
+[2026-09-03T07:03:52.014Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419029740_3da3311d.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419029740_3da3311d.pages"}
+[2026-09-03T07:04:31.194Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419029740_3da3311d.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419029740_3da3311d.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419029740_3da3311d.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/12) Page 1\n[INFO] (2/12) Page 2\n[INFO] (3/12) Page 3\n[INFO] (4/12) Page 4\n[INFO] (5/12) Page 5\n[INFO] (6/12) Page 6\n[INFO] (7/12) Page 7\n[INFO] (8/12) Page 8\n[INFO] (9/12) Page 9\n[INFO] (10/12) Page 10\n[INFO] (11/12) Page 11\n[INFO] (12/12) Page 12\n[INFO] Terminated in 7.18s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419029740_3da3311d.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419029740_3da3311d_3208.docx\nDone."}
+[2026-09-03T07:04:31.194Z] [INFO] Uploading converted output for job job_1788419029740_3da3311d...
+[2026-09-03T07:04:34.097Z] [INFO] === Job [job_1788419029740_3da3311d] COMPLETED Successfully ===
+[2026-09-03T07:06:27.764Z] [INFO] === Starting Job [job_1788419187697_afb23de6] === | {"name":"24BCE2821_VL2026270103292_AST04.pdf","source":"pdf","target":"pages"}
+[2026-09-03T07:06:27.771Z] [INFO] Downloading source file for job job_1788419187697_afb23de6...
+[2026-09-03T07:06:28.080Z] [INFO] Executing conversion for job job_1788419187697_afb23de6...
+[2026-09-03T07:06:28.081Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419187697_afb23de6.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419187697_afb23de6.pages"}
+[2026-09-03T07:06:51.999Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419187697_afb23de6.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419187697_afb23de6.pages (pages)\n  (PDF -> Pages via Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419187697_afb23de6.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[WARNING] 'modified' timestamp seems very low; regarding as unix timestamp\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/6) Page 1\n[INFO] (2/6) Page 2\n[INFO] (3/6) Page 3\n[INFO] (4/6) Page 4\n[INFO] (5/6) Page 5\n[INFO] (6/6) Page 6\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/6) Page 1\n[INFO] (2/6) Page 2\n[INFO] (3/6) Page 3\n[INFO] (4/6) Page 4\n[INFO] (5/6) Page 5\n[INFO] (6/6) Page 6\n[INFO] Terminated in 2.11s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419187697_afb23de6.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419187697_afb23de6_3325.docx\nDone."}
+[2026-09-03T07:06:52.002Z] [INFO] Uploading converted output for job job_1788419187697_afb23de6...
+[2026-09-03T07:06:54.009Z] [INFO] === Job [job_1788419187697_afb23de6] COMPLETED Successfully ===
+[2026-09-03T07:13:02.283Z] [INFO] ========================================================
+[2026-09-03T07:13:02.292Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:13:02.292Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:13:02.292Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:13:02.292Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:13:02.292Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:13:02.293Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:13:02.293Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:13:02.293Z] [INFO] ========================================================
+[2026-09-03T07:14:20.434Z] [INFO] === Starting Job [job_1788419658335_7d41718f] === | {"name":"CN_ASSESSMENT_4_compressed.pdf","source":"pdf","target":"pages"}
+[2026-09-03T07:14:20.439Z] [INFO] Downloading source file for job job_1788419658335_7d41718f...
+[2026-09-03T07:14:21.330Z] [INFO] Executing conversion for job job_1788419658335_7d41718f...
+[2026-09-03T07:14:21.331Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419658335_7d41718f.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419658335_7d41718f.pages"}
+[2026-09-03T07:14:47.897Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419658335_7d41718f.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419658335_7d41718f.pages (pages)\n  (PDF -> Pages via 2026 Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419658335_7d41718f.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] Terminated in 5.35s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419658335_7d41718f.pdf\n[Precision Engine] Enhanced and polished layout structure in /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419658335_7d41718f_3930.docx\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419658335_7d41718f_3930.docx\nDone."}
+[2026-09-03T07:14:47.900Z] [INFO] Uploading converted output for job job_1788419658335_7d41718f...
+[2026-09-03T07:14:53.057Z] [INFO] === Job [job_1788419658335_7d41718f] COMPLETED Successfully ===
+[2026-09-03T07:18:15.937Z] [INFO] ========================================================
+[2026-09-03T07:18:15.948Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:18:15.948Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:18:15.948Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:18:15.948Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:18:15.948Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:18:15.948Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:18:15.949Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:18:15.949Z] [INFO] ========================================================
+[2026-09-03T07:19:46.322Z] [INFO] === Starting Job [job_1788419984834_841a8e28] === | {"name":"CN_ASSESSMENT_4_compressed.pdf","source":"pdf","target":"pages"}
+[2026-09-03T07:19:46.326Z] [INFO] Downloading source file for job job_1788419984834_841a8e28...
+[2026-09-03T07:19:48.214Z] [INFO] Executing conversion for job job_1788419984834_841a8e28...
+[2026-09-03T07:19:48.214Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419984834_841a8e28.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419984834_841a8e28.pages"}
+[2026-09-03T07:20:20.391Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419984834_841a8e28.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788419984834_841a8e28.pages (pages)\n  (PDF -> Pages via 2026 Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419984834_841a8e28.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] Terminated in 6.38s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788419984834_841a8e28.pdf\n[Precision Engine] Enhanced and polished layout structure in /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419984834_841a8e28_4192.docx\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788419984834_841a8e28_4192.docx\nDone."}
+[2026-09-03T07:20:20.395Z] [INFO] Uploading converted output for job job_1788419984834_841a8e28...
+[2026-09-03T07:20:25.195Z] [INFO] === Job [job_1788419984834_841a8e28] COMPLETED Successfully ===
+[2026-09-03T07:20:25.429Z] [INFO] === Starting Job [job_1788420012294_0f63326c] === | {"name":"CN_ASSESSMENT_4_compressed.pdf","source":"pdf","target":"pages"}
+[2026-09-03T07:20:25.430Z] [INFO] Downloading source file for job job_1788420012294_0f63326c...
+[2026-09-03T07:20:26.004Z] [INFO] Executing conversion for job job_1788420012294_0f63326c...
+[2026-09-03T07:20:26.004Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420012294_0f63326c.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788420012294_0f63326c.pages"}
+[2026-09-03T07:20:46.599Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420012294_0f63326c.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788420012294_0f63326c.pages (pages)\n  (PDF -> Pages via 2026 Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420012294_0f63326c.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/15) Page 1\n[INFO] (2/15) Page 2\n[INFO] (3/15) Page 3\n[INFO] (4/15) Page 4\n[INFO] (5/15) Page 5\n[INFO] (6/15) Page 6\n[INFO] (7/15) Page 7\n[INFO] (8/15) Page 8\n[INFO] (9/15) Page 9\n[INFO] (10/15) Page 10\n[INFO] (11/15) Page 11\n[INFO] (12/15) Page 12\n[INFO] (13/15) Page 13\n[INFO] (14/15) Page 14\n[INFO] (15/15) Page 15\n[INFO] Terminated in 5.25s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420012294_0f63326c.pdf\n[Precision Engine] Enhanced and polished layout structure in /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788420012294_0f63326c_4290.docx\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788420012294_0f63326c_4290.docx\nDone."}
+[2026-09-03T07:20:46.600Z] [INFO] Uploading converted output for job job_1788420012294_0f63326c...
+[2026-09-03T07:20:51.385Z] [INFO] === Job [job_1788420012294_0f63326c] COMPLETED Successfully ===
+[2026-09-03T07:23:47.893Z] [INFO] ========================================================
+[2026-09-03T07:23:47.902Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:23:47.902Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:23:47.902Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:23:47.902Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:23:47.902Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:23:47.903Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:23:47.903Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:23:47.903Z] [INFO] ========================================================
+[2026-09-03T07:32:54.264Z] [INFO] === Starting Job [job_1788420773503_74d3bc30] === | {"name":"Executive_Strategic_Brief.docx","source":"docx","target":"pages"}
+[2026-09-03T07:32:54.269Z] [INFO] Downloading source file for job job_1788420773503_74d3bc30...
+[2026-09-03T07:32:54.380Z] [INFO] Executing conversion for job job_1788420773503_74d3bc30...
+[2026-09-03T07:32:54.380Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420773503_74d3bc30.docx","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788420773503_74d3bc30.pages"}
+[2026-09-03T07:33:07.456Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788420773503_74d3bc30.docx (docx) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788420773503_74d3bc30.pages (pages)\nDone."}
+[2026-09-03T07:33:07.457Z] [INFO] Uploading converted output for job job_1788420773503_74d3bc30...
+[2026-09-03T07:33:11.940Z] [INFO] === Job [job_1788420773503_74d3bc30] COMPLETED Successfully ===
+[2026-09-03T07:39:12.774Z] [INFO] ========================================================
+[2026-09-03T07:39:12.777Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:39:12.777Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:39:12.777Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:39:12.778Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:39:12.778Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:39:12.778Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:39:12.778Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:39:12.778Z] [INFO] ========================================================
+[2026-09-03T07:39:45.610Z] [INFO] === Starting Job [job_1788421185025_da9cbf85] === | {"name":"Executive_Strategic_Brief.docx","source":"docx","target":"pdf"}
+[2026-09-03T07:39:45.611Z] [INFO] Downloading source file for job job_1788421185025_da9cbf85...
+[2026-09-03T07:39:45.721Z] [INFO] Executing conversion for job job_1788421185025_da9cbf85...
+[2026-09-03T07:39:45.722Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788421185025_da9cbf85.docx","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788421185025_da9cbf85.pdf"}
+[2026-09-03T07:39:54.827Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788421185025_da9cbf85.docx (docx) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788421185025_da9cbf85.pdf (pdf)\nconvert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788421185025_da9cbf85.docx as a Writer document -> /private/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788421185025_da9cbf85.pdf using filter : writer_pdf_Export\nDone."}
+[2026-09-03T07:39:54.829Z] [INFO] Uploading converted output for job job_1788421185025_da9cbf85...
+[2026-09-03T07:39:56.114Z] [INFO] === Job [job_1788421185025_da9cbf85] COMPLETED Successfully ===
+[2026-09-03T07:44:49.301Z] [INFO] Shutting down Mac Worker Daemon gracefully...
+[2026-09-03T07:44:50.303Z] [INFO] Worker stopped.
+[2026-09-03T07:44:50.364Z] [INFO] ========================================================
+[2026-09-03T07:44:50.371Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-03T07:44:50.371Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-03T07:44:50.371Z] [INFO]  Poll Interval: 3000ms
+[2026-09-03T07:44:50.371Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-03T07:44:50.371Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-03T07:44:50.372Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-03T07:44:50.372Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-03T07:44:50.372Z] [INFO] ========================================================
+[2026-09-03T09:46:01.511Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:04.221Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:07.224Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:10.224Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:13.231Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:16.228Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:19.230Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:22.233Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:25.231Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:28.233Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:31.235Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:34.240Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:37.239Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:40.242Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:43.243Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T09:46:46.249Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:01.031Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:04.025Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:07.028Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:10.027Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:13.047Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:13.048Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:16.032Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:19.034Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:22.035Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:25.047Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:28.038Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:31.038Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:34.040Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:37.042Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:40.047Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:43.049Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T10:47:46.046Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:03.247Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:06.248Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:09.249Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:12.251Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:15.253Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:18.254Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:21.260Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:24.260Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:27.261Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:30.265Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:33.260Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:36.267Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:39.267Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:42.270Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T11:48:45.270Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:02.630Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:05.634Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:08.635Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:11.637Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:14.638Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:17.635Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:20.638Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:23.641Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:26.642Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:29.643Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:32.643Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:35.648Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:38.651Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:41.652Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T12:49:44.652Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:38.240Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:41.243Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:44.242Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:47.240Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:50.241Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T13:18:53.242Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:23.869Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:26.787Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:29.786Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:32.788Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:35.786Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:38.787Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:41.789Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:44.788Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:47.794Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:50.795Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:53.796Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:56.797Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:30:59.800Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:31:02.801Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:31:05.804Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T14:31:08.803Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:19:52.032Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:19:55.035Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:19:58.035Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:01.035Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:04.037Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:07.040Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:10.044Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:13.047Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:16.049Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:19.048Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:22.047Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:25.051Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:28.054Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:31.056Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:20:34.059Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:13.156Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:16.162Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:19.163Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:22.161Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:25.161Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:28.161Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:31.164Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:34.163Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:37.164Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:40.168Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:43.164Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:46.166Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:49.168Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:52.171Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:55.171Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:43:58.170Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:01.173Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:04.174Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:07.176Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:10.176Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:13.177Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:16.180Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:19.183Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:22.186Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:25.187Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:28.186Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:31.190Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:34.190Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:37.191Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:40.193Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:43.194Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:46.199Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:49.200Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:52.201Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:55.204Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:44:58.205Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:01.206Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:04.210Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:07.212Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:10.213Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:13.213Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:16.215Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:19.221Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:22.222Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:25.224Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:28.225Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:31.228Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:34.227Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:37.232Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:40.232Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:43.234Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:46.235Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:49.238Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:52.238Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:55.239Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:45:58.243Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:01.244Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:04.245Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:07.248Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:10.251Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:13.251Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:16.254Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:19.254Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:22.256Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:25.260Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:28.262Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:31.262Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:34.264Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:37.264Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:40.267Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:43.267Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:46.272Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:49.273Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:52.277Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:55.278Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:46:58.279Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:01.281Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:04.282Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:07.284Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:10.285Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:13.288Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:16.290Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:19.292Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:22.293Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:25.296Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:28.297Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:31.299Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:34.300Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:37.302Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:40.306Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:43.306Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:46.309Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:49.309Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:52.311Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:55.312Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:47:58.314Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:01.316Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:04.319Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:07.318Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:10.321Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:13.321Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:16.326Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:19.329Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:22.330Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:25.332Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:28.334Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:31.335Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:34.335Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:37.336Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:40.340Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:43.339Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:46.342Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:49.343Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:52.347Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:55.348Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:48:58.348Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:01.350Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:04.353Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:07.354Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:10.356Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:13.358Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:16.361Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:19.363Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:22.366Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:25.367Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:28.368Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:31.368Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:34.369Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:37.369Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:40.374Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:43.376Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:46.379Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:49.381Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:52.384Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:55.384Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:49:58.386Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:01.388Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:04.391Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:07.393Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:10.395Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:13.396Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:16.397Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:19.400Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:22.401Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:25.402Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:28.400Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:31.400Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:34.401Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:37.403Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:40.404Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T15:50:44.171Z] [INFO] === Starting Job [job_1788428078529_7e992281] === | {"name":"Tutorial sheet.pdf","source":"pdf","target":"pages"}
+[2026-09-03T15:50:44.172Z] [INFO] Downloading source file for job job_1788428078529_7e992281...
+[2026-09-03T15:50:44.771Z] [INFO] Executing conversion for job job_1788428078529_7e992281...
+[2026-09-03T15:50:44.772Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788428078529_7e992281.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788428078529_7e992281.pages"}
+[2026-09-03T15:51:00.975Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788428078529_7e992281.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788428078529_7e992281.pages (pages)\n  (PDF -> Pages via 2026 Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788428078529_7e992281.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/4) Page 1\n[INFO] (2/4) Page 2\n[INFO] (3/4) Page 3\n[INFO] (4/4) Page 4\n[INFO] Terminated in 0.54s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788428078529_7e992281.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788428078529_7e992281_5897.docx\nDone."}
+[2026-09-03T15:51:00.977Z] [INFO] Uploading converted output for job job_1788428078529_7e992281...
+[2026-09-03T15:51:02.288Z] [INFO] === Job [job_1788428078529_7e992281] COMPLETED Successfully ===
+[2026-09-03T17:02:28.991Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:02:32.014Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:19:02.631Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:19:05.637Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:26.932Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:29.919Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:32.914Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:35.914Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:39.192Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:41.919Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:44.918Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:47.919Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:50.921Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:53.921Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:56.922Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:52:59.920Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:02.921Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:05.924Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:08.926Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:11.925Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:14.925Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:17.930Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:20.928Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:23.930Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:26.930Z] [WARN] Polling connection error: fetch failed
+[2026-09-03T17:53:29.933Z] [WARN] Polling connection error: fetch failed
+[2026-09-04T06:41:18.225Z] [INFO] ========================================================
+[2026-09-04T06:41:18.233Z] [INFO]  The Port — Mac Worker Daemon Started
+[2026-09-04T06:41:18.233Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-04T06:41:18.233Z] [INFO]  Poll Interval: 3000ms
+[2026-09-04T06:41:18.233Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-04T06:41:18.233Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-04T06:41:18.233Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-04T06:41:18.234Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-04T06:41:18.234Z] [INFO] ========================================================
+[2026-09-04T06:43:45.401Z] [INFO] === Starting Job [job_1788504224197_de7c5440] === | {"name":"Screenshot 2026-07-29 at 10.09.53â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:43:45.402Z] [INFO] Downloading source file for job job_1788504224197_de7c5440...
+[2026-09-04T06:43:47.536Z] [INFO] Executing conversion for job job_1788504224197_de7c5440...
+[2026-09-04T06:43:47.536Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504224197_de7c5440.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504224197_de7c5440.pdf"}
+[2026-09-04T06:43:49.303Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504224197_de7c5440.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504224197_de7c5440.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504224197_de7c5440.pdf"}
+[2026-09-04T06:43:49.304Z] [INFO] Uploading converted output for job job_1788504224197_de7c5440...
+[2026-09-04T06:43:51.934Z] [INFO] === Job [job_1788504224197_de7c5440] COMPLETED Successfully ===
+[2026-09-04T06:43:57.418Z] [INFO] === Starting Job [job_1788504235010_abd0b152] === | {"name":"Screenshot 2026-07-15 at 9.54.48â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:43:57.419Z] [INFO] Downloading source file for job job_1788504235010_abd0b152...
+[2026-09-04T06:43:58.236Z] [INFO] Executing conversion for job job_1788504235010_abd0b152...
+[2026-09-04T06:43:58.236Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504235010_abd0b152.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504235010_abd0b152.pdf"}
+[2026-09-04T06:43:58.652Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504235010_abd0b152.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504235010_abd0b152.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504235010_abd0b152.pdf"}
+[2026-09-04T06:43:58.652Z] [INFO] Uploading converted output for job job_1788504235010_abd0b152...
+[2026-09-04T06:43:59.597Z] [INFO] === Job [job_1788504235010_abd0b152] COMPLETED Successfully ===
+[2026-09-04T06:44:06.934Z] [INFO] === Starting Job [job_1788504243896_f74d06d2] === | {"name":"Screenshot 2026-07-16 at 8.55.39â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:06.936Z] [INFO] Downloading source file for job job_1788504243896_f74d06d2...
+[2026-09-04T06:44:07.603Z] [INFO] Executing conversion for job job_1788504243896_f74d06d2...
+[2026-09-04T06:44:07.603Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504243896_f74d06d2.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504243896_f74d06d2.pdf"}
+[2026-09-04T06:44:07.991Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504243896_f74d06d2.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504243896_f74d06d2.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504243896_f74d06d2.pdf"}
+[2026-09-04T06:44:07.991Z] [INFO] Uploading converted output for job job_1788504243896_f74d06d2...
+[2026-09-04T06:44:09.183Z] [INFO] === Job [job_1788504243896_f74d06d2] COMPLETED Successfully ===
+[2026-09-04T06:44:12.388Z] [INFO] === Starting Job [job_1788504251904_37a7f14e] === | {"name":"Screenshot 2026-07-16 at 9.36.02â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:12.388Z] [INFO] Downloading source file for job job_1788504251904_37a7f14e...
+[2026-09-04T06:44:13.003Z] [INFO] Executing conversion for job job_1788504251904_37a7f14e...
+[2026-09-04T06:44:13.003Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504251904_37a7f14e.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504251904_37a7f14e.pdf"}
+[2026-09-04T06:44:13.445Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504251904_37a7f14e.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504251904_37a7f14e.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504251904_37a7f14e.pdf"}
+[2026-09-04T06:44:13.445Z] [INFO] Uploading converted output for job job_1788504251904_37a7f14e...
+[2026-09-04T06:44:14.244Z] [INFO] === Job [job_1788504251904_37a7f14e] COMPLETED Successfully ===
+[2026-09-04T06:44:18.487Z] [INFO] === Starting Job [job_1788504257412_ce960bc5] === | {"name":"Screenshot 2026-07-16 at 10.13.30â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:18.488Z] [INFO] Downloading source file for job job_1788504257412_ce960bc5...
+[2026-09-04T06:44:18.957Z] [INFO] Executing conversion for job job_1788504257412_ce960bc5...
+[2026-09-04T06:44:18.957Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504257412_ce960bc5.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504257412_ce960bc5.pdf"}
+[2026-09-04T06:44:19.419Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504257412_ce960bc5.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504257412_ce960bc5.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504257412_ce960bc5.pdf"}
+[2026-09-04T06:44:19.420Z] [INFO] Uploading converted output for job job_1788504257412_ce960bc5...
+[2026-09-04T06:44:19.940Z] [INFO] === Job [job_1788504257412_ce960bc5] COMPLETED Successfully ===
+[2026-09-04T06:44:24.415Z] [INFO] === Starting Job [job_1788504263002_1a09ab0b] === | {"name":"Screenshot 2026-07-17 at 8.11.42â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:24.415Z] [INFO] Downloading source file for job job_1788504263002_1a09ab0b...
+[2026-09-04T06:44:24.823Z] [INFO] Executing conversion for job job_1788504263002_1a09ab0b...
+[2026-09-04T06:44:24.823Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504263002_1a09ab0b.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504263002_1a09ab0b.pdf"}
+[2026-09-04T06:44:25.194Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504263002_1a09ab0b.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504263002_1a09ab0b.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504263002_1a09ab0b.pdf"}
+[2026-09-04T06:44:25.194Z] [INFO] Uploading converted output for job job_1788504263002_1a09ab0b...
+[2026-09-04T06:44:25.689Z] [INFO] === Job [job_1788504263002_1a09ab0b] COMPLETED Successfully ===
+[2026-09-04T06:44:30.421Z] [INFO] === Starting Job [job_1788504269346_f2d7a22d] === | {"name":"Screenshot 2026-07-17 at 8.58.45â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:30.421Z] [INFO] Downloading source file for job job_1788504269346_f2d7a22d...
+[2026-09-04T06:44:31.216Z] [INFO] Executing conversion for job job_1788504269346_f2d7a22d...
+[2026-09-04T06:44:31.216Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504269346_f2d7a22d.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504269346_f2d7a22d.pdf"}
+[2026-09-04T06:44:31.653Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504269346_f2d7a22d.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504269346_f2d7a22d.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504269346_f2d7a22d.pdf"}
+[2026-09-04T06:44:31.653Z] [INFO] Uploading converted output for job job_1788504269346_f2d7a22d...
+[2026-09-04T06:44:32.768Z] [INFO] === Job [job_1788504269346_f2d7a22d] COMPLETED Successfully ===
+[2026-09-04T06:44:36.718Z] [INFO] === Starting Job [job_1788504276358_99dd376d] === | {"name":"Screenshot 2026-07-17 at 8.58.48â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:36.719Z] [INFO] Downloading source file for job job_1788504276358_99dd376d...
+[2026-09-04T06:44:37.479Z] [INFO] Executing conversion for job job_1788504276358_99dd376d...
+[2026-09-04T06:44:37.480Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504276358_99dd376d.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504276358_99dd376d.pdf"}
+[2026-09-04T06:44:38.058Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504276358_99dd376d.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504276358_99dd376d.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504276358_99dd376d.pdf"}
+[2026-09-04T06:44:38.058Z] [INFO] Uploading converted output for job job_1788504276358_99dd376d...
+[2026-09-04T06:44:38.772Z] [INFO] === Job [job_1788504276358_99dd376d] COMPLETED Successfully ===
+[2026-09-04T06:44:42.450Z] [INFO] === Starting Job [job_1788504282084_8372e109] === | {"name":"Screenshot 2026-07-18 at 1.39.14â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:42.451Z] [INFO] Downloading source file for job job_1788504282084_8372e109...
+[2026-09-04T06:44:42.728Z] [INFO] Executing conversion for job job_1788504282084_8372e109...
+[2026-09-04T06:44:42.728Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504282084_8372e109.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504282084_8372e109.pdf"}
+[2026-09-04T06:44:43.221Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504282084_8372e109.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504282084_8372e109.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504282084_8372e109.pdf"}
+[2026-09-04T06:44:43.222Z] [INFO] Uploading converted output for job job_1788504282084_8372e109...
+[2026-09-04T06:44:43.982Z] [INFO] === Job [job_1788504282084_8372e109] COMPLETED Successfully ===
+[2026-09-04T06:44:48.990Z] [INFO] === Starting Job [job_1788504287617_b7638016] === | {"name":"Screenshot 2026-07-19 at 9.20.23â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:48.990Z] [INFO] Downloading source file for job job_1788504287617_b7638016...
+[2026-09-04T06:44:49.481Z] [INFO] Executing conversion for job job_1788504287617_b7638016...
+[2026-09-04T06:44:49.481Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504287617_b7638016.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504287617_b7638016.pdf"}
+[2026-09-04T06:44:49.814Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504287617_b7638016.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504287617_b7638016.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504287617_b7638016.pdf"}
+[2026-09-04T06:44:49.814Z] [INFO] Uploading converted output for job job_1788504287617_b7638016...
+[2026-09-04T06:44:50.827Z] [INFO] === Job [job_1788504287617_b7638016] COMPLETED Successfully ===
+[2026-09-04T06:44:54.423Z] [INFO] === Starting Job [job_1788504293754_44716337] === | {"name":"Screenshot 2026-07-26 at 12.13.59â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:44:54.423Z] [INFO] Downloading source file for job job_1788504293754_44716337...
+[2026-09-04T06:44:54.939Z] [INFO] Executing conversion for job job_1788504293754_44716337...
+[2026-09-04T06:44:54.939Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504293754_44716337.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504293754_44716337.pdf"}
+[2026-09-04T06:44:55.303Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504293754_44716337.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504293754_44716337.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504293754_44716337.pdf"}
+[2026-09-04T06:44:55.304Z] [INFO] Uploading converted output for job job_1788504293754_44716337...
+[2026-09-04T06:44:56.042Z] [INFO] === Job [job_1788504293754_44716337] COMPLETED Successfully ===
+[2026-09-04T06:45:03.804Z] [INFO] === Starting Job [job_1788504303754_35afc642] === | {"name":"Screenshot 2026-07-28 at 10.37.46â¯PM.png","source":"png","target":"pdf"}
+[2026-09-04T06:45:03.805Z] [INFO] Downloading source file for job job_1788504303754_35afc642...
+[2026-09-04T06:45:04.540Z] [INFO] Executing conversion for job job_1788504303754_35afc642...
+[2026-09-04T06:45:04.541Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504303754_35afc642.png","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504303754_35afc642.pdf"}
+[2026-09-04T06:45:04.903Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504303754_35afc642.png (png) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504303754_35afc642.pdf (pdf)\n  (Image -> PDF via Media Engine)\n[Media Engine] Successfully bound 1 images into PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504303754_35afc642.pdf"}
+[2026-09-04T06:45:04.903Z] [INFO] Uploading converted output for job job_1788504303754_35afc642...
+[2026-09-04T06:45:05.873Z] [INFO] === Job [job_1788504303754_35afc642] COMPLETED Successfully ===
+[2026-09-04T06:46:24.446Z] [INFO] === Starting Job [job_1788504383290_993f95f9] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pdf"}
+[2026-09-04T06:46:24.448Z] [INFO] Downloading source file for job job_1788504383290_993f95f9...
+[2026-09-04T06:46:25.105Z] [INFO] Executing conversion for job job_1788504383290_993f95f9...
+[2026-09-04T06:46:25.105Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504383290_993f95f9.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504383290_993f95f9.pdf"}
+[2026-09-04T06:46:25.648Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788504383290_993f95f9.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788504383290_993f95f9.pdf (pdf)\n  (PDF -> Compressed PDF via Media Engine)\n[Media Engine] Compressed PDF from 614966 to 613385 bytes (0% reduction)"}
+[2026-09-04T06:46:25.648Z] [INFO] Uploading converted output for job job_1788504383290_993f95f9...
+[2026-09-04T06:46:26.467Z] [INFO] === Job [job_1788504383290_993f95f9] COMPLETED Successfully ===
+[2026-09-04T07:19:55.123Z] [INFO] === Starting Job [job_1788506394624_3ded813b] === | {"name":"Atharva_Upadhyay_Resume.pdf","source":"pdf","target":"pages"}
+[2026-09-04T07:19:55.125Z] [INFO] Downloading source file for job job_1788506394624_3ded813b...
+[2026-09-04T07:19:55.692Z] [INFO] Executing conversion for job job_1788506394624_3ded813b...
+[2026-09-04T07:19:55.693Z] [INFO] Spawning convert script: /Users/atharvaupadhyay/Downloads/convert/convert.sh | {"inputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788506394624_3ded813b.pdf","outputPath":"/var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788506394624_3ded813b.pages"}
+[2026-09-04T07:20:12.802Z] [INFO] Subprocess completed successfully | {"stdout":"Converting: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788506394624_3ded813b.pdf (pdf) -> /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/out_job_1788506394624_3ded813b.pages (pages)\n  (PDF -> Pages via 2026 Precision Engine)\nwarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.\n[INFO] Start to convert /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788506394624_3ded813b.pdf\n[INFO] \u001b[1;36m[1/4] Opening document...\u001b[0m\n[INFO] \u001b[1;36m[2/4] Analyzing document...\u001b[0m\n[INFO] \u001b[1;36m[3/4] Parsing pages...\u001b[0m\n[INFO] (1/1) Page 1\n[INFO] \u001b[1;36m[4/4] Creating pages...\u001b[0m\n[INFO] (1/1) Page 1\n[INFO] Terminated in 0.36s.\n[Precision Engine] Analyzing and parsing PDF: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/in_job_1788506394624_3ded813b.pdf\n[Precision Engine] Successfully generated high-fidelity DOCX: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker/.tmp_in_job_1788506394624_3ded813b_3538.docx\n  [Engine] Pre-launching Pages...\nDone."}
+[2026-09-04T07:20:12.802Z] [INFO] Uploading converted output for job job_1788506394624_3ded813b...
+[2026-09-04T07:20:13.593Z] [INFO] === Job [job_1788506394624_3ded813b] COMPLETED Successfully ===
+[2026-09-04T07:37:09.407Z] [INFO] ========================================================
+[2026-09-04T07:37:09.414Z] [INFO]  The Port — Mac Worker Daemon Started (Dual-Lane Mode)
+[2026-09-04T07:37:09.414Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-04T07:37:09.414Z] [INFO]  Poll Interval: 3000ms
+[2026-09-04T07:37:09.414Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-04T07:37:09.414Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-04T07:37:09.414Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-04T07:37:09.414Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-04T07:37:09.414Z] [INFO]  Parallel Non-Apple Slots: 2
+[2026-09-04T07:37:09.414Z] [INFO] ========================================================
+[2026-09-04T07:37:09.476Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:09.477Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:12.420Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:12.420Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:15.418Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:15.419Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:18.422Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:18.423Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:21.422Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:21.423Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:24.423Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:24.424Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:27.422Z] [WARN] Apple queue polling error: fetch failed
+[2026-09-04T07:37:27.422Z] [WARN] Parallel queue polling error: fetch failed
+[2026-09-04T07:37:27.892Z] [INFO] Shutting down Mac Worker Daemon gracefully...
+[2026-09-04T07:37:27.893Z] [INFO] Shutting down Mac Worker Daemon gracefully...
+[2026-09-04T07:37:28.894Z] [INFO] Worker stopped.
+[2026-09-04T07:37:28.895Z] [INFO] Worker stopped.
+[2026-09-04T07:37:28.958Z] [INFO] ========================================================
+[2026-09-04T07:37:28.961Z] [INFO]  The Port — Mac Worker Daemon Started (Dual-Lane Mode)
+[2026-09-04T07:37:28.961Z] [INFO]  Backend Target: https://the-port.onrender.com
+[2026-09-04T07:37:28.961Z] [INFO]  Poll Interval: 3000ms
+[2026-09-04T07:37:28.961Z] [INFO]  Watchdog Timeout: 90s
+[2026-09-04T07:37:28.961Z] [INFO]  Convert Script: /Users/atharvaupadhyay/Downloads/convert/convert.sh
+[2026-09-04T07:37:28.961Z] [INFO]  Temp Storage: /var/folders/2q/_4_1dhsn4m91dr_78v_vj0840000gn/T/the_port_worker
+[2026-09-04T07:37:28.961Z] [INFO]  Log File: /Users/atharvaupadhyay/Downloads/convert/worker/worker.log
+[2026-09-04T07:37:28.961Z] [INFO]  Parallel Non-Apple Slots: 2
+[2026-09-04T07:37:28.961Z] [INFO] ========================================================

@@ -52,6 +52,23 @@ export function createJob({ id, originalName, sourceFormat, targetFormat, fileSi
 }
 
 /**
+ * Creates a multi-file merge job
+ */
+export function createMergeJob({ id, originalName, inputFilenames, fileSize }) {
+  const now = Date.now();
+  const stmt = db.prepare(`
+    INSERT INTO jobs (
+      id, original_name, source_format, target_format, file_size,
+      status, input_filename, output_filename, error_message,
+      created_at, updated_at, completed_at
+    ) VALUES (?, ?, 'pdf', 'pdf', ?, 'pending', ?, NULL, NULL, ?, ?, NULL)
+  `);
+
+  stmt.run(id, originalName || 'Merged_Collection.pdf', fileSize, JSON.stringify(inputFilenames), now, now);
+  return getJobById(id);
+}
+
+/**
  * Retrieves a job by ID
  */
 export function getJobById(id) {
@@ -178,6 +195,7 @@ function formatJobRow(row) {
 
 export default {
   createJob,
+  createMergeJob,
   getJobById,
   getNextPendingJob,
   completeJob,

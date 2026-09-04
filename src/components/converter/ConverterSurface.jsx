@@ -11,6 +11,7 @@ export default function ConverterSurface({
   onSelectTarget,
   onStartConvert,
   onStartAll,
+  onMergePdfs,
   onRemoveFile,
   onClearAll,
   onDeleteConversion,
@@ -38,6 +39,7 @@ export default function ConverterSurface({
             onSelectTarget={onSelectTarget}
             onStartConvert={onStartConvert}
             onStartAll={onStartAll}
+            onMergePdfs={onMergePdfs}
             onRemoveFile={onRemoveFile}
             onClearAll={onClearAll}
             onDeleteConversion={onDeleteConversion}

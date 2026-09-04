@@ -61,9 +61,33 @@ if [ "$IN_EXT" = "pdf" ]; then
         echo "  (PDF -> Markdown/Text via Media Engine)"
         "$PYTHON_BIN" "$MEDIA_SCRIPT" pdf2md "$INPUT" "$OUTPUT"
         exit 0
-    elif [ "$OUT_EXT" = "pdf" ] || [ "$OUT_EXT" = "compressed" ]; then
+    elif [ "$OUT_EXT" = "compress" ] || [ "$OUT_EXT" = "compressed" ]; then
         echo "  (PDF -> Compressed PDF via Media Engine)"
         "$PYTHON_BIN" "$MEDIA_SCRIPT" compress "$INPUT" "$OUTPUT"
+        exit 0
+    elif [ "$OUT_EXT" = "split" ]; then
+        echo "  (PDF -> Split Pages ZIP via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" split "$INPUT" "$OUTPUT"
+        exit 0
+    elif [ "$OUT_EXT" = "rotate" ]; then
+        echo "  (PDF -> Rotate 90° via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" rotate "$INPUT" "$OUTPUT" 90
+        exit 0
+    elif [ "$OUT_EXT" = "watermark" ]; then
+        echo "  (PDF -> Watermark via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" watermark "$INPUT" "$OUTPUT" "THE PORT"
+        exit 0
+    elif [ "$OUT_EXT" = "protect" ]; then
+        echo "  (PDF -> Password Protect via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" protect "$INPUT" "$OUTPUT" "theport2026"
+        exit 0
+    elif [ "$OUT_EXT" = "unprotect" ]; then
+        echo "  (PDF -> Unprotect via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" unprotect "$INPUT" "$OUTPUT"
+        exit 0
+    elif [ "$OUT_EXT" = "ocr" ]; then
+        echo "  (PDF -> OCR Text Layer via Media Engine)"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" ocr "$INPUT" "$OUTPUT"
         exit 0
     fi
 fi

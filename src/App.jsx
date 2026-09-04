@@ -27,6 +27,7 @@ export default function App() {
     setTargetFormat,
     startConversion,
     startAllConversions,
+    mergePdfs,
     deleteConversion,
     selectSample,
     isConverting
@@ -250,6 +251,7 @@ export default function App() {
               onSelectTarget={setTargetFormat}
               onStartConvert={startConversion}
               onStartAll={startAllConversions}
+              onMergePdfs={mergePdfs}
               onRemoveFile={removeFile}
               onClearAll={clearAll}
               onDeleteConversion={deleteConversion}

@@ -1,15 +1,17 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Plus, Zap, Trash2, Files, Sparkles, ArrowRight } from 'lucide-react';
+import { Plus, Zap, Trash2, Files, Sparkles, ArrowRight, Layers } from 'lucide-react';
 import MorphCard from './MorphCard';
 import { triggerHaptic } from '../../utils/haptics';
 import { MODES } from '../../config/featuresConfig';
+import { AdobePdfIcon } from '../BrandIcons';
 
 export default function MorphCardStack({
   files,
   onSelectTarget,
   onStartConvert,
   onStartAll,
+  onMergePdfs,
   onRemoveFile,
   onClearAll,
   onDeleteConversion,
@@ -20,11 +22,14 @@ export default function MorphCardStack({
 }) {
   const currentMode = MODES[activeMode] || MODES.documents;
   const idleCount = files.filter((f) => f.status === 'idle').length;
+  const pdfFiles = files.filter((f) => f.sourceFormat === 'pdf' && (f.status === 'idle' || f.file));
   const primaryFile = files[0];
 
   const handlePresetClick = (preset) => {
     triggerHaptic('light');
-    if (primaryFile && primaryFile.status === 'idle') {
+    if (preset.id === 'merge-pdfs' && onMergePdfs && pdfFiles.length >= 2) {
+      onMergePdfs();
+    } else if (primaryFile && primaryFile.status === 'idle') {
       onSelectTarget(primaryFile.id, preset.target);
     } else if (onSelectSample) {
       onSelectSample(preset.sample);
@@ -53,6 +58,21 @@ export default function MorphCardStack({
             >
               <Plus className="w-3 h-3 stroke-[3]" />
               <span>Add File</span>
+            </button>
+          )}
+
+          {pdfFiles.length >= 2 && onMergePdfs && (
+            <button
+              type="button"
+              onClick={() => {
+                triggerHaptic('medium');
+                onMergePdfs();
+              }}
+              className="avero-dark-glossy text-white px-3.5 py-1.5 rounded-full text-xs font-black flex items-center gap-1.5 shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer bg-gradient-to-r from-red-600 to-rose-700 border-red-400/30"
+              title="Merge all PDF files into a single unified document"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Merge {pdfFiles.length} PDFs</span>
             </button>
           )}
 

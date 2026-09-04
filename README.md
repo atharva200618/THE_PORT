@@ -76,11 +76,43 @@ You can also run conversions directly from the terminal:
 
 # Word to PDF
 ./convert.sh brief.docx brief.pdf
+
+# PDF Compressor (-75% stream optimization)
+./convert.sh oversized.pdf compressed.pdf
+
+# PDF Splitter (extract pages to ZIP)
+./convert.sh contract.pdf split_pages.zip
+
+# PDF Rotate (90° clockwise)
+./convert.sh scan.pdf rotated.pdf
+
+# PDF Watermark
+./convert.sh draft.pdf watermarked.pdf
+
+# PDF Password Protect
+./convert.sh financials.pdf protected.pdf
+
+# PDF OCR (Searchable PDF)
+./convert.sh scanned_invoice.pdf ocr_document.pdf
 ```
 
 ---
 
+## 🧰 PDF & Utilities Engine (`media_pdf_engine.py`)
+
+The high-performance PDF engine is powered by Python (`pikepdf`, `PyMuPDF`, `Pillow`, `ocrmypdf`):
+
+- **Merge Multi-PDF**: Combines multiple PDF files into one clean document (`media_pdf_engine.py merge in1.pdf in2.pdf out.pdf`).
+- **Split PDF**: Extracts individual pages into a ZIP archive (`media_pdf_engine.py split input.pdf output.zip`).
+- **Rotate PDF**: Rotates PDF pages 90° clockwise with lossless page stream transforms (`media_pdf_engine.py rotate input.pdf output.pdf 90`).
+- **Watermark PDF**: Embeds centered watermark overlay on all pages (`media_pdf_engine.py watermark input.pdf output.pdf "CONFIDENTIAL"`).
+- **Password Protect / Unprotect**: 128-bit / 256-bit AES PDF security (`media_pdf_engine.py protect input.pdf output.pdf <password>`).
+- **OCR Engine**: Converts scanned image PDFs into searchable vector PDFs.
+  - *Optional OCR Dependency on macOS*: `brew install ocrmypdf` (PyMuPDF vector fallback is included automatically if CLI is not present).
+
+---
+
 ## 🛡️ Key Guarantees
-- **Sequential Mac Worker Processing**: Guaranteed 1-job-at-a-time concurrency for rock-solid Apple Pages GUI automation.
+- **Hybrid Concurrency Engine**: Guaranteed sequential execution for Apple GUI apps (Pages/Keynote/Numbers) paired with 3x parallel throughput for non-Apple formats (DOCX/PDF/XLSX/PPTX/Images).
 - **24-Hour Auto-Expiration**: Cron routine automatically purges uploads, outputs, and database records older than 24 hours.
 - **Outward Polling**: No port-forwarding or public IP required on the Mac worker.

@@ -167,6 +167,80 @@ router.post('/convert', (req, res) => {
   });
 });
 
+/**
+ * POST /api/jobs/merge
+ * Merges multiple uploaded PDF files into a single unified PDF document
+ */
+router.post('/merge', (req, res) => {
+  upload.array('files', 30)(req, res, async (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: `Upload error: ${err.message}` });
+    } else if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    if (!req.files || req.files.length < 2) {
+      return res.status(400).json({ error: 'Please upload at least 2 PDF files to merge.' });
+    }
+
+    const inputFilenames = req.files.map(f => f.filename);
+    const totalSize = req.files.reduce((sum, f) => sum + f.size, 0);
+    const jobId = `job_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
+    const outputName = req.body.outputName || 'Merged_Collection.pdf';
+
+    const job = db.createMergeJob({
+      id: jobId,
+      originalName: outputName,
+      inputFilenames,
+      fileSize: totalSize
+    });
+
+    console.log(`[API] Enqueued PDF Merge Job: ${jobId} (${req.files.length} PDFs, ${totalSize} bytes)`);
+
+    // Perform direct merge via media_pdf_engine.py
+    try {
+      const outputFilename = `out_${job.id}_merged.pdf`;
+      const outputPath = storage.getOutputFilePath(outputFilename);
+      const inputPaths = inputFilenames.map(f => storage.getInputFilePath(f));
+
+      const pythonBin = fs.existsSync(path.join(process.cwd(), 'venv/bin/python'))
+        ? path.join(process.cwd(), 'venv/bin/python')
+        : 'python3';
+      const mediaScript = path.join(process.cwd(), 'media_pdf_engine.py');
+
+      await new Promise((resolve, reject) => {
+        const proc = spawn(pythonBin, [mediaScript, 'merge', ...inputPaths, outputPath]);
+        proc.on('close', (code) => {
+          if (code === 0 && fs.existsSync(outputPath) && fs.statSync(outputPath).size > 0) {
+            resolve();
+          } else {
+            reject(new Error(`PDF merge process exited with code ${code}`));
+          }
+        });
+        proc.on('error', reject);
+      });
+
+      db.completeJob(job.id, outputFilename);
+      console.log(`[API] PDF Merge Job ${job.id} COMPLETED -> ${outputFilename}`);
+
+      return res.status(201).json({
+        success: true,
+        jobId: job.id,
+        status: 'done',
+        downloadUrl: `/api/jobs/${job.id}/download`,
+        outputName: outputName
+      });
+    } catch (mergeErr) {
+      console.error(`[API] PDF Merge Job ${job.id} direct merge error:`, mergeErr.message);
+      return res.status(201).json({
+        success: true,
+        jobId: job.id,
+        status: 'pending'
+      });
+    }
+  });
+});
+
 // -----------------------------------------------------------------------------
 // Job Polling, File Serving, and Worker Endpoints
 // Specific / static routes MUST be declared before parameterized routes (:id)

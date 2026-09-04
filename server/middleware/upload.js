@@ -9,7 +9,8 @@ export const ALLOWED_EXTENSIONS = new Set([
   'docx', 'doc', 'pdf', 'pages', 'key', 'pptx', 'ppt',
   'numbers', 'xlsx', 'xls', 'csv',
   'jpg', 'jpeg', 'png', 'webp', 'heic',
-  'zip', 'txt', 'md', 'compress', 'compressed'
+  'zip', 'txt', 'md', 'compress', 'compressed',
+  'split', 'rotate', 'watermark', 'protect', 'unprotect', 'ocr', 'merge'
 ]);
 
 // Multer storage configuration for uploads

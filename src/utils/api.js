@@ -63,6 +63,34 @@ export async function submitConversionJob(file, targetFormat) {
 }
 
 /**
+ * Merges multiple PDF files into a single unified document
+ */
+export async function submitMergePdfsJob(filesList, outputName = 'Merged_Document.pdf') {
+  const formData = new FormData();
+  for (const f of filesList) {
+    const fileObj = f instanceof File ? f : f.file || f;
+    formData.append('files', fileObj);
+  }
+  formData.append('outputName', outputName);
+
+  const response = await fetch(`${API_BASE_URL}/api/jobs/merge`, {
+    method: 'POST',
+    body: formData
+  });
+
+  if (!response.ok) {
+    let errorMsg = `PDF Merge failed (HTTP ${response.status})`;
+    try {
+      const errorJson = await response.json();
+      if (errorJson.error) errorMsg = errorJson.error;
+    } catch {}
+    throw new Error(errorMsg);
+  }
+
+  return response.json();
+}
+
+/**
  * Fetches current job status
  */
 export async function fetchJobStatus(jobId) {
