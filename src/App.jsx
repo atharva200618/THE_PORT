@@ -1,343 +1,67 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LandingPortal from './components/LandingPortal';
 import TerritoryPanel from './components/territory/TerritoryPanel';
 import { paperConfig, glassConfig } from './components/territory/territoryConfig';
 import TheGate from './components/TheGate';
 import StatusStrip from './components/StatusStrip';
 import MobileActionBar from './components/MobileActionBar';
-import { 
-  submitConversionJob, 
-  fetchJobStatus, 
-  getDownloadUrl, 
-  simulateClientConversion, 
-  checkBackendHealth,
-  fetchWorkerStatus,
-  deleteJobFromServer,
-  formatBytes 
-} from './utils/api';
-import { sounds } from './utils/audio';
-import { triggerHaptic } from './utils/haptics';
-import { 
-  ArrowLeftRight, 
-  ArrowLeft,
-  Upload, 
-  Volume2, 
-  VolumeX, 
-  Layers, 
-  Zap, 
-  X, 
-  Files, 
-  Plus, 
-  FileText, 
-  FileSpreadsheet, 
-  Presentation,
-  ShieldCheck 
-} from 'lucide-react';
+import { useWorkerStatus } from './hooks/useWorkerStatus';
+import { useFileStaging } from './hooks/useFileStaging';
+import { useConversionQueue } from './hooks/useConversionQueue';
+import { ArrowLeft, Files, Zap, Plus } from 'lucide-react';
 
 export default function App() {
-  const [activeMode, setActiveMode] = useState('documents'); // 'documents' | 'spreadsheets' | 'presentations'
-  const [stagedFiles, setStagedFiles] = useState([]); // Clean initial state for Landing Portal
-  const [selectedTargetFormat, setSelectedTargetFormat] = useState('pages');
-  const [isDraggingOver, setIsDraggingOver] = useState(false);
-  const [isConverting, setIsConverting] = useState(false);
-  const [activeConversion, setActiveConversion] = useState(null);
-  const [animatingFile, setAnimatingFile] = useState(null);
-  const [conversions, setConversions] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [workerStatus, setWorkerStatus] = useState({ online: false });
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [strictPrivacy, setStrictPrivacy] = useState(false);
-
   const fileInputRef = useRef(null);
+
+  // 1. Worker Heartbeat & System Health
+  const { workerStatus } = useWorkerStatus();
+
+  // 2. File Staging, Drag & Drop, Mode & Territory Detection
+  const {
+    activeMode,
+    setActiveMode,
+    stagedFiles,
+    setStagedFiles,
+    selectedTargetFormat,
+    setSelectedTargetFormat,
+    isDraggingOver,
+    errorMessage,
+    setErrorMessage,
+    activeFile,
+    sourceTerritory,
+    getDefaultTargetFormat,
+    handleAppendFiles,
+    handleRemoveStagedFile,
+    handleSelectSample,
+    handleDragOver,
+    handleDragLeave,
+    handleDrop
+  } = useFileStaging();
+
+  // 3. Conversion Queue Orchestration, Status Polling & Transitions
+  const {
+    isConverting,
+    activeConversion,
+    animatingFile,
+    conversions,
+    setConversions,
+    startConversionSequence,
+    handleDeleteConversion
+  } = useConversionQueue({
+    stagedFiles,
+    setStagedFiles,
+    selectedTargetFormat,
+    getDefaultTargetFormat,
+    soundEnabled,
+    setErrorMessage
+  });
 
   // Determine if Workspace view or Landing Portal is active
   const isWorkspaceActive = stagedFiles.length > 0 || isConverting || conversions.length > 0;
 
-  // Poll worker heartbeat & health
-  useEffect(() => {
-    const checkStatus = async () => {
-      const status = await fetchWorkerStatus();
-      setWorkerStatus(status);
-    };
-    checkStatus();
-    const interval = setInterval(checkStatus, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Mode Auto-detection helper
-  const detectModeFromFile = (ext = '') => {
-    const cleaned = ext.toLowerCase().replace(/^\./, '');
-    if (['key', 'pptx', 'ppt'].includes(cleaned)) return 'presentations';
-    if (['numbers', 'xlsx', 'xls', 'csv'].includes(cleaned)) return 'spreadsheets';
-    return 'documents';
-  };
-
-  // Determine territory from filename (Apple iWork -> Glass, Universal/PC -> Paper)
-  const getFileTerritory = (filename = '') => {
-    const ext = filename.split('.').pop().toLowerCase();
-    if (['pages', 'key', 'numbers'].includes(ext)) return 'glass';
-    return 'paper';
-  };
-
-  // Determine sensible default target format based on source extension
-  const getDefaultTargetFormat = (filename = '') => {
-    const ext = filename.split('.').pop().toLowerCase();
-    if (ext === 'pages') return 'docx';
-    if (ext === 'docx' || ext === 'doc' || ext === 'pdf') return 'pages';
-    if (ext === 'key') return 'pptx';
-    if (ext === 'pptx' || ext === 'ppt') return 'key';
-    if (ext === 'numbers') return 'xlsx';
-    if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') return 'numbers';
-    return 'pages';
-  };
-
-  // Primary active file is the latest or first staged file
-  const activeFile = stagedFiles.length > 0 ? stagedFiles[0] : null;
-  const sourceTerritory = activeFile ? getFileTerritory(activeFile.name) : 'paper';
-
-  // Add / Append new files to the staging queue (avoiding exact duplicates)
-  const handleAppendFiles = useCallback((incoming) => {
-    setErrorMessage(null);
-    const incomingList = Array.isArray(incoming) ? incoming : [incoming];
-    if (incomingList.length === 0) return;
-
-    // Auto-detect & switch active mode based on dropped file
-    const firstExt = (incomingList[0].name.split('.').pop() || '').toLowerCase();
-    const detected = detectModeFromFile(firstExt);
-    setActiveMode(detected);
-
-    setStagedFiles((prev) => {
-      const baseList = [...prev];
-      for (const newF of incomingList) {
-        if (!baseList.some(item => item.name === newF.name && item.size === newF.size)) {
-          baseList.push(newF);
-        }
-      }
-      return baseList;
-    });
-
-    // Update target format default
-    setSelectedTargetFormat(getDefaultTargetFormat(incomingList[0].name));
-  }, []);
-
-  // Remove a specific file or category from staging
-  const handleRemoveStagedFile = useCallback((fileName) => {
-    if (fileName === 'ALL_PAPER') {
-      setStagedFiles(prev => prev.filter(f => {
-        const ext = (f.name.split('.').pop() || '').toLowerCase();
-        return ['pages', 'key', 'numbers'].includes(ext);
-      }));
-    } else if (fileName === 'ALL_GLASS') {
-      setStagedFiles(prev => prev.filter(f => {
-        const ext = (f.name.split('.').pop() || '').toLowerCase();
-        return !['pages', 'key', 'numbers'].includes(ext);
-      }));
-    } else {
-      setStagedFiles((prev) => prev.filter(f => f.name !== fileName));
-    }
-  }, []);
-
-  // Global Drag & Drop handlers
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDraggingOver(true);
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    if (e.clientX <= 0 || e.clientY <= 0) {
-      setIsDraggingOver(false);
-    }
-  };
-
-  // Process a single file conversion
-  const convertSingleFile = async (inputFile, targetFormat, index = 0, total = 1) => {
-    const sourceExt = (inputFile.name.split('.').pop() || '').toLowerCase();
-    const resolvedTarget = targetFormat || getDefaultTargetFormat(inputFile.name);
-
-    if (sourceExt === resolvedTarget) {
-      throw new Error(`Source document '${inputFile.name}' is already .${sourceExt}.`);
-    }
-
-    const prefix = total > 1 ? `[${index + 1}/${total}] ` : '';
-    const isAppleSource = ['pages', 'key', 'numbers'].includes(sourceExt);
-
-    // 1. Trigger 600ms The Gate Morph Animation
-    setAnimatingFile({
-      name: inputFile.name,
-      sourceType: sourceExt,
-      targetType: resolvedTarget,
-      direction: isAppleSource ? 'glass-to-paper' : 'paper-to-glass'
-    });
-
-    if (soundEnabled) sounds.playGateTransit();
-
-    setActiveConversion({
-      statusText: `${prefix}Crossing over ${inputFile.name}…`,
-      progressPercent: 25
-    });
-
-    setTimeout(() => {
-      setAnimatingFile(null);
-    }, 650);
-
-    // 2. Attempt real Backend API Job
-    let result = null;
-    try {
-      const job = await submitConversionJob(inputFile, resolvedTarget);
-      setActiveConversion({
-        statusText: `${prefix}Engaging Port Gate on Mac Worker…`,
-        progressPercent: 40
-      });
-
-      const pollInterval = 1500;
-      const maxAttempts = 80; // 120 seconds total
-      let attempts = 0;
-
-      while (attempts < maxAttempts) {
-        await new Promise((r) => setTimeout(r, pollInterval));
-        attempts++;
-
-        const jobStatus = await fetchJobStatus(job.jobId);
-        if (jobStatus.status === 'processing' || jobStatus.status === 'pending') {
-          setActiveConversion({
-            statusText: ['pages', 'key', 'numbers'].includes(resolvedTarget)
-              ? `${prefix}Synthesizing Apple iWork vector canvas…` 
-              : resolvedTarget === 'docx' || resolvedTarget === 'xlsx' || resolvedTarget === 'pptx'
-              ? `${prefix}Mapping OpenXML baseline grid…`
-              : `${prefix}Rendering PDF vector layout…`,
-            progressPercent: Math.min(92, 40 + attempts * 4)
-          });
-        } else if (jobStatus.status === 'done') {
-          result = {
-            id: jobStatus.id,
-            originalName: jobStatus.originalName,
-            originalSize: formatBytes(jobStatus.fileSize),
-            sourceFormat: jobStatus.sourceFormat,
-            targetFormat: jobStatus.targetFormat,
-            downloadUrl: getDownloadUrl(jobStatus.id),
-            outputName: `${jobStatus.originalName.replace(/\.[^/.]+$/, '')}.${jobStatus.targetFormat}`,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            status: 'done'
-          };
-          break;
-        } else if (jobStatus.status === 'failed') {
-          throw new Error(jobStatus.error || `Conversion failed for ${inputFile.name}.`);
-        }
-      }
-
-      if (!result && attempts >= maxAttempts) {
-        throw new Error(`Conversion timed out for ${inputFile.name}.`);
-      }
-    } catch (backendErr) {
-      console.warn('Backend conversion error:', backendErr.message);
-      const isSample = inputFile.name.includes('Sample') || inputFile.name.includes('Executive') || inputFile.name.includes('Architectural') || inputFile.name.includes('Product');
-      if (isSample) {
-        result = await simulateClientConversion(inputFile, resolvedTarget, (step) => {
-          setActiveConversion({
-            statusText: `${prefix}${step.statusText}`,
-            progressPercent: step.progressPercent
-          });
-        });
-      } else {
-        throw backendErr;
-      }
-    }
-
-    if (soundEnabled) sounds.playSnap();
-    return result;
-  };
-
-  // Batch Queue & Single Conversion Orchestration
-  const startConversionSequence = useCallback(async (explicitTarget = null) => {
-    const filesToProcess = stagedFiles.length > 0 ? stagedFiles : [];
-    if (filesToProcess.length === 0 || isConverting) return;
-
-    setIsConverting(true);
-    setErrorMessage(null);
-
-    try {
-      for (let i = 0; i < filesToProcess.length; i++) {
-        const curFile = filesToProcess[i];
-        const target = explicitTarget || (filesToProcess.length === 1 ? selectedTargetFormat : getDefaultTargetFormat(curFile.name));
-        
-        try {
-          const res = await convertSingleFile(curFile, target, i, filesToProcess.length);
-          if (res) {
-            setConversions((prev) => [res, ...prev.filter(c => c.id !== res.id)]);
-            triggerHaptic('success');
-          }
-        } catch (fileErr) {
-          console.error(`Error converting ${curFile.name}:`, fileErr);
-          setErrorMessage(fileErr.message);
-          triggerHaptic('error');
-          // Keep workspace active by adding a failed entry
-          setConversions((prev) => [{
-            id: `fail_${Date.now()}`,
-            originalName: curFile.name,
-            originalSize: '',
-            sourceFormat: (curFile.name.split('.').pop() || '').toLowerCase(),
-            targetFormat: target,
-            status: 'failed',
-            error: fileErr.message,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-          }, ...prev]);
-        }
-      }
-      setStagedFiles([]);
-    } finally {
-      setIsConverting(false);
-      setActiveConversion(null);
-    }
-  }, [stagedFiles, selectedTargetFormat, isConverting, soundEnabled]);
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDraggingOver(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const droppedFiles = Array.from(e.dataTransfer.files);
-      handleAppendFiles(droppedFiles);
-    }
-  };
-
-  const handleDeleteConversion = async (id) => {
-    await deleteJobFromServer(id);
-    setConversions((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  // Sample document selector across all modes
-  const handleSelectSample = (format) => {
-    let name = 'Executive_Strategic_Brief.docx';
-    let size = 284000;
-    if (format === 'pdf') {
-      name = 'Architectural_Blueprint.pdf';
-      size = 512000;
-    } else if (format === 'pages') {
-      name = 'Product_Marketing_Brief.pages';
-      size = 720000;
-    } else if (format === 'xlsx') {
-      name = 'Annual_Financial_Model.xlsx';
-      size = 450000;
-    } else if (format === 'csv') {
-      name = 'Global_Metrics_Export.csv';
-      size = 180000;
-    } else if (format === 'numbers') {
-      name = 'Q4_Operating_Budget.numbers';
-      size = 890000;
-    } else if (format === 'pptx') {
-      name = 'Series_A_Pitch_Deck.pptx';
-      size = 1200000;
-    } else if (format === 'key') {
-      name = 'Apple_Keynote_Showcase.key';
-      size = 1600000;
-    }
-
-    const sampleFile = new File(['The Port Sample Document Content'], name, { type: 'application/octet-stream' });
-    Object.defineProperty(sampleFile, 'size', { value: size });
-    handleAppendFiles([sampleFile]);
-  };
-
-  // Keyboard shortcut listener
+  // Keyboard shortcut listener (Spacebar triggers passage)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space' && !isConverting && e.target.tagName !== 'INPUT') {
@@ -384,7 +108,6 @@ export default function App() {
       ) : (
         /* VIEW 2: ACTIVE PASSAGE WORKSPACE */
         <div className="flex-1 flex flex-col justify-between w-full relative overflow-hidden">
-          
           {/* Subtle Background Glowing Ambient Orbs for rich depth */}
           <div className="absolute top-20 left-1/4 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl animate-orb-amber pointer-events-none -z-10" />
           <div className="absolute top-40 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-orb-sapphire pointer-events-none -z-10" />
@@ -392,7 +115,6 @@ export default function App() {
           {/* Top Header Bar */}
           <header className="px-4 pt-6 max-w-4xl mx-auto w-full">
             <div className="avero-clay-card rounded-full px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2 sm:gap-4 shadow-clay-pill border-[1.5px] border-white/95 backdrop-blur-2xl">
-              
               {/* Left Identity & Back to Portal Button */}
               <div className="flex items-center shrink-0">
                 <button
@@ -486,7 +208,6 @@ export default function App() {
                   <span className="text-white whitespace-nowrap">Add Files</span>
                 </button>
               </div>
-
             </div>
           </header>
 
@@ -503,7 +224,8 @@ export default function App() {
                       {stagedFiles.length} Documents Staged for Passage
                     </span>
                     <span className="text-[11px] text-[#71717A] font-medium">
-                      {stagedFiles.map(f => f.name).slice(0, 3).join(', ')}{stagedFiles.length > 3 ? ` +${stagedFiles.length - 3} more` : ''}
+                      {stagedFiles.map((f) => f.name).slice(0, 3).join(', ')}
+                      {stagedFiles.length > 3 ? ` +${stagedFiles.length - 3} more` : ''}
                     </span>
                   </div>
                 </div>
@@ -532,7 +254,6 @@ export default function App() {
           {/* HERO SECTION: THE SEAM (Split Layout) */}
           <main className="flex-1 flex flex-col justify-center w-full px-4 py-6">
             <div className="max-w-5xl mx-auto w-full relative min-h-[500px] flex flex-col md:flex-row items-stretch gap-6">
-              
               {/* LEFT: PAPER TERRITORY */}
               <div className="flex-1 flex flex-col">
                 <TerritoryPanel
@@ -582,7 +303,6 @@ export default function App() {
                   activeMode={activeMode}
                 />
               </div>
-
             </div>
           </main>
 
@@ -615,7 +335,6 @@ export default function App() {
           />
         </div>
       )}
-
     </div>
   );
 }
