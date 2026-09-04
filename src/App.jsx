@@ -1,79 +1,80 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import LandingPortal from './components/LandingPortal';
-import TerritoryPanel from './components/territory/TerritoryPanel';
-import { paperConfig, glassConfig } from './components/territory/territoryConfig';
-import TheGate from './components/TheGate';
+import ConverterSurface from './components/converter/ConverterSurface';
 import StatusStrip from './components/StatusStrip';
 import MobileActionBar from './components/MobileActionBar';
 import { useWorkerStatus } from './hooks/useWorkerStatus';
-import { useFileStaging } from './hooks/useFileStaging';
 import { useConversionQueue } from './hooks/useConversionQueue';
-import { ArrowLeft, Files, Zap, Plus } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 
 export default function App() {
+  const [activeMode, setActiveMode] = useState('documents');
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [strictPrivacy, setStrictPrivacy] = useState(false);
   const fileInputRef = useRef(null);
 
   // 1. Worker Heartbeat & System Health
   const { workerStatus } = useWorkerStatus();
 
-  // 2. File Staging, Drag & Drop, Mode & Territory Detection
+  // 2. Unified Single-State Conversion Queue
   const {
-    activeMode,
-    setActiveMode,
-    stagedFiles,
-    setStagedFiles,
-    selectedTargetFormat,
-    setSelectedTargetFormat,
-    isDraggingOver,
-    errorMessage,
-    setErrorMessage,
-    activeFile,
-    sourceTerritory,
-    getDefaultTargetFormat,
-    handleAppendFiles,
-    handleRemoveStagedFile,
-    handleSelectSample,
-    handleDragOver,
-    handleDragLeave,
-    handleDrop
-  } = useFileStaging();
+    files,
+    addFiles,
+    removeFile,
+    clearAll,
+    setTargetFormat,
+    startConversion,
+    startAllConversions,
+    deleteConversion,
+    selectSample,
+    isConverting
+  } = useConversionQueue(soundEnabled);
 
-  // 3. Conversion Queue Orchestration, Status Polling & Transitions
-  const {
-    isConverting,
-    activeConversion,
-    animatingFile,
-    conversions,
-    setConversions,
-    startConversionSequence,
-    handleDeleteConversion
-  } = useConversionQueue({
-    stagedFiles,
-    setStagedFiles,
-    selectedTargetFormat,
-    getDefaultTargetFormat,
-    soundEnabled,
-    setErrorMessage
-  });
+  // Global Drag & Drop handlers
+  const handleDragOver = useCallback((e) => {
+    e.preventDefault();
+    setIsDraggingOver(true);
+  }, []);
 
-  // Determine if Workspace view or Landing Portal is active
-  const isWorkspaceActive = stagedFiles.length > 0 || isConverting || conversions.length > 0;
+  const handleDragLeave = useCallback((e) => {
+    e.preventDefault();
+    if (e.clientX <= 0 || e.clientY <= 0) {
+      setIsDraggingOver(false);
+    }
+  }, []);
+
+  const handleDrop = useCallback(
+    (e) => {
+      e.preventDefault();
+      setIsDraggingOver(false);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        addFiles(Array.from(e.dataTransfer.files));
+      }
+    },
+    [addFiles]
+  );
+
+  const isWorkspaceActive = files.length > 0;
+  const activeConvertingFile = files.find((f) => f.status === 'converting');
+  const activeConversion = activeConvertingFile
+    ? { statusText: activeConvertingFile.statusText, progressPercent: activeConvertingFile.progress }
+    : null;
+  const completedOrErrorFiles = files.filter((f) => f.status === 'done' || f.status === 'error');
+  const errorFile = files.find((f) => f.status === 'error');
 
   // Keyboard shortcut listener (Spacebar triggers passage)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space' && !isConverting && e.target.tagName !== 'INPUT') {
         e.preventDefault();
-        if (stagedFiles.length > 0) {
-          startConversionSequence();
+        if (files.some((f) => f.status === 'idle')) {
+          startAllConversions();
         }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [startConversionSequence, isConverting, stagedFiles]);
+  }, [startAllConversions, isConverting, files]);
 
   return (
     <div
@@ -91,7 +92,7 @@ export default function App() {
         className="hidden"
         onChange={(e) => {
           if (e.target.files && e.target.files.length > 0) {
-            handleAppendFiles(Array.from(e.target.files));
+            addFiles(Array.from(e.target.files));
             e.target.value = '';
           }
         }}
@@ -100,8 +101,8 @@ export default function App() {
       {/* VIEW 1: CLEAN MINIMALIST LANDING PORTAL (When No Files are Staged/Converting) */}
       {!isWorkspaceActive ? (
         <LandingPortal
-          onFileSelect={handleAppendFiles}
-          onSelectSample={handleSelectSample}
+          onFileSelect={addFiles}
+          onSelectSample={selectSample}
           isDraggingOver={isDraggingOver}
           workerOnline={workerStatus.online}
         />
@@ -119,11 +120,8 @@ export default function App() {
               <div className="flex items-center shrink-0">
                 <button
                   type="button"
-                  onClick={() => {
-                    setStagedFiles([]);
-                    setConversions([]);
-                  }}
-                  className="avero-light-glossy hover:scale-105 active:scale-95 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-black text-[#161618] transition-all border border-black/5 shadow-2xs whitespace-nowrap shrink-0"
+                  onClick={clearAll}
+                  className="avero-light-glossy hover:scale-105 active:scale-95 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-black text-[#161618] transition-all border border-black/5 shadow-2xs whitespace-nowrap shrink-0 cursor-pointer"
                   title="Return to Clean Landing Portal"
                 >
                   <ArrowLeft className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -135,10 +133,7 @@ export default function App() {
               <div className="flex items-center p-1 rounded-full avero-inset-bar text-xs font-extrabold gap-1 shrink-0">
                 <button
                   type="button"
-                  onClick={() => {
-                    setActiveMode('documents');
-                    setSelectedTargetFormat('pages');
-                  }}
+                  onClick={() => setActiveMode('documents')}
                   className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
                     activeMode === 'documents'
                       ? 'bg-white text-[#161618] shadow-sm'
@@ -151,10 +146,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => {
-                    setActiveMode('spreadsheets');
-                    setSelectedTargetFormat('numbers');
-                  }}
+                  onClick={() => setActiveMode('spreadsheets')}
                   className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
                     activeMode === 'spreadsheets'
                       ? 'bg-white text-[#161618] shadow-sm'
@@ -167,10 +159,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => {
-                    setActiveMode('presentations');
-                    setSelectedTargetFormat('key');
-                  }}
+                  onClick={() => setActiveMode('presentations')}
                   className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
                     activeMode === 'presentations'
                       ? 'bg-white text-[#161618] shadow-sm'
@@ -183,10 +172,7 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => {
-                    setActiveMode('utilities');
-                    setSelectedTargetFormat('pdf');
-                  }}
+                  onClick={() => setActiveMode('utilities')}
                   className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
                     activeMode === 'utilities'
                       ? 'bg-white text-[#161618] shadow-sm'
@@ -202,7 +188,7 @@ export default function App() {
               <div className="flex items-center shrink-0">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="avero-dark-glossy text-white px-3.5 sm:px-4.5 py-2 rounded-full text-xs font-black flex items-center gap-1.5 shadow-md active:scale-95 border border-white/20 hover:scale-105 transition-all whitespace-nowrap shrink-0 sheen-container"
+                  className="avero-dark-glossy text-white px-3.5 sm:px-4.5 py-2 rounded-full text-xs font-black flex items-center gap-1.5 shadow-md active:scale-95 border border-white/20 hover:scale-105 transition-all whitespace-nowrap shrink-0 cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5 text-white stroke-[3] shrink-0" />
                   <span className="text-white whitespace-nowrap">Add Files</span>
@@ -211,127 +197,46 @@ export default function App() {
             </div>
           </header>
 
-          {/* Multi-File Staging Queue Banner */}
-          {stagedFiles.length > 1 && !isConverting && (
-            <div className="max-w-5xl mx-auto w-full px-4 pt-4">
-              <div className="avero-clay-card rounded-2xl p-4.5 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md border border-white">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center font-bold shadow-2xs">
-                    <Files className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-black text-[#161618] block">
-                      {stagedFiles.length} Documents Staged for Passage
-                    </span>
-                    <span className="text-[11px] text-[#71717A] font-medium">
-                      {stagedFiles.map((f) => f.name).slice(0, 3).join(', ')}
-                      {stagedFiles.length > 3 ? ` +${stagedFiles.length - 3} more` : ''}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <button
-                    type="button"
-                    onClick={() => setStagedFiles([])}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[#71717A] hover:text-rose-600 transition-colors"
-                  >
-                    Clear
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => startConversionSequence()}
-                    className="avero-dark-glossy text-white px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md active:scale-95 border border-white/20 hover:scale-105 transition-all"
-                  >
-                    <Zap className="w-3.5 h-3.5" />
-                    <span>Convert All {stagedFiles.length} Files</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* HERO SECTION: THE SEAM (Split Layout) */}
-          <main className="flex-1 flex flex-col justify-center w-full px-4 py-6">
-            <div className="max-w-5xl mx-auto w-full relative min-h-[500px] flex flex-col md:flex-row items-stretch gap-6">
-              {/* LEFT: PAPER TERRITORY */}
-              <div className="flex-1 flex flex-col">
-                <TerritoryPanel
-                  config={paperConfig}
-                  activeFile={sourceTerritory === 'paper' ? activeFile : null}
-                  stagedFiles={stagedFiles}
-                  onFileSelect={handleAppendFiles}
-                  onRemoveStagedFile={handleRemoveStagedFile}
-                  isSource={sourceTerritory === 'paper'}
-                  selectedTargetFormat={selectedTargetFormat}
-                  onChangeTargetFormat={setSelectedTargetFormat}
-                  onSelectSample={handleSelectSample}
-                  onTriggerConvert={(target) => startConversionSequence(target)}
-                  activeMode={activeMode}
-                />
-              </div>
-
-              {/* CENTER: THE GATE */}
-              <div className="relative z-30 flex items-center justify-center shrink-0 self-center">
-                <TheGate
-                  isDraggingOver={isDraggingOver}
-                  isConverting={isConverting}
-                  animatingFile={animatingFile}
-                  onGateClick={() => {
-                    if (stagedFiles.length > 0) {
-                      startConversionSequence();
-                    } else {
-                      fileInputRef.current?.click();
-                    }
-                  }}
-                />
-              </div>
-
-              {/* RIGHT: GLASS TERRITORY */}
-              <div className="flex-1 flex flex-col">
-                <TerritoryPanel
-                  config={glassConfig}
-                  activeFile={sourceTerritory === 'glass' ? activeFile : null}
-                  stagedFiles={stagedFiles}
-                  onFileSelect={handleAppendFiles}
-                  onRemoveStagedFile={handleRemoveStagedFile}
-                  isSource={sourceTerritory === 'glass'}
-                  selectedTargetFormat={selectedTargetFormat}
-                  onChangeTargetFormat={setSelectedTargetFormat}
-                  onSelectSample={handleSelectSample}
-                  onTriggerConvert={(target) => startConversionSequence(target)}
-                  activeMode={activeMode}
-                />
-              </div>
-            </div>
+          {/* HERO SECTION: CONVERTER SURFACE */}
+          <main className="flex-1 flex flex-col justify-center w-full px-4 py-8">
+            <ConverterSurface
+              files={files}
+              onFileSelect={addFiles}
+              onSelectSample={selectSample}
+              isDraggingOver={isDraggingOver}
+              onSelectTarget={setTargetFormat}
+              onStartConvert={startConversion}
+              onStartAll={startAllConversions}
+              onRemoveFile={removeFile}
+              onClearAll={clearAll}
+              onDeleteConversion={deleteConversion}
+              onOpenFileInput={() => fileInputRef.current?.click()}
+            />
           </main>
 
           {/* BELOW THE FOLD: STATUS STRIP & RESULTS */}
-          <StatusStrip
-            conversions={conversions}
-            activeConversion={activeConversion}
-            onClearConversions={() => setConversions([])}
-            onDeleteConversion={handleDeleteConversion}
-            localIp={workerStatus.localIp}
-            errorMessage={errorMessage}
-            onDismissError={() => setErrorMessage(null)}
-          />
+          {completedOrErrorFiles.length > 0 && (
+            <StatusStrip
+              conversions={completedOrErrorFiles}
+              activeConversion={activeConversion}
+              onClearConversions={clearAll}
+              onDeleteConversion={deleteConversion}
+              localIp={workerStatus.localIp}
+              errorMessage={errorFile?.error || null}
+              onDismissError={() => {}}
+            />
+          )}
 
           {/* STICKY BOTTOM THUMB ACTION BAR FOR MOBILE */}
           <MobileActionBar
-            stagedFiles={stagedFiles}
+            stagedFiles={files.filter((f) => f.status === 'idle')}
             isConverting={isConverting}
             activeConversion={activeConversion}
-            onConvertAll={() => startConversionSequence()}
+            onConvertAll={startAllConversions}
             onOpenFileInput={() => fileInputRef.current?.click()}
             activeMode={activeMode}
-            onChangeMode={(mode) => {
-              setActiveMode(mode);
-              if (mode === 'documents') setSelectedTargetFormat('pages');
-              else if (mode === 'spreadsheets') setSelectedTargetFormat('numbers');
-              else if (mode === 'presentations') setSelectedTargetFormat('key');
-            }}
-            conversions={conversions}
+            onChangeMode={setActiveMode}
+            conversions={completedOrErrorFiles}
           />
         </div>
       )}

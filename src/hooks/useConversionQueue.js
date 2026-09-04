@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import {
   submitConversionJob,
   fetchJobStatus,
@@ -11,194 +11,308 @@ import { sounds } from '../utils/audio';
 import { triggerHaptic } from '../utils/haptics';
 
 /**
- * Custom hook to orchestrate single & batch conversion queues, status polling, and animations
+ * Determine sensible default target format based on source extension
  */
-export function useConversionQueue({
-  stagedFiles,
-  setStagedFiles,
-  selectedTargetFormat,
-  getDefaultTargetFormat,
-  soundEnabled = true,
-  setErrorMessage
-}) {
-  const [isConverting, setIsConverting] = useState(false);
-  const [activeConversion, setActiveConversion] = useState(null);
-  const [animatingFile, setAnimatingFile] = useState(null);
-  const [conversions, setConversions] = useState([]);
+export const getDefaultTargetFormat = (filename = '') => {
+  const ext = (filename.split('.').pop() || '').toLowerCase();
+  if (['png', 'jpg', 'jpeg', 'webp', 'heic', 'heif', 'bmp', 'tiff'].includes(ext)) return 'pdf';
+  if (ext === 'pages') return 'docx';
+  if (ext === 'docx' || ext === 'doc' || ext === 'pdf') return 'pages';
+  if (ext === 'key') return 'pptx';
+  if (ext === 'pptx' || ext === 'ppt') return 'key';
+  if (ext === 'numbers') return 'xlsx';
+  if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') return 'numbers';
+  return 'pages';
+};
 
-  // Process a single file conversion
-  const convertSingleFile = useCallback(async (inputFile, targetFormat, index = 0, total = 1) => {
-    const sourceExt = (inputFile.name.split('.').pop() || '').toLowerCase();
-    const resolvedTarget = targetFormat || getDefaultTargetFormat(inputFile.name);
+/**
+ * Single-State Conversion Queue Hook
+ * Replaces disconnected states with a unified `files` array
+ */
+export function useConversionQueue(soundEnabled = true) {
+  const [files, setFiles] = useState([]);
+  const activeJobsRef = useRef(new Set());
 
-    if (sourceExt === resolvedTarget && resolvedTarget !== 'pdf' && resolvedTarget !== 'compress') {
-      throw new Error(`Source document '${inputFile.name}' is already .${sourceExt}.`);
-    }
+  // Add / Append new files to the staging queue (deduplicating by name + size)
+  const addFiles = useCallback((incoming) => {
+    const list = Array.isArray(incoming) ? incoming : [incoming];
+    if (list.length === 0) return;
 
-    const prefix = total > 1 ? `[${index + 1}/${total}] ` : '';
-    const isAppleSource = ['pages', 'key', 'numbers'].includes(sourceExt);
-
-    // 1. Trigger 600ms The Gate Morph Animation
-    setAnimatingFile({
-      name: inputFile.name,
-      sourceType: sourceExt,
-      targetType: resolvedTarget,
-      direction: isAppleSource ? 'glass-to-paper' : 'paper-to-glass'
-    });
-
-    if (soundEnabled) sounds.playGateTransit();
-
-    setActiveConversion({
-      statusText: `${prefix}Crossing over ${inputFile.name}…`,
-      progressPercent: 25
-    });
-
-    setTimeout(() => {
-      setAnimatingFile(null);
-    }, 650);
-
-    // 2. Attempt real Backend API Job
-    let result = null;
-    try {
-      const job = await submitConversionJob(inputFile, resolvedTarget);
-      setActiveConversion({
-        statusText: `${prefix}Engaging Port Gate on Mac Worker…`,
-        progressPercent: 40
-      });
-
-      const pollInterval = 1500;
-      const maxAttempts = 80; // 120 seconds total
-      let attempts = 0;
-
-      while (attempts < maxAttempts) {
-        await new Promise((r) => setTimeout(r, pollInterval));
-        attempts++;
-
-        const jobStatus = await fetchJobStatus(job.jobId);
-        if (jobStatus.status === 'processing' || jobStatus.status === 'pending') {
-          setActiveConversion({
-            statusText: ['pages', 'key', 'numbers'].includes(resolvedTarget)
-              ? `${prefix}Synthesizing Apple iWork vector canvas…`
-              : resolvedTarget === 'docx' || resolvedTarget === 'xlsx' || resolvedTarget === 'pptx'
-              ? `${prefix}Mapping OpenXML baseline grid…`
-              : `${prefix}Rendering PDF vector layout…`,
-            progressPercent: Math.min(92, 40 + attempts * 4)
-          });
-        } else if (jobStatus.status === 'done') {
-          result = {
-            id: jobStatus.id,
-            originalName: jobStatus.originalName,
-            originalSize: formatBytes(jobStatus.fileSize),
-            sourceFormat: jobStatus.sourceFormat,
-            targetFormat: jobStatus.targetFormat,
-            downloadUrl: getDownloadUrl(jobStatus.id),
-            outputName: `${jobStatus.originalName.replace(/\.[^/.]+$/, '')}.${jobStatus.targetFormat}`,
+    setFiles((prev) => {
+      const updated = [...prev];
+      for (const item of list) {
+        const fileObj = item instanceof File ? item : item.file || item;
+        const name = fileObj.name || 'document';
+        const size = fileObj.size || 0;
+        const exists = updated.some(f => f.name === name && f.file?.size === size);
+        if (!exists) {
+          const sourceExt = (name.split('.').pop() || '').toLowerCase();
+          const targetExt = getDefaultTargetFormat(name);
+          updated.push({
+            id: `file_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+            file: fileObj,
+            name: name,
+            sourceFormat: sourceExt,
+            targetFormat: targetExt,
+            status: 'idle',
+            progress: 0,
+            statusText: 'Ready for conversion',
+            downloadUrl: null,
+            error: null,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            status: 'done'
-          };
-          break;
-        } else if (jobStatus.status === 'failed') {
-          throw new Error(jobStatus.error || `Conversion failed for ${inputFile.name}.`);
-        }
-      }
-
-      if (!result && attempts >= maxAttempts) {
-        throw new Error(`Conversion timed out for ${inputFile.name}.`);
-      }
-    } catch (backendErr) {
-      console.warn('Backend conversion notice:', backendErr.message);
-      const isSample =
-        inputFile.name.includes('Sample') ||
-        inputFile.name.includes('Executive') ||
-        inputFile.name.includes('Architectural') ||
-        inputFile.name.includes('Product');
-
-      if (isSample) {
-        result = await simulateClientConversion(inputFile, resolvedTarget, (step) => {
-          setActiveConversion({
-            statusText: `${prefix}${step.statusText}`,
-            progressPercent: step.progressPercent
+            originalSize: size ? formatBytes(size) : '',
+            outputName: `${name.replace(/\.[^/.]+$/, '')}.${targetExt}`
           });
-        });
-      } else {
-        throw backendErr;
-      }
-    }
-
-    if (soundEnabled) sounds.playSnap();
-    return result;
-  }, [getDefaultTargetFormat, soundEnabled]);
-
-  // Batch Queue & Single Conversion Orchestration
-  const startConversionSequence = useCallback(
-    async (explicitTarget = null) => {
-      const filesToProcess = stagedFiles.length > 0 ? stagedFiles : [];
-      if (filesToProcess.length === 0 || isConverting) return;
-
-      setIsConverting(true);
-      if (setErrorMessage) setErrorMessage(null);
-
-      try {
-        for (let i = 0; i < filesToProcess.length; i++) {
-          const curFile = filesToProcess[i];
-          const target =
-            explicitTarget ||
-            (filesToProcess.length === 1 ? selectedTargetFormat : getDefaultTargetFormat(curFile.name));
-
-          try {
-            const res = await convertSingleFile(curFile, target, i, filesToProcess.length);
-            if (res) {
-              setConversions((prev) => [res, ...prev.filter((c) => c.id !== res.id)]);
-              triggerHaptic('success');
-            }
-          } catch (fileErr) {
-            console.error(`Error converting ${curFile.name}:`, fileErr);
-            if (setErrorMessage) setErrorMessage(fileErr.message);
-            triggerHaptic('error');
-
-            // Keep workspace active by adding a failed entry
-            setConversions((prev) => [
-              {
-                id: `fail_${Date.now()}`,
-                originalName: curFile.name,
-                originalSize: '',
-                sourceFormat: (curFile.name.split('.').pop() || '').toLowerCase(),
-                targetFormat: target,
-                status: 'failed',
-                error: fileErr.message,
-                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-              },
-              ...prev
-            ]);
-          }
         }
-        setStagedFiles([]);
-      } finally {
-        setIsConverting(false);
-        setActiveConversion(null);
       }
-    },
-    [stagedFiles, isConverting, setErrorMessage, selectedTargetFormat, getDefaultTargetFormat, convertSingleFile, setStagedFiles]
-  );
-
-  const handleDeleteConversion = useCallback(async (id) => {
-    try {
-      await deleteJobFromServer(id);
-    } catch (err) {
-      console.warn('Failed to delete job from server:', err);
-    }
-    setConversions((prev) => prev.filter((item) => item.id !== id));
+      return updated;
+    });
   }, []);
 
+  // Remove a specific file by ID
+  const removeFile = useCallback((id) => {
+    setFiles((prev) => prev.filter((f) => f.id !== id));
+  }, []);
+
+  // Clear all files
+  const clearAll = useCallback(() => {
+    setFiles([]);
+  }, []);
+
+  // Change target format for a specific file
+  const setTargetFormat = useCallback((id, newTargetFormat) => {
+    setFiles((prev) =>
+      prev.map((f) => {
+        if (f.id === id) {
+          return {
+            ...f,
+            targetFormat: newTargetFormat,
+            outputName: `${f.name.replace(/\.[^/.]+$/, '')}.${newTargetFormat}`
+          };
+        }
+        return f;
+      })
+    );
+  }, []);
+
+  // Convert a single file by ID
+  const startConversion = useCallback(
+    async (fileId) => {
+      setFiles((prev) => {
+        const target = prev.find((f) => f.id === fileId);
+        if (!target || target.status === 'converting') return prev;
+        return prev.map((f) =>
+          f.id === fileId
+            ? { ...f, status: 'converting', progress: 15, statusText: 'Initializing passage…', error: null }
+            : f
+        );
+      });
+
+      const currentFile = files.find((f) => f.id === fileId);
+      if (!currentFile || !currentFile.file) return;
+
+      const { file, name, sourceFormat, targetFormat } = currentFile;
+      if (soundEnabled) sounds.playGateTransit();
+
+      try {
+        // Attempt backend conversion job
+        const job = await submitConversionJob(file, targetFormat);
+
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === fileId
+              ? { ...f, progress: 35, statusText: 'Engaging Port Gate on Mac Worker…' }
+              : f
+          )
+        );
+
+        const pollInterval = 1500;
+        const maxAttempts = 80;
+        let attempts = 0;
+        let result = null;
+
+        while (attempts < maxAttempts) {
+          await new Promise((r) => setTimeout(r, pollInterval));
+          attempts++;
+
+          const jobStatus = await fetchJobStatus(job.jobId);
+          if (jobStatus.status === 'processing' || jobStatus.status === 'pending') {
+            const dynamicText = ['pages', 'key', 'numbers'].includes(targetFormat)
+              ? 'Synthesizing Apple iWork vector canvas…'
+              : targetFormat === 'docx' || targetFormat === 'xlsx' || targetFormat === 'pptx'
+              ? 'Mapping OpenXML baseline grid…'
+              : 'Rendering high-fidelity vector layout…';
+
+            setFiles((prev) =>
+              prev.map((f) =>
+                f.id === fileId
+                  ? { ...f, progress: Math.min(92, 35 + attempts * 4), statusText: dynamicText }
+                  : f
+              )
+            );
+          } else if (jobStatus.status === 'done') {
+            result = {
+              downloadUrl: getDownloadUrl(jobStatus.id),
+              outputName: `${jobStatus.originalName.replace(/\.[^/.]+$/, '')}.${jobStatus.targetFormat}`
+            };
+            break;
+          } else if (jobStatus.status === 'failed') {
+            throw new Error(jobStatus.error || `Conversion failed for ${name}.`);
+          }
+        }
+
+        if (!result && attempts >= maxAttempts) {
+          throw new Error(`Conversion timed out for ${name}.`);
+        }
+
+        // Success
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === fileId
+              ? {
+                  ...f,
+                  status: 'done',
+                  progress: 100,
+                  statusText: 'Conversion complete',
+                  downloadUrl: result.downloadUrl,
+                  outputName: result.outputName
+                }
+              : f
+          )
+        );
+        if (soundEnabled) sounds.playSnap();
+        triggerHaptic('success');
+      } catch (err) {
+        console.warn('Backend conversion notice, checking sample simulation:', err.message);
+        const isSample =
+          name.includes('Sample') ||
+          name.includes('Executive') ||
+          name.includes('Architectural') ||
+          name.includes('Product') ||
+          name.includes('Financial') ||
+          name.includes('Showcase');
+
+        if (isSample) {
+          try {
+            const simResult = await simulateClientConversion(file, targetFormat, (step) => {
+              setFiles((prev) =>
+                prev.map((f) =>
+                  f.id === fileId
+                    ? { ...f, progress: step.progressPercent, statusText: step.statusText }
+                    : f
+                )
+              );
+            });
+            setFiles((prev) =>
+              prev.map((f) =>
+                f.id === fileId
+                  ? {
+                      ...f,
+                      status: 'done',
+                      progress: 100,
+                      statusText: 'Conversion complete',
+                      downloadUrl: simResult.downloadUrl,
+                      outputName: `${name.replace(/\.[^/.]+$/, '')}.${targetFormat}`
+                    }
+                  : f
+              )
+            );
+            if (soundEnabled) sounds.playSnap();
+            triggerHaptic('success');
+            return;
+          } catch (simErr) {
+            console.error('Simulation error:', simErr);
+          }
+        }
+
+        // Error
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === fileId
+              ? {
+                  ...f,
+                  status: 'error',
+                  progress: 0,
+                  statusText: 'Conversion failed',
+                  error: err.message
+                }
+              : f
+          )
+        );
+        triggerHaptic('error');
+      }
+    },
+    [files, soundEnabled]
+  );
+
+  // Convert all idle / error files sequentially
+  const startAllConversions = useCallback(async () => {
+    const idleFiles = files.filter((f) => f.status === 'idle' || f.status === 'error');
+    for (const item of idleFiles) {
+      await startConversion(item.id);
+    }
+  }, [files, startConversion]);
+
+  // Delete conversion from server and state
+  const deleteConversion = useCallback(async (id) => {
+    try {
+      await deleteJobFromServer(id);
+    } catch {}
+    setFiles((prev) => prev.filter((f) => f.id !== id));
+  }, []);
+
+  // Quick sample loader
+  const selectSample = useCallback((format) => {
+    let name = 'Executive_Strategic_Brief.docx';
+    let size = 284000;
+    if (format === 'pdf') {
+      name = 'Architectural_Blueprint.pdf';
+      size = 512000;
+    } else if (format === 'compress') {
+      name = 'Oversized_Report_To_Compress.pdf';
+      size = 8500000;
+    } else if (format === 'jpg' || format === 'png') {
+      name = 'Screenshot_Portfolio_Batch.jpg';
+      size = 1450000;
+    } else if (format === 'pages') {
+      name = 'Product_Marketing_Brief.pages';
+      size = 720000;
+    } else if (format === 'xlsx') {
+      name = 'Annual_Financial_Model.xlsx';
+      size = 450000;
+    } else if (format === 'csv') {
+      name = 'Global_Metrics_Export.csv';
+      size = 180000;
+    } else if (format === 'numbers') {
+      name = 'Q4_Operating_Budget.numbers';
+      size = 890000;
+    } else if (format === 'pptx') {
+      name = 'Series_A_Pitch_Deck.pptx';
+      size = 1200000;
+    } else if (format === 'key') {
+      name = 'Apple_Keynote_Showcase.key';
+      size = 1600000;
+    }
+
+    const sampleFile = new File(['The Port Sample Document Content'], name, { type: 'application/octet-stream' });
+    Object.defineProperty(sampleFile, 'size', { value: size });
+    addFiles([sampleFile]);
+  }, [addFiles]);
+
+  const isConverting = files.some((f) => f.status === 'converting');
+
   return {
-    isConverting,
-    activeConversion,
-    animatingFile,
-    conversions,
-    setConversions,
-    convertSingleFile,
-    startConversionSequence,
-    handleDeleteConversion
+    files,
+    setFiles,
+    addFiles,
+    removeFile,
+    clearAll,
+    setTargetFormat,
+    startConversion,
+    startAllConversions,
+    deleteConversion,
+    selectSample,
+    isConverting
   };
 }
 
