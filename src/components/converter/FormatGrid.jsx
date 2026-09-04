@@ -67,14 +67,21 @@ export function getAvailableTargets(sourceFormat = '') {
   ];
 }
 
-export default function FormatGrid({ sourceFormat, selectedTarget, onSelectTarget }) {
+export default function FormatGrid({ sourceFormat, selectedTarget, onSelectTarget, activeMode }) {
   const targets = getAvailableTargets(sourceFormat);
 
   return (
     <div className="space-y-2">
-      <span className="text-[10px] uppercase font-black text-[#71717A] block tracking-wider">
-        Target Passage Format:
-      </span>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] uppercase font-black text-[#71717A] block tracking-wider">
+          Target Passage Format:
+        </span>
+        {activeMode && (
+          <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+            Mode: {activeMode.charAt(0).toUpperCase() + activeMode.slice(1)}
+          </span>
+        )}
+      </div>
       <div className="flex flex-wrap items-center gap-2">
         {targets.map((t) => {
           const isSelected = selectedTarget === t.format;

@@ -5,6 +5,7 @@ import StatusStrip from './components/StatusStrip';
 import MobileActionBar from './components/MobileActionBar';
 import { useWorkerStatus } from './hooks/useWorkerStatus';
 import { useConversionQueue } from './hooks/useConversionQueue';
+import { MODES, detectModeFromFile, getTargetForMode } from './config/featuresConfig';
 import { ArrowLeft, Plus } from 'lucide-react';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
   // 2. Unified Single-State Conversion Queue
   const {
     files,
+    setFiles,
     addFiles,
     removeFile,
     clearAll,
@@ -29,6 +31,45 @@ export default function App() {
     selectSample,
     isConverting
   } = useConversionQueue(soundEnabled);
+
+  // Smart Mode Switcher that updates activeMode & adapts idle files' target formats
+  const handleModeChange = useCallback((newMode) => {
+    setActiveMode(newMode);
+    if (setFiles) {
+      setFiles((prev) =>
+        prev.map((f) => {
+          if (f.status === 'idle') {
+            const newTarget = getTargetForMode(f.sourceFormat, newMode);
+            return {
+              ...f,
+              targetFormat: newTarget,
+              outputName: `${f.name.replace(/\.[^/.]+$/, '')}.${newTarget}`
+            };
+          }
+          return f;
+        })
+      );
+    }
+  }, [setFiles]);
+
+  // Add files and auto-sync active mode
+  const handleAddFilesWithModeSync = useCallback((incoming) => {
+    const list = Array.isArray(incoming) ? incoming : [incoming];
+    if (list.length > 0) {
+      const firstObj = list[0] instanceof File ? list[0] : list[0].file || list[0];
+      const firstExt = (firstObj.name?.split('.').pop() || '').toLowerCase();
+      const detected = detectModeFromFile(firstExt);
+      setActiveMode(detected);
+    }
+    addFiles(incoming);
+  }, [addFiles]);
+
+  // Sample selector with auto mode sync
+  const handleSelectSampleWithModeSync = useCallback((format) => {
+    const detected = detectModeFromFile(format);
+    setActiveMode(detected);
+    selectSample(format);
+  }, [selectSample]);
 
   // Global Drag & Drop handlers
   const handleDragOver = useCallback((e) => {
@@ -48,10 +89,10 @@ export default function App() {
       e.preventDefault();
       setIsDraggingOver(false);
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-        addFiles(Array.from(e.dataTransfer.files));
+        handleAddFilesWithModeSync(Array.from(e.dataTransfer.files));
       }
     },
-    [addFiles]
+    [handleAddFilesWithModeSync]
   );
 
   const isWorkspaceActive = files.length > 0;
@@ -101,10 +142,12 @@ export default function App() {
       {/* VIEW 1: CLEAN MINIMALIST LANDING PORTAL (When No Files are Staged/Converting) */}
       {!isWorkspaceActive ? (
         <LandingPortal
-          onFileSelect={addFiles}
-          onSelectSample={selectSample}
+          onFileSelect={handleAddFilesWithModeSync}
+          onSelectSample={handleSelectSampleWithModeSync}
           isDraggingOver={isDraggingOver}
           workerOnline={workerStatus.online}
+          activeMode={activeMode}
+          onChangeMode={handleModeChange}
         />
       ) : (
         /* VIEW 2: ACTIVE PASSAGE WORKSPACE */
@@ -133,8 +176,8 @@ export default function App() {
               <div className="flex items-center p-1 rounded-full avero-inset-bar text-xs font-extrabold gap-1 shrink-0">
                 <button
                   type="button"
-                  onClick={() => setActiveMode('documents')}
-                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
+                  onClick={() => handleModeChange('documents')}
+                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap cursor-pointer ${
                     activeMode === 'documents'
                       ? 'bg-white text-[#161618] shadow-sm'
                       : 'text-[#71717A] hover:text-[#161618]'
@@ -146,8 +189,8 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => setActiveMode('spreadsheets')}
-                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
+                  onClick={() => handleModeChange('spreadsheets')}
+                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap cursor-pointer ${
                     activeMode === 'spreadsheets'
                       ? 'bg-white text-[#161618] shadow-sm'
                       : 'text-[#71717A] hover:text-[#161618]'
@@ -159,8 +202,8 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => setActiveMode('presentations')}
-                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
+                  onClick={() => handleModeChange('presentations')}
+                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap cursor-pointer ${
                     activeMode === 'presentations'
                       ? 'bg-white text-[#161618] shadow-sm'
                       : 'text-[#71717A] hover:text-[#161618]'
@@ -172,8 +215,8 @@ export default function App() {
 
                 <button
                   type="button"
-                  onClick={() => setActiveMode('utilities')}
-                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap ${
+                  onClick={() => handleModeChange('utilities')}
+                  className={`px-2.5 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black whitespace-nowrap cursor-pointer ${
                     activeMode === 'utilities'
                       ? 'bg-white text-[#161618] shadow-sm'
                       : 'text-[#71717A] hover:text-[#161618]'
@@ -201,8 +244,8 @@ export default function App() {
           <main className="flex-1 flex flex-col justify-center w-full px-4 py-8">
             <ConverterSurface
               files={files}
-              onFileSelect={addFiles}
-              onSelectSample={selectSample}
+              onFileSelect={handleAddFilesWithModeSync}
+              onSelectSample={handleSelectSampleWithModeSync}
               isDraggingOver={isDraggingOver}
               onSelectTarget={setTargetFormat}
               onStartConvert={startConversion}
@@ -211,6 +254,8 @@ export default function App() {
               onClearAll={clearAll}
               onDeleteConversion={deleteConversion}
               onOpenFileInput={() => fileInputRef.current?.click()}
+              activeMode={activeMode}
+              onChangeMode={handleModeChange}
             />
           </main>
 
@@ -235,7 +280,7 @@ export default function App() {
             onConvertAll={startAllConversions}
             onOpenFileInput={() => fileInputRef.current?.click()}
             activeMode={activeMode}
-            onChangeMode={setActiveMode}
+            onChangeMode={handleModeChange}
             conversions={completedOrErrorFiles}
           />
         </div>

@@ -14,7 +14,9 @@ export default function ConverterSurface({
   onRemoveFile,
   onClearAll,
   onDeleteConversion,
-  onOpenFileInput
+  onOpenFileInput,
+  activeMode = 'documents',
+  onChangeMode
 }) {
   const isEmpty = files.length === 0;
 
@@ -27,6 +29,7 @@ export default function ConverterSurface({
             onFileSelect={onFileSelect}
             onSelectSample={onSelectSample}
             isDraggingOver={isDraggingOver}
+            activeMode={activeMode}
           />
         ) : (
           <MorphCardStack
@@ -39,6 +42,9 @@ export default function ConverterSurface({
             onClearAll={onClearAll}
             onDeleteConversion={onDeleteConversion}
             onOpenFileInput={onOpenFileInput}
+            activeMode={activeMode}
+            onChangeMode={onChangeMode}
+            onSelectSample={onSelectSample}
           />
         )}
       </AnimatePresence>

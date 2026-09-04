@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { triggerHaptic } from '../utils/haptics';
 import DropZone from './converter/DropZone';
+import { MODES } from '../config/featuresConfig';
 import {
   ApplePagesIcon,
   MicrosoftWordIcon,
@@ -93,25 +94,12 @@ export default function LandingPortal({
   onFileSelect,
   onSelectSample,
   isDraggingOver,
-  workerOnline = false
+  workerOnline = false,
+  activeMode = 'documents',
+  onChangeMode
 }) {
-  // Rotating floating headline texts inside the black capsule
-  const rotatingHeadlines = [
-    "Apple & Office Converter",
-    "Pages ↔ Microsoft Word",
-    "Keynote ↔ PowerPoint",
-    "Numbers ↔ Microsoft Excel",
-    "PDF ↔ Vector Canvas"
-  ];
-  const [headlineIndex, setHeadlineIndex] = useState(0);
+  const currentMode = MODES[activeMode] || MODES.documents;
   const [copiedShare, setCopiedShare] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setHeadlineIndex((prev) => (prev + 1) % rotatingHeadlines.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
 
   const handleShare = (platform) => {
     const url = window.location.href;
@@ -151,46 +139,40 @@ export default function LandingPortal({
         
         {/* 1. Unique 2026 Futuristic Floating Navbar */}
         <header className="pt-6 sm:pt-8 px-4 w-full flex justify-center z-50">
-          <div className="bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),_0_0_0_1px_rgba(255,255,255,1)_inset] rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between gap-4 sm:gap-8 w-full max-w-3xl transition-all duration-300">
+          <div className="bg-white/80 backdrop-blur-2xl border border-white/90 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),_0_0_0_1px_rgba(255,255,255,1)_inset] rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between gap-3 sm:gap-6 w-full max-w-4xl transition-all duration-300">
             
             {/* Brand Logo Emblem */}
-            <a href="#home" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
+            <a href="#home" className="flex items-center gap-2 hover:opacity-90 transition-opacity shrink-0">
               <div className="w-8 h-8 rounded-full bg-[#1E1E22] text-white flex items-center justify-center text-xs shadow-md border border-white/20">
                 ⛩️
               </div>
               <ThePortLogo className="h-4 sm:h-4.5 w-auto" />
             </a>
 
-            {/* Unique Segmented Nav Track with Active Pill Glow */}
-            <nav className="bg-[#EBEBEF]/80 p-1 rounded-full flex items-center gap-1 text-xs font-semibold text-[#71717A] border border-black/5 shadow-inner">
-              <a 
-                href="#home" 
-                className="px-4 py-1.5 rounded-full bg-[#1E1E22] text-white font-bold shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-all"
-              >
-                Home
-              </a>
-              <a 
-                href="#tools" 
-                className="px-4 py-1.5 rounded-full hover:text-[#161618] hover:bg-white/60 transition-all"
-              >
-                Tools
-              </a>
-              <a 
-                href="#formats" 
-                className="hidden sm:inline-block px-4 py-1.5 rounded-full hover:text-[#161618] hover:bg-white/60 transition-all"
-              >
-                Formats
-              </a>
-              <a 
-                href="#how-it-works" 
-                className="px-4 py-1.5 rounded-full hover:text-[#161618] hover:bg-white/60 transition-all"
-              >
-                FAQ
-              </a>
+            {/* Interactive Feature Mode Segmented Pill Selector */}
+            <nav className="bg-[#EBEBEF]/90 p-1 rounded-full flex items-center gap-1 text-xs font-extrabold text-[#71717A] border border-black/5 shadow-inner">
+              {Object.values(MODES).map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => {
+                    triggerHaptic('light');
+                    if (onChangeMode) onChangeMode(m.id);
+                  }}
+                  className={`px-3 sm:px-4 py-1.5 rounded-full transition-all text-xs font-black cursor-pointer whitespace-nowrap ${
+                    activeMode === m.id
+                      ? 'bg-[#1E1E22] text-white shadow-sm'
+                      : 'text-[#71717A] hover:text-[#161618] hover:bg-white/60'
+                  }`}
+                >
+                  <span className="hidden sm:inline">{m.name}</span>
+                  <span className="sm:hidden">{m.shortName}</span>
+                </button>
+              ))}
             </nav>
 
             {/* Right M1 Engine Pulse Badge */}
-            <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 font-bold text-[11px] shrink-0 shadow-sm">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 font-bold text-[11px] shrink-0 shadow-sm">
               <span className={`w-2 h-2 rounded-full ${workerOnline ? 'bg-emerald-500 animate-pulse' : 'bg-emerald-500'}`} />
               <span className="hidden sm:inline">M1 Engine</span>
               <span className="sm:hidden">M1</span>
@@ -200,10 +182,10 @@ export default function LandingPortal({
         </header>
 
         {/* 2. Hero Centerpiece (Wider 2026 Layout & Slim Capsule Profile) */}
-        <div className="w-full max-w-5xl px-6 text-center my-auto py-6 sm:py-10">
+        <div className="w-full max-w-5xl px-6 text-center my-auto py-6 sm:py-8 space-y-5">
           
           {/* Title & Slim Floating Black Capsule */}
-          <div className="space-y-3 mb-6 sm:mb-8">
+          <div className="space-y-3">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#161618] leading-tight">
               Free Universal Document
             </h1>
@@ -214,25 +196,29 @@ export default function LandingPortal({
               className="inline-block pt-1"
             >
               {/* Glowing, sleek black capsule profile with ambient halo shadow */}
-              <div className="bg-[#1E1E22] text-white px-7 sm:px-9 py-2 sm:py-2.5 rounded-full shadow-[0_14px_36px_rgba(0,0,0,0.35),_0_0_20px_rgba(0,0,0,0.15)] border border-white/20 hover:border-white/50 hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] transition-all duration-300 inline-flex items-center justify-center min-w-[280px] sm:min-w-[380px] h-11 sm:h-12">
+              <div className="bg-[#1E1E22] text-white px-7 sm:px-9 py-2 sm:py-2.5 rounded-full shadow-[0_14px_36px_rgba(0,0,0,0.35),_0_0_20px_rgba(0,0,0,0.15)] border border-white/20 hover:border-white/50 hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] transition-all duration-300 inline-flex items-center justify-center min-w-[280px] sm:min-w-[400px] h-11 sm:h-12">
                 <AnimatePresence mode="wait">
                   <motion.span
-                    key={headlineIndex}
+                    key={activeMode}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.28, ease: 'easeOut' }}
-                    className="text-xl sm:text-3xl md:text-[32px] font-extrabold tracking-tight text-white block text-center truncate leading-none"
+                    className="text-xl sm:text-3xl md:text-[30px] font-extrabold tracking-tight text-white block text-center truncate leading-none"
                   >
-                    {rotatingHeadlines[headlineIndex]}
+                    {currentMode.headline}
                   </motion.span>
                 </AnimatePresence>
               </div>
             </motion.div>
+
+            <p className="text-xs sm:text-sm text-[#71717A] max-w-xl mx-auto font-medium">
+              {currentMode.desc}
+            </p>
           </div>
 
           {/* 3. Flowing River Carousel (Compact Snug Length & Small Icons) */}
-          <div className="max-w-xs sm:max-w-sm mx-auto overflow-hidden relative my-5 sm:my-6 river-mask">
+          <div className="max-w-xs sm:max-w-sm mx-auto overflow-hidden relative my-3 river-mask">
             <div className="animate-river items-center py-1">
               {infiniteRiverList.map((item, idx) => (
                 <button
@@ -248,16 +234,43 @@ export default function LandingPortal({
             </div>
           </div>
 
-          {/* 4. Grand Length Dropzone Bar (Morphing Surface) */}
-          <div className="max-w-4xl mx-auto w-full space-y-6 mt-7 sm:mt-9">
+          {/* 4. Active Category 1-Tap Feature Chips */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap max-w-3xl mx-auto pt-1">
+            {currentMode.presets.map((preset) => {
+              const { SourceIcon, TargetIcon } = preset;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => {
+                    triggerHaptic('medium');
+                    onSelectSample(preset.sample);
+                  }}
+                  className="avero-clay-card px-3.5 sm:px-4 py-2 rounded-2xl text-xs font-bold text-[#161618] border border-white/95 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-xs cursor-pointer group bg-white/90 backdrop-blur-md"
+                  title={`Click to try ${preset.label}`}
+                >
+                  <div className="flex items-center gap-1.5">
+                    {SourceIcon && <SourceIcon className="w-4 h-4 shrink-0" />}
+                    <ArrowRight className="w-3 h-3 text-[#71717A] group-hover:text-[#161618] group-hover:translate-x-0.5 transition-all" />
+                    {TargetIcon && <TargetIcon className="w-4 h-4 shrink-0" />}
+                  </div>
+                  <span className="font-extrabold">{preset.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 5. Grand Length Dropzone Bar (Morphing Surface) */}
+          <div className="max-w-4xl mx-auto w-full space-y-6 pt-2">
             <DropZone
               onFileSelect={onFileSelect}
               onSelectSample={onSelectSample}
               isDraggingOver={isDraggingOver}
+              activeMode={activeMode}
             />
 
-            {/* 5. Unique Floating Glass Highlights Capsule */}
-            <div className="pt-8 sm:pt-10 max-w-3xl mx-auto w-full">
+            {/* 6. Unique Floating Glass Highlights Capsule */}
+            <div className="pt-6 sm:pt-8 max-w-3xl mx-auto w-full">
               <div className="avero-bottom-bar rounded-full py-3.5 px-6 sm:px-8 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-bold text-[#161618] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-white/90">
                 <div className="flex items-center gap-2">
                   <Zap className="w-4 h-4 text-[#161618] stroke-[2.5]" />
@@ -275,7 +288,7 @@ export default function LandingPortal({
             </div>
 
             {/* Elegant Clay Pill Badge */}
-            <div className="pt-6 flex justify-center">
+            <div className="pt-4 flex justify-center">
               <a 
                 href="#tools" 
                 className="avero-light-glossy rounded-full px-6 py-2.5 inline-flex items-center gap-2 text-xs font-bold text-[#161618] hover:scale-105 transition-all shadow-sm group border border-white/80"

@@ -58,21 +58,26 @@ export default function MobileActionBar({
           <div className="w-full flex items-center justify-between gap-2">
             {/* Quick Mobile Mode Pill */}
             <div className="flex items-center p-0.5 rounded-full avero-inset-bar text-[11px] font-black shrink-0">
-              {['documents', 'spreadsheets', 'presentations'].map((m) => (
+              {[
+                { id: 'documents', label: 'Doc' },
+                { id: 'spreadsheets', label: 'Sheet' },
+                { id: 'presentations', label: 'Slide' },
+                { id: 'utilities', label: 'Tools' }
+              ].map((m) => (
                 <button
-                  key={m}
+                  key={m.id}
                   type="button"
                   onClick={() => {
                     triggerHaptic('light');
-                    onChangeMode(m);
+                    onChangeMode(m.id);
                   }}
-                  className={`px-2.5 py-1.5 rounded-full transition-all uppercase text-[10px] ${
-                    activeMode === m
+                  className={`px-2 py-1 rounded-full transition-all uppercase text-[10px] cursor-pointer ${
+                    activeMode === m.id
                       ? 'bg-white text-[#161618] shadow-sm font-black'
                       : 'text-[#71717A]'
                   }`}
                 >
-                  {m === 'documents' ? 'Doc' : m === 'spreadsheets' ? 'Sheet' : 'Slide'}
+                  {m.label}
                 </button>
               ))}
             </div>

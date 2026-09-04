@@ -12,7 +12,8 @@ export default function MorphCard({
   onSelectTarget,
   onStartConvert,
   onRemove,
-  onDelete
+  onDelete,
+  activeMode
 }) {
   const isApple = ['pages', 'key', 'numbers'].includes(file.sourceFormat);
   const cardBorderClass = isApple ? 'border-blue-500/30' : 'border-amber-500/30';
@@ -91,6 +92,7 @@ export default function MorphCard({
             sourceFormat={file.sourceFormat}
             selectedTarget={file.targetFormat}
             onSelectTarget={(target) => onSelectTarget(file.id, target)}
+            activeMode={activeMode}
           />
 
           <div className="flex items-center justify-end pt-2">

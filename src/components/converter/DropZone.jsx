@@ -2,12 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
+import { MODES } from '../../config/featuresConfig';
 
 export default function DropZone({
   onFileSelect,
   onSelectSample,
-  isDraggingOver = false
+  isDraggingOver = false,
+  activeMode = 'documents'
 }) {
+  const currentMode = MODES[activeMode] || MODES.documents;
+  const samplePreset = currentMode.presets[0] || { sample: 'pages' };
+
   return (
     <div className="max-w-4xl mx-auto w-full space-y-6">
       {/* Primary Morphing Dropzone Surface */}
@@ -24,7 +29,7 @@ export default function DropZone({
           <input
             type="file"
             multiple
-            accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"
+            accept={currentMode.accept || ".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"}
             className="hidden"
             onChange={(e) => {
               if (e.target.files && e.target.files.length > 0) {
@@ -37,7 +42,7 @@ export default function DropZone({
 
           <div className="flex items-center gap-3 text-[#71717A] text-xs sm:text-base font-medium truncate">
             <span className="truncate">
-              {isDraggingOver ? 'Release files…' : 'Drop your document, images or screenshots (.pdf, .docx, .png, .jpg)...'}
+              {isDraggingOver ? 'Release files…' : currentMode.placeholder}
             </span>
           </div>
 
@@ -57,12 +62,12 @@ export default function DropZone({
 
       {/* 2 Prominent 3D Action Buttons */}
       <div className="flex items-center justify-center gap-4 flex-wrap pt-2">
-        <label className="cursor-pointer avero-dark-glossy text-white px-8 sm:px-10 py-3.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all">
+        <label className="cursor-pointer avero-dark-glossy text-white px-8 sm:px-10 py-3.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-md hover:scale-105 active:scale-95">
           <span>Select Files</span>
           <input
             type="file"
             multiple
-            accept=".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"
+            accept={currentMode.accept || ".docx,.doc,.pdf,.pages,.key,.pptx,.ppt,.numbers,.xlsx,.xls,.csv,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp,image/*"}
             className="hidden"
             onChange={(e) => {
               if (e.target.files && e.target.files.length > 0) {
@@ -79,12 +84,12 @@ export default function DropZone({
             type="button"
             onClick={() => {
               triggerHaptic('light');
-              onSelectSample('pages');
+              onSelectSample(samplePreset.sample);
             }}
-            className="avero-light-glossy text-[#161618] px-8 sm:px-10 py-3.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="avero-light-glossy text-[#161618] px-8 sm:px-10 py-3.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer border border-black/5"
           >
             <Sparkles className="w-4 h-4 text-[#161618]" />
-            <span>Try Sample Passage</span>
+            <span>Try {currentMode.name} Sample</span>
           </button>
         )}
       </div>
