@@ -48,7 +48,7 @@ export default function ConverterSurface({
             onOpenFileInput={onOpenFileInput}
             activeMode={activeMode}
             onChangeMode={onChangeMode}
-            onSelectSample={onSelectSample}
+            onFileSelect={onFileSelect}
           />
         )}
       </AnimatePresence>

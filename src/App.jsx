@@ -159,10 +159,10 @@ export default function App() {
           <div className="absolute top-40 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-orb-sapphire pointer-events-none -z-10" />
 
           {/* Top Header Bar */}
-          <header className="px-4 pt-6 max-w-4xl mx-auto w-full">
-            <div className="avero-clay-card rounded-full px-3.5 sm:px-6 py-2.5 flex items-center justify-between gap-2 sm:gap-4 shadow-clay-pill border-[1.5px] border-white/95 backdrop-blur-2xl">
+          <header className="px-4 pt-6 max-w-6xl mx-auto w-full">
+            <div className="avero-clay-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2 sm:gap-4 shadow-clay-pill border-[1.5px] border-white/95 backdrop-blur-2xl">
               {/* Left Identity & Back to Portal Button */}
-              <div className="flex items-center shrink-0">
+              <div className="flex items-center gap-3 shrink-0">
                 <button
                   type="button"
                   onClick={clearAll}
@@ -229,11 +229,16 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Right Controls (Add Files - NO WRAPPING, single line) */}
-              <div className="flex items-center shrink-0">
+              {/* Right Controls (M1 Badge + Add Files) */}
+              <div className="flex items-center gap-2.5 shrink-0">
+                <div className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 font-bold text-[11px] shrink-0 shadow-2xs">
+                  <span className={`w-2 h-2 rounded-full ${workerStatus.online ? 'bg-emerald-500 animate-pulse' : 'bg-emerald-500'}`} />
+                  <span>M1 Silicon</span>
+                </div>
+
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="avero-dark-glossy text-white px-3.5 sm:px-4.5 py-2 rounded-full text-xs font-black flex items-center gap-1.5 shadow-md active:scale-95 border border-white/20 hover:scale-105 transition-all whitespace-nowrap shrink-0 cursor-pointer"
+                  className="avero-dark-glossy text-white px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full text-xs font-black flex items-center gap-1.5 shadow-md active:scale-95 border border-white/20 hover:scale-105 transition-all whitespace-nowrap shrink-0 cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5 text-white stroke-[3] shrink-0" />
                   <span className="text-white whitespace-nowrap">Add Files</span>
