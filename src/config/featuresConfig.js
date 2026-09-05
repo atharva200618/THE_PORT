@@ -19,9 +19,11 @@ export const MODES = {
     accept: '.pages,.docx,.doc,.pdf,.txt',
     primaryTarget: 'docx',
     presets: [
-      { id: 'pages-to-word', label: 'Pages → Word (.docx)', sample: 'pages', target: 'docx', SourceIcon: ApplePagesIcon, TargetIcon: MicrosoftWordIcon },
-      { id: 'word-to-pages', label: 'Word → Pages (.pages)', sample: 'docx', target: 'pages', SourceIcon: MicrosoftWordIcon, TargetIcon: ApplePagesIcon },
-      { id: 'doc-to-pdf', label: 'Document → PDF', sample: 'docx', target: 'pdf', SourceIcon: MicrosoftWordIcon, TargetIcon: AdobePdfIcon }
+      { id: 'pages-to-word', label: 'Pages → Word (.docx)', sample: 'pages', sourceExt: 'pages', target: 'docx', SourceIcon: ApplePagesIcon, TargetIcon: MicrosoftWordIcon },
+      { id: 'word-to-pages', label: 'Word → Pages (.pages)', sample: 'docx', sourceExt: 'docx', target: 'pages', SourceIcon: MicrosoftWordIcon, TargetIcon: ApplePagesIcon },
+      { id: 'pdf-to-pages', label: 'PDF → Apple Pages (.pages)', sample: 'pdf', sourceExt: 'pdf', target: 'pages', SourceIcon: AdobePdfIcon, TargetIcon: ApplePagesIcon },
+      { id: 'pdf-to-word', label: 'PDF → Microsoft Word (.docx)', sample: 'pdf', sourceExt: 'pdf', target: 'docx', SourceIcon: AdobePdfIcon, TargetIcon: MicrosoftWordIcon },
+      { id: 'doc-to-pdf', label: 'Document → PDF Layout', sample: 'docx', sourceExt: 'docx', target: 'pdf', SourceIcon: MicrosoftWordIcon, TargetIcon: AdobePdfIcon }
     ]
   },
   spreadsheets: {
@@ -34,9 +36,10 @@ export const MODES = {
     accept: '.numbers,.xlsx,.xls,.csv,.pdf',
     primaryTarget: 'xlsx',
     presets: [
-      { id: 'numbers-to-excel', label: 'Numbers → Excel (.xlsx)', sample: 'numbers', target: 'xlsx', SourceIcon: AppleNumbersIcon, TargetIcon: MicrosoftExcelIcon },
-      { id: 'excel-to-numbers', label: 'Excel → Numbers (.numbers)', sample: 'xlsx', target: 'numbers', SourceIcon: MicrosoftExcelIcon, TargetIcon: AppleNumbersIcon },
-      { id: 'sheet-to-csv', label: 'Export Table (.csv)', sample: 'numbers', target: 'csv', SourceIcon: AppleNumbersIcon, TargetIcon: MicrosoftExcelIcon }
+      { id: 'numbers-to-excel', label: 'Numbers → Excel (.xlsx)', sample: 'numbers', sourceExt: 'numbers', target: 'xlsx', SourceIcon: AppleNumbersIcon, TargetIcon: MicrosoftExcelIcon },
+      { id: 'excel-to-numbers', label: 'Excel → Numbers (.numbers)', sample: 'xlsx', sourceExt: 'xlsx', target: 'numbers', SourceIcon: MicrosoftExcelIcon, TargetIcon: AppleNumbersIcon },
+      { id: 'sheet-to-csv', label: 'Export Table (.csv)', sample: 'numbers', sourceExt: 'numbers', target: 'csv', SourceIcon: AppleNumbersIcon, TargetIcon: MicrosoftExcelIcon },
+      { id: 'sheet-to-pdf', label: 'Sheet → PDF Canvas', sample: 'numbers', sourceExt: 'numbers', target: 'pdf', SourceIcon: AppleNumbersIcon, TargetIcon: AdobePdfIcon }
     ]
   },
   presentations: {
@@ -49,9 +52,9 @@ export const MODES = {
     accept: '.key,.pptx,.ppt,.pdf',
     primaryTarget: 'pptx',
     presets: [
-      { id: 'keynote-to-pptx', label: 'Keynote → PowerPoint (.pptx)', sample: 'key', target: 'pptx', SourceIcon: AppleKeynoteIcon, TargetIcon: MicrosoftPowerPointIcon },
-      { id: 'pptx-to-keynote', label: 'PowerPoint → Keynote (.key)', sample: 'pptx', target: 'key', SourceIcon: MicrosoftPowerPointIcon, TargetIcon: AppleKeynoteIcon },
-      { id: 'deck-to-pdf', label: 'Presentation → PDF Slides', sample: 'key', target: 'pdf', SourceIcon: AppleKeynoteIcon, TargetIcon: AdobePdfIcon }
+      { id: 'keynote-to-pptx', label: 'Keynote → PowerPoint (.pptx)', sample: 'key', sourceExt: 'key', target: 'pptx', SourceIcon: AppleKeynoteIcon, TargetIcon: MicrosoftPowerPointIcon },
+      { id: 'pptx-to-keynote', label: 'PowerPoint → Keynote (.key)', sample: 'pptx', sourceExt: 'pptx', target: 'key', SourceIcon: MicrosoftPowerPointIcon, TargetIcon: AppleKeynoteIcon },
+      { id: 'deck-to-pdf', label: 'Presentation → PDF Slides', sample: 'key', sourceExt: 'key', target: 'pdf', SourceIcon: AppleKeynoteIcon, TargetIcon: AdobePdfIcon }
     ]
   },
   utilities: {
@@ -64,16 +67,14 @@ export const MODES = {
     accept: '.pdf,.png,.jpg,.jpeg,.webp,.heic,.heif,.tiff,.bmp',
     primaryTarget: 'compress',
     presets: [
-      { id: 'compress-pdf', label: 'Smart PDF Compressor (-75%)', sample: 'compress', target: 'compress', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'merge-pdfs', label: 'Merge PDFs into One', sample: 'merge', target: 'pdf', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'split-pdf', label: 'Split PDF Pages to ZIP', sample: 'split', target: 'split', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'rotate-pdf', label: 'Rotate PDF 90°', sample: 'rotate', target: 'rotate', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'watermark-pdf', label: 'Watermark PDF', sample: 'watermark', target: 'watermark', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'protect-pdf', label: 'Password Protect PDF', sample: 'protect', target: 'protect', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'ocr-pdf', label: 'OCR Scanned PDF', sample: 'ocr', target: 'ocr', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
-      { id: 'images-to-pdf', label: 'Photos / Images to PDF', sample: 'jpg', target: 'pdf', SourceIcon: AdobePdfIcon, TargetIcon: ApplePagesIcon },
-      { id: 'pdf-to-pages', label: 'PDF → Apple Pages (.pages)', sample: 'pdf', target: 'pages', SourceIcon: AdobePdfIcon, TargetIcon: ApplePagesIcon },
-      { id: 'pdf-to-word', label: 'PDF → Microsoft Word (.docx)', sample: 'pdf', target: 'docx', SourceIcon: AdobePdfIcon, TargetIcon: MicrosoftWordIcon }
+      { id: 'compress-pdf', label: 'Compress PDF (-75%)', sample: 'compress', sourceExt: 'pdf', target: 'compress', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'protect-pdf', label: 'Password Protect PDF', sample: 'protect', sourceExt: 'pdf', target: 'protect', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'merge-pdfs', label: 'Merge Multi-PDFs', sample: 'merge', sourceExt: 'pdf', target: 'pdf', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'split-pdf', label: 'Split Pages to ZIP', sample: 'split', sourceExt: 'pdf', target: 'split', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'rotate-pdf', label: 'Rotate PDF 90°', sample: 'rotate', sourceExt: 'pdf', target: 'rotate', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'watermark-pdf', label: 'Watermark PDF', sample: 'watermark', sourceExt: 'pdf', target: 'watermark', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'ocr-pdf', label: 'OCR Searchable PDF', sample: 'ocr', sourceExt: 'pdf', target: 'ocr', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon },
+      { id: 'images-to-pdf', label: 'Images / Photos → PDF', sample: 'jpg', sourceExt: 'jpg', target: 'pdf', SourceIcon: AdobePdfIcon, TargetIcon: AdobePdfIcon }
     ]
   }
 };

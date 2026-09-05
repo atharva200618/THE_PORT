@@ -30,8 +30,16 @@ export default function MorphCardStack({
     triggerHaptic('light');
     if (preset.id === 'merge-pdfs' && onMergePdfs && pdfFiles.length >= 2) {
       onMergePdfs();
-    } else if (primaryFile && primaryFile.status === 'idle') {
-      onSelectTarget(primaryFile.id, preset.target);
+      return;
+    }
+
+    // Check if any idle file matches this preset's expected source extension
+    const matchingFile = files.find(
+      (f) => f.status === 'idle' && (preset.sourceExt ? f.sourceFormat === preset.sourceExt : true)
+    );
+
+    if (matchingFile) {
+      onSelectTarget(matchingFile.id, preset.target);
     } else if (onSelectSample) {
       onSelectSample(preset.sample);
     }
@@ -130,19 +138,29 @@ export default function MorphCardStack({
         </div>
 
         {/* Quick Mode Preset Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 scrollbar-none px-0.5">
           {currentMode.presets.map((preset) => {
             const { SourceIcon, TargetIcon } = preset;
+            const isSelected =
+              primaryFile &&
+              primaryFile.status === 'idle' &&
+              (preset.sourceExt ? primaryFile.sourceFormat === preset.sourceExt : true) &&
+              primaryFile.targetFormat === preset.target;
+
             return (
               <button
                 key={preset.id}
                 type="button"
                 onClick={() => handlePresetClick(preset)}
-                className="avero-light-glossy px-3 py-1.5 rounded-xl text-xs font-bold text-[#161618] border border-black/5 hover:scale-[1.03] active:scale-95 transition-all flex items-center gap-2 shrink-0 cursor-pointer shadow-2xs"
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer shadow-2xs border ${
+                  isSelected
+                    ? 'avero-dark-glossy text-white border-white/20 shadow-md scale-[1.02]'
+                    : 'avero-light-glossy text-[#161618] border-black/5 hover:scale-[1.03] active:scale-95'
+                }`}
                 title={`Quick Passage: ${preset.label}`}
               >
                 {SourceIcon && <SourceIcon className="w-3.5 h-3.5 shrink-0" />}
-                <ArrowRight className="w-2.5 h-2.5 text-[#71717A]" />
+                <ArrowRight className={`w-2.5 h-2.5 ${isSelected ? 'text-white/70' : 'text-[#71717A]'}`} />
                 {TargetIcon && <TargetIcon className="w-3.5 h-3.5 shrink-0" />}
                 <span className="truncate">{preset.label}</span>
               </button>
