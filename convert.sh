@@ -78,8 +78,13 @@ if [ "$IN_EXT" = "pdf" ]; then
         "$PYTHON_BIN" "$MEDIA_SCRIPT" watermark "$INPUT" "$OUTPUT" "THE PORT"
         exit 0
     elif [ "$OUT_EXT" = "protect" ]; then
+        USER_PASSWORD="$3"
+        if [ -z "$USER_PASSWORD" ]; then
+            echo "Error: Password required to protect PDF." >&2
+            exit 1
+        fi
         echo "  (PDF -> Password Protect via Media Engine)"
-        "$PYTHON_BIN" "$MEDIA_SCRIPT" protect "$INPUT" "$OUTPUT" "theport2026"
+        "$PYTHON_BIN" "$MEDIA_SCRIPT" protect "$INPUT" "$OUTPUT" "$USER_PASSWORD"
         exit 0
     elif [ "$OUT_EXT" = "unprotect" ]; then
         echo "  (PDF -> Unprotect via Media Engine)"

@@ -9,6 +9,7 @@ import { AdobePdfIcon } from '../BrandIcons';
 export default function MorphCardStack({
   files,
   onSelectTarget,
+  onSetPassword,
   onStartConvert,
   onStartAll,
   onMergePdfs,
@@ -159,6 +160,7 @@ export default function MorphCardStack({
               file={file}
               isPrimary={index === 0}
               onSelectTarget={onSelectTarget}
+              onSetPassword={onSetPassword}
               onStartConvert={onStartConvert}
               onRemove={onRemoveFile}
               onDelete={onDeleteConversion}

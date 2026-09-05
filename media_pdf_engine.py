@@ -261,9 +261,11 @@ def watermark_pdf(input_pdf, output_pdf, watermark_text="CONFIDENTIAL"):
     print(f"[Media Engine] Applied watermark '{text}' to {output_pdf}")
     return output_pdf
 
-def protect_pdf(input_pdf, output_pdf, password="theport2026"):
+def protect_pdf(input_pdf, output_pdf, password=None):
     """Encrypts a PDF with AES-256 password protection."""
-    pw = str(password) if password else "theport2026"
+    if not password:
+        raise ValueError("Password is required to protect this PDF")
+    pw = str(password)
     if pikepdf:
         with pikepdf.open(input_pdf) as pdf:
             pdf.save(output_pdf, encryption=pikepdf.Encryption(owner=pw, user=pw, R=6))
@@ -352,7 +354,10 @@ if __name__ == '__main__':
         text = sys.argv[4] if len(sys.argv) > 4 else "CONFIDENTIAL"
         watermark_pdf(sys.argv[2], sys.argv[3], watermark_text=text)
     elif mode == 'protect':
-        pw = sys.argv[4] if len(sys.argv) > 4 else "theport2026"
+        if len(sys.argv) < 5 or not sys.argv[4]:
+            print("Error: Password is required to protect PDF.", file=sys.stderr)
+            sys.exit(1)
+        pw = sys.argv[4]
         protect_pdf(sys.argv[2], sys.argv[3], password=pw)
     elif mode == 'unprotect':
         pw = sys.argv[4] if len(sys.argv) > 4 else ""

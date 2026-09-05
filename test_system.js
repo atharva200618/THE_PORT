@@ -70,6 +70,26 @@ async function runTests() {
   console.assert(stats.failed >= 1, 'Stats failed count >= 1');
   console.log('✓ db.getStats passed');
 
+  // Test job with options (Protect PDF custom password)
+  const protectJobId = `protect_job_${Date.now()}`;
+  const protectJob = db.createJob({
+    id: protectJobId,
+    originalName: 'Financial_Confidential.pdf',
+    sourceFormat: 'pdf',
+    targetFormat: 'protect',
+    fileSize: 4096,
+    inputFilename: `${protectJobId}_Financial_Confidential.pdf`,
+    options: { password: 'UserCustomSecret123!' }
+  });
+
+  console.assert(protectJob !== null, 'Protect job should be created');
+  console.assert(protectJob.options && protectJob.options.password === 'UserCustomSecret123!', 'Options password should match');
+  console.log('✓ db.createJob with custom password options passed');
+
+  const retrievedProtectJob = db.getJobById(protectJobId);
+  console.assert(retrievedProtectJob.options && retrievedProtectJob.options.password === 'UserCustomSecret123!', 'Retrieved options password should match');
+  console.log('✓ db.getJobById (options parsing) passed');
+
   console.log('\n=== 2. Testing Storage & 24-Hour Cleanup ===');
   const dummyInputFile = path.join(storage.UPLOADS_DIR, 'dummy_test.docx');
   fs.writeFileSync(dummyInputFile, 'dummy content');
@@ -82,6 +102,7 @@ async function runTests() {
   // Clean up test DB rows
   db.deleteJob(testJobId);
   db.deleteJob(failJobId);
+  db.deleteJob(protectJobId);
 
   console.log('\n========================================');
   console.log(' ALL AUTOMATED TESTS PASSED SUCCESSFULLY! ');

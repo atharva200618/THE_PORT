@@ -95,12 +95,16 @@ function cleanupHungProcesses() {
 /**
  * Runs the ./convert.sh subprocess with a 30s timeout watchdog
  */
-function executeConvertScript(inputPath, outputPath) {
+function executeConvertScript(inputPath, outputPath, extraArg = null) {
   return new Promise((resolve, reject) => {
-    log('info', `Spawning convert script: ${CONVERT_SCRIPT}`, { inputPath, outputPath });
+    const scriptArgs = [inputPath, outputPath];
+    if (extraArg) {
+      scriptArgs.push(extraArg);
+    }
+    log('info', `Spawning convert script: ${CONVERT_SCRIPT}`, { inputPath, outputPath, hasExtraArg: Boolean(extraArg) });
 
     let isSettled = false;
-    const proc = spawn(CONVERT_SCRIPT, [inputPath, outputPath], {
+    const proc = spawn(CONVERT_SCRIPT, scriptArgs, {
       cwd: ROOT_DIR,
       env: { ...process.env, PATH: process.env.PATH || '/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin' }
     });
@@ -241,7 +245,12 @@ async function processJob(job) {
 
     // 2. Run conversion
     log('info', `Executing conversion for job ${job.id}...`);
-    await executeConvertScript(tempInputPath, tempOutputPath);
+    if (job.targetFormat === 'protect') {
+      const password = job.options?.password;
+      await executeConvertScript(tempInputPath, tempOutputPath, password);
+    } else {
+      await executeConvertScript(tempInputPath, tempOutputPath);
+    }
 
     // 3. Upload result
     log('info', `Uploading converted output for job ${job.id}...`);

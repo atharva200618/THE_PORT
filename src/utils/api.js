@@ -38,10 +38,14 @@ export async function fetchWorkerStatus() {
 /**
  * Enqueues a conversion job on the Backend API
  */
-export async function submitConversionJob(file, targetFormat) {
+export async function submitConversionJob(file, targetFormat, options = {}) {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('targetFormat', targetFormat);
+
+  if (options && options.password) {
+    formData.append('password', options.password);
+  }
 
   const response = await fetch(`${API_BASE_URL}/api/convert`, {
     method: 'POST',

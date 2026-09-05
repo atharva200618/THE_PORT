@@ -55,8 +55,13 @@ export async function processNextJobDirectly() {
     const outputFilename = `out_${job.id}_${uniqueSuffix}_${baseName}.${job.targetFormat}`;
     const outputPath = storage.getOutputFilePath(outputFilename);
 
+    const convertArgs = [inputPath, outputPath];
+    if (job.targetFormat === 'protect' && job.options?.password) {
+      convertArgs.push(job.options.password);
+    }
+
     await new Promise((resolve, reject) => {
-      const proc = spawn(CONVERT_SCRIPT, [inputPath, outputPath], {
+      const proc = spawn(CONVERT_SCRIPT, convertArgs, {
         env: {
           ...process.env,
           PATH: `/tmp/pdf2docx_env/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${process.env.PATH || ''}`
@@ -129,15 +134,28 @@ router.post('/convert', (req, res) => {
     const sourceExt = (originalName.split('.').pop() || '').toLowerCase();
     const requestedFormat = (req.body.targetFormat || req.body.target || req.query.targetFormat || '').toLowerCase();
     const isCompressAction = requestedFormat === 'compress' || requestedFormat === 'compressed';
-    const targetFormat = isCompressAction ? 'pdf' : resolveTargetFormat(sourceExt, requestedFormat);
+    const isProtectAction = requestedFormat === 'protect';
+    const targetFormat = isCompressAction ? 'pdf' : (isProtectAction ? 'protect' : resolveTargetFormat(sourceExt, requestedFormat));
 
-    if (sourceExt === targetFormat && !isCompressAction) {
+    if (targetFormat === 'protect') {
+      const password = req.body.password;
+      if (!password || (typeof password === 'string' && !password.trim())) {
+        if (req.file && fs.existsSync(req.file.path)) {
+          fs.unlinkSync(req.file.path);
+        }
+        return res.status(400).json({ error: 'Password is required to protect this PDF' });
+      }
+    }
+
+    if (sourceExt === targetFormat && !isCompressAction && !isProtectAction) {
       // Clean up uploaded file
       fs.unlinkSync(req.file.path);
       return res.status(400).json({
         error: `Source format is already .${sourceExt}. Please choose a different target format.`
       });
     }
+
+    const jobOptions = targetFormat === 'protect' ? { password: req.body.password } : {};
 
     const jobId = `job_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
     const job = db.createJob({
@@ -146,7 +164,8 @@ router.post('/convert', (req, res) => {
       sourceFormat: sourceExt,
       targetFormat: targetFormat,
       fileSize: req.file.size,
-      inputFilename: req.file.filename
+      inputFilename: req.file.filename,
+      options: jobOptions
     });
 
     console.log(`[API] Enqueued conversion job: ${jobId} (${sourceExt} -> ${targetFormat}, ${req.file.size} bytes)`);
@@ -267,6 +286,7 @@ router.get('/next', (req, res) => {
       originalName: job.originalName,
       fileSize: job.fileSize,
       fileUrl: `/api/jobs/${job.id}/file`,
+      options: job.options || {},
       createdAt: job.createdAt
     }
   });

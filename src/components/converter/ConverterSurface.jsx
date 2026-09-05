@@ -9,6 +9,7 @@ export default function ConverterSurface({
   onSelectSample,
   isDraggingOver = false,
   onSelectTarget,
+  onSetPassword,
   onStartConvert,
   onStartAll,
   onMergePdfs,
@@ -37,6 +38,7 @@ export default function ConverterSurface({
             key="cardstack"
             files={files}
             onSelectTarget={onSelectTarget}
+            onSetPassword={onSetPassword}
             onStartConvert={onStartConvert}
             onStartAll={onStartAll}
             onMergePdfs={onMergePdfs}

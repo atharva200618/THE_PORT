@@ -112,9 +112,47 @@ export function useConversionQueue(soundEnabled = true) {
     );
   }, []);
 
+  // Change password for a specific file
+  const setFilePassword = useCallback((id, newPassword) => {
+    setFiles((prev) =>
+      prev.map((f) => {
+        if (f.id === id) {
+          return {
+            ...f,
+            password: newPassword
+          };
+        }
+        return f;
+      })
+    );
+  }, []);
+
   // Convert a single file by ID
   const startConversion = useCallback(
     async (fileId) => {
+      const currentFile = files.find((f) => f.id === fileId);
+      if (!currentFile || !currentFile.file) return;
+
+      const { file, name, sourceFormat, targetFormat, password } = currentFile;
+
+      if (targetFormat === 'protect' && (!password || (typeof password === 'string' && !password.trim()))) {
+        setFiles((prev) =>
+          prev.map((f) =>
+            f.id === fileId
+              ? {
+                  ...f,
+                  status: 'error',
+                  progress: 0,
+                  statusText: 'Conversion failed',
+                  error: 'Password is required to protect this PDF'
+                }
+              : f
+          )
+        );
+        triggerHaptic('error');
+        return;
+      }
+
       setFiles((prev) => {
         const target = prev.find((f) => f.id === fileId);
         if (!target || target.status === 'converting') return prev;
@@ -125,15 +163,11 @@ export function useConversionQueue(soundEnabled = true) {
         );
       });
 
-      const currentFile = files.find((f) => f.id === fileId);
-      if (!currentFile || !currentFile.file) return;
-
-      const { file, name, sourceFormat, targetFormat } = currentFile;
       if (soundEnabled) sounds.playGateTransit();
 
       try {
         // Attempt backend conversion job
-        const job = await submitConversionJob(file, targetFormat);
+        const job = await submitConversionJob(file, targetFormat, { password: password ? password.trim() : undefined });
 
         setFiles((prev) =>
           prev.map((f) =>
@@ -214,7 +248,8 @@ export function useConversionQueue(soundEnabled = true) {
       } catch (err) {
         console.warn('Backend conversion notice, checking sample simulation:', err.message);
         const isSample =
-          name.includes('Sample') ||
+          targetFormat !== 'protect' &&
+          (name.includes('Sample') ||
           name.includes('Executive') ||
           name.includes('Architectural') ||
           name.includes('Product') ||
@@ -222,7 +257,7 @@ export function useConversionQueue(soundEnabled = true) {
           name.includes('Showcase') ||
           name.includes('Contract') ||
           name.includes('Receipt') ||
-          name.includes('Invoice');
+          name.includes('Invoice'));
 
         if (isSample) {
           try {
@@ -536,6 +571,7 @@ export function useConversionQueue(soundEnabled = true) {
     removeFile,
     clearAll,
     setTargetFormat,
+    setFilePassword,
     startConversion,
     startAllConversions,
     mergePdfs,

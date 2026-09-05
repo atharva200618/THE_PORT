@@ -25,6 +25,7 @@ export default function App() {
     removeFile,
     clearAll,
     setTargetFormat,
+    setFilePassword,
     startConversion,
     startAllConversions,
     mergePdfs,
@@ -249,6 +250,7 @@ export default function App() {
               onSelectSample={handleSelectSampleWithModeSync}
               isDraggingOver={isDraggingOver}
               onSelectTarget={setTargetFormat}
+              onSetPassword={setFilePassword}
               onStartConvert={startConversion}
               onStartAll={startAllConversions}
               onMergePdfs={mergePdfs}

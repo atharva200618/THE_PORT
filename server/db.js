@@ -26,6 +26,7 @@ db.exec(`
     input_filename TEXT NOT NULL,
     output_filename TEXT,
     error_message TEXT,
+    job_options TEXT,
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,
     completed_at INTEGER
@@ -34,20 +35,28 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_jobs_status_created ON jobs(status, created_at ASC);
 `);
 
+// Migration for existing tables
+try {
+  db.exec(`ALTER TABLE jobs ADD COLUMN job_options TEXT;`);
+} catch {
+  // Column already exists
+}
+
 /**
  * Creates a new conversion job with status 'pending'
  */
-export function createJob({ id, originalName, sourceFormat, targetFormat, fileSize, inputFilename }) {
+export function createJob({ id, originalName, sourceFormat, targetFormat, fileSize, inputFilename, options = {} }) {
   const now = Date.now();
+  const jobOptionsJson = options && Object.keys(options).length > 0 ? JSON.stringify(options) : null;
   const stmt = db.prepare(`
     INSERT INTO jobs (
       id, original_name, source_format, target_format, file_size,
-      status, input_filename, output_filename, error_message,
+      status, input_filename, output_filename, error_message, job_options,
       created_at, updated_at, completed_at
-    ) VALUES (?, ?, ?, ?, ?, 'pending', ?, NULL, NULL, ?, ?, NULL)
+    ) VALUES (?, ?, ?, ?, ?, 'pending', ?, NULL, NULL, ?, ?, ?, NULL)
   `);
 
-  stmt.run(id, originalName, sourceFormat, targetFormat, fileSize, inputFilename, now, now);
+  stmt.run(id, originalName, sourceFormat, targetFormat, fileSize, inputFilename, jobOptionsJson, now, now);
   return getJobById(id);
 }
 
@@ -177,6 +186,16 @@ export function getStats() {
 }
 
 function formatJobRow(row) {
+  let options = {};
+  if (row.job_options) {
+    try {
+      options = JSON.parse(row.job_options);
+      if (typeof options !== 'object' || options === null) options = {};
+    } catch {
+      options = {};
+    }
+  }
+
   return {
     id: row.id,
     originalName: row.original_name,
@@ -187,6 +206,7 @@ function formatJobRow(row) {
     inputFilename: row.input_filename,
     outputFilename: row.output_filename,
     errorMessage: row.error_message,
+    options: options,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     completedAt: row.completed_at
