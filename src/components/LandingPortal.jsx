@@ -234,33 +234,7 @@ export default function LandingPortal({
             </div>
           </div>
 
-          {/* 4. Active Category 1-Tap Feature Chips */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap max-w-3xl mx-auto pt-1">
-            {currentMode.presets.map((preset) => {
-              const { SourceIcon, TargetIcon } = preset;
-              return (
-                <button
-                  key={preset.id}
-                  type="button"
-                  onClick={() => {
-                    triggerHaptic('medium');
-                    onSelectSample(preset.sample);
-                  }}
-                  className="avero-clay-card px-3.5 sm:px-4 py-2 rounded-2xl text-xs font-bold text-[#161618] border border-white/95 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-xs cursor-pointer group bg-white/90 backdrop-blur-md"
-                  title={`Click to try ${preset.label}`}
-                >
-                  <div className="flex items-center gap-1.5">
-                    {SourceIcon && <SourceIcon className="w-4 h-4 shrink-0" />}
-                    <ArrowRight className="w-3 h-3 text-[#71717A] group-hover:text-[#161618] group-hover:translate-x-0.5 transition-all" />
-                    {TargetIcon && <TargetIcon className="w-4 h-4 shrink-0" />}
-                  </div>
-                  <span className="font-extrabold">{preset.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* 5. Grand Length Dropzone Bar (Morphing Surface) */}
+          {/* 4. Grand Length Dropzone Bar (Morphing Surface) */}
           <div className="max-w-4xl mx-auto w-full space-y-6 pt-2">
             <DropZone
               onFileSelect={onFileSelect}
