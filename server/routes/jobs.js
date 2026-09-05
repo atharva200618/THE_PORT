@@ -132,10 +132,9 @@ router.post('/convert', (req, res) => {
 
     const originalName = req.file.originalname;
     const sourceExt = (originalName.split('.').pop() || '').toLowerCase();
-    const requestedFormat = (req.body.targetFormat || req.body.target || req.query.targetFormat || '').toLowerCase();
-    const isCompressAction = requestedFormat === 'compress' || requestedFormat === 'compressed';
-    const isProtectAction = requestedFormat === 'protect';
-    const targetFormat = isCompressAction ? 'pdf' : (isProtectAction ? 'protect' : resolveTargetFormat(sourceExt, requestedFormat));
+    const requestedFormat = (req.body.targetFormat || req.body.target || req.query.targetFormat || '').toLowerCase().replace(/^\./, '');
+    const isSpecialPdfTool = ['compress', 'compressed', 'split', 'rotate', 'watermark', 'protect', 'unprotect', 'ocr', 'merge'].includes(requestedFormat);
+    const targetFormat = isSpecialPdfTool ? (requestedFormat === 'compressed' ? 'compress' : requestedFormat) : resolveTargetFormat(sourceExt, requestedFormat);
 
     if (targetFormat === 'protect') {
       const password = req.body.password;
@@ -147,7 +146,7 @@ router.post('/convert', (req, res) => {
       }
     }
 
-    if (sourceExt === targetFormat && !isCompressAction && !isProtectAction) {
+    if (sourceExt === targetFormat && !isSpecialPdfTool) {
       // Clean up uploaded file
       fs.unlinkSync(req.file.path);
       return res.status(400).json({
@@ -361,7 +360,13 @@ router.get('/:id/download', (req, res) => {
   }
 
   const baseName = job.originalName.replace(/\.[^/.]+$/, '');
-  const downloadFileName = `${baseName}.${job.targetFormat}`;
+  let downloadExt = job.targetFormat;
+  if (['compress', 'compressed', 'rotate', 'watermark', 'protect', 'unprotect', 'ocr'].includes(downloadExt)) {
+    downloadExt = 'pdf';
+  } else if (downloadExt === 'split') {
+    downloadExt = 'zip';
+  }
+  const downloadFileName = `${baseName}.${downloadExt}`;
 
   return res.download(filePath, downloadFileName);
 });
@@ -381,7 +386,7 @@ router.get('/:id/view', (req, res) => {
     return res.status(410).json({ error: 'Converted file has expired.' });
   }
 
-  if (job.targetFormat === 'pdf') {
+  if (['pdf', 'compress', 'compressed', 'rotate', 'watermark', 'protect', 'unprotect', 'ocr'].includes(job.targetFormat)) {
     const baseName = job.originalName.replace(/\.[^/.]+$/, '');
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `inline; filename="${encodeURIComponent(baseName)}.pdf"`);

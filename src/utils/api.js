@@ -52,18 +52,25 @@ export async function submitConversionJob(file, targetFormat, options = {}) {
     body: formData
   });
 
-  if (!response.ok) {
+  const contentType = response.headers.get('content-type') || '';
+  if (!response.ok || !contentType.includes('application/json')) {
     let errorMsg = `Server error (HTTP ${response.status})`;
     try {
       const errorJson = await response.json();
       if (errorJson.error) errorMsg = errorJson.error;
     } catch {
-      // ignore
+      if (!contentType.includes('application/json')) {
+        errorMsg = 'Native M1 Engine is offline on this cloud URL. Please test on http://localhost:3000 to use your Mac hardware accelerator.';
+      }
     }
     throw new Error(errorMsg);
   }
 
-  return response.json();
+  const data = await response.json();
+  if (!data || !data.jobId) {
+    throw new Error('Invalid response from conversion API');
+  }
+  return data;
 }
 
 /**
@@ -82,7 +89,8 @@ export async function submitMergePdfsJob(filesList, outputName = 'Merged_Documen
     body: formData
   });
 
-  if (!response.ok) {
+  const contentType = response.headers.get('content-type') || '';
+  if (!response.ok || !contentType.includes('application/json')) {
     let errorMsg = `PDF Merge failed (HTTP ${response.status})`;
     try {
       const errorJson = await response.json();
@@ -99,10 +107,15 @@ export async function submitMergePdfsJob(filesList, outputName = 'Merged_Documen
  */
 export async function fetchJobStatus(jobId) {
   const response = await fetch(`${API_BASE_URL}/api/jobs/${jobId}`);
-  if (!response.ok) {
+  const contentType = response.headers.get('content-type') || '';
+  if (!response.ok || !contentType.includes('application/json')) {
     throw new Error(`Failed to fetch job status (HTTP ${response.status})`);
   }
-  return response.json();
+  const data = await response.json();
+  if (!data || !data.status) {
+    throw new Error('Malformed job status response from engine');
+  }
+  return data;
 }
 
 /**
