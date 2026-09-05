@@ -165,6 +165,7 @@ export default function MorphCardStack({
               onRemove={onRemoveFile}
               onDelete={onDeleteConversion}
               activeMode={activeMode}
+              onChangeMode={onChangeMode}
             />
           ))}
         </AnimatePresence>

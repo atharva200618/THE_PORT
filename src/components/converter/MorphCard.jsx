@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Zap, FileText, ArrowRight, Lock, Eye, EyeOff } from 'lucide-react';
-import FormatGrid from './FormatGrid';
+import { X, Zap, FileText, ArrowRight, Lock, Eye, EyeOff, Layers, RefreshCw, Sparkles } from 'lucide-react';
+import FormatGrid, { getAvailableTargets } from './FormatGrid';
 import ProgressView from './ProgressView';
 import ResultView from './ResultView';
 import { triggerHaptic } from '../../utils/haptics';
+import { getTargetActionDetails } from '../../config/featuresConfig';
 
 export default function MorphCard({
   file,
@@ -14,12 +15,33 @@ export default function MorphCard({
   onStartConvert,
   onRemove,
   onDelete,
-  activeMode
+  activeMode = 'documents',
+  onChangeMode
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const isApple = ['pages', 'key', 'numbers'].includes(file.sourceFormat);
   const cardBorderClass = isApple ? 'border-blue-500/30' : 'border-amber-500/30';
+  
+  const availableTargets = getAvailableTargets(file.sourceFormat, activeMode);
+  const hasValidTargets = availableTargets.length > 0;
+  const actionDetails = getTargetActionDetails(file.sourceFormat, file.targetFormat);
   const isProtectWithoutPassword = file.targetFormat === 'protect' && (!file.password || !file.password.trim());
+
+  const renderActionIcon = () => {
+    switch (actionDetails.iconType) {
+      case 'protect':
+        return <Lock className="w-3.5 h-3.5 text-amber-300" />;
+      case 'split':
+        return <Layers className="w-3.5 h-3.5 text-blue-300" />;
+      case 'rotate':
+        return <RefreshCw className="w-3.5 h-3.5 text-cyan-300" />;
+      case 'watermark':
+      case 'ocr':
+        return <Sparkles className="w-3.5 h-3.5 text-yellow-300" />;
+      default:
+        return <Zap className="w-3.5 h-3.5 text-white" />;
+    }
+  };
 
   const motionProps = isPrimary
     ? {
@@ -96,10 +118,16 @@ export default function MorphCard({
             selectedTarget={file.targetFormat}
             onSelectTarget={(target) => onSelectTarget(file.id, target)}
             activeMode={activeMode}
+            onChangeMode={onChangeMode}
           />
 
-          {file.targetFormat === 'protect' && (
-            <div className="p-3.5 rounded-2xl bg-amber-50/90 border border-amber-200/90 space-y-2 transition-all">
+          {hasValidTargets && file.targetFormat === 'protect' && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="p-3.5 rounded-2xl bg-amber-50/90 border border-amber-200/90 space-y-2 transition-all"
+            >
               <div className="flex items-center justify-between">
                 <label
                   htmlFor={`password-${file.id}`}
@@ -135,27 +163,29 @@ export default function MorphCard({
                   {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                 </button>
               </div>
-            </div>
+            </motion.div>
           )}
 
-          <div className="flex items-center justify-end pt-2">
-            <button
-              type="button"
-              disabled={isProtectWithoutPassword}
-              onClick={() => {
-                triggerHaptic('medium');
-                onStartConvert(file.id);
-              }}
-              className={`px-6 py-2.5 rounded-full text-xs font-black flex items-center gap-2 shadow-md transition-all ${
-                isProtectWithoutPassword
-                  ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed border border-zinc-300 shadow-none'
-                  : 'avero-dark-glossy text-white hover:scale-105 active:scale-95 cursor-pointer'
-              }`}
-            >
-              <Zap className="w-3.5 h-3.5" />
-              <span>{file.targetFormat === 'protect' ? 'Protect PDF with Password' : `Convert to .${file.targetFormat}`}</span>
-            </button>
-          </div>
+          {hasValidTargets && (
+            <div className="flex items-center justify-end pt-2">
+              <button
+                type="button"
+                disabled={isProtectWithoutPassword}
+                onClick={() => {
+                  triggerHaptic('medium');
+                  onStartConvert(file.id);
+                }}
+                className={`px-6 py-2.5 rounded-full text-xs font-black flex items-center gap-2 shadow-md transition-all ${
+                  isProtectWithoutPassword
+                    ? 'bg-zinc-200 text-zinc-400 cursor-not-allowed border border-zinc-300 shadow-none'
+                    : 'avero-dark-glossy text-white hover:scale-105 active:scale-95 cursor-pointer'
+                }`}
+              >
+                {renderActionIcon()}
+                <span>{actionDetails.label}</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
 
