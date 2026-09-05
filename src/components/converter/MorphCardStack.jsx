@@ -1,10 +1,8 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Plus, Zap, Trash2, Files, Sparkles, ArrowRight, Layers } from 'lucide-react';
+import { Plus, Zap, Trash2, Files, Layers } from 'lucide-react';
 import MorphCard from './MorphCard';
 import { triggerHaptic } from '../../utils/haptics';
-import { MODES } from '../../config/featuresConfig';
-import { AdobePdfIcon } from '../BrandIcons';
 
 export default function MorphCardStack({
   files,
@@ -18,32 +16,10 @@ export default function MorphCardStack({
   onDeleteConversion,
   onOpenFileInput,
   activeMode = 'documents',
-  onChangeMode,
-  onSelectSample
+  onChangeMode
 }) {
-  const currentMode = MODES[activeMode] || MODES.documents;
   const idleCount = files.filter((f) => f.status === 'idle').length;
   const pdfFiles = files.filter((f) => f.sourceFormat === 'pdf' && (f.status === 'idle' || f.file));
-  const primaryFile = files[0];
-
-  const handlePresetClick = (preset) => {
-    triggerHaptic('light');
-    if (preset.id === 'merge-pdfs' && onMergePdfs && pdfFiles.length >= 2) {
-      onMergePdfs();
-      return;
-    }
-
-    // Check if any idle file matches this preset's expected source extension
-    const matchingFile = files.find(
-      (f) => f.status === 'idle' && (preset.sourceExt ? f.sourceFormat === preset.sourceExt : true)
-    );
-
-    if (matchingFile) {
-      onSelectTarget(matchingFile.id, preset.target);
-    } else if (onSelectSample) {
-      onSelectSample(preset.sample);
-    }
-  };
 
   return (
     <div className="max-w-2xl mx-auto w-full space-y-4">
@@ -112,60 +88,6 @@ export default function MorphCardStack({
               <Trash2 className="w-3.5 h-3.5" />
             </button>
           )}
-        </div>
-      </div>
-
-      {/* Feature Tool Ribbon matching activeMode */}
-      <div className="avero-clay-card rounded-2xl p-3 bg-white/70 border border-white/90 shadow-xs space-y-2">
-        <div className="flex items-center justify-between gap-2 px-1">
-          <span className="text-[10px] font-black uppercase text-[#71717A] tracking-wider flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            <span>{currentMode.name} Passage Tools:</span>
-          </span>
-          {onSelectSample && (
-            <button
-              type="button"
-              onClick={() => {
-                triggerHaptic('light');
-                onSelectSample(currentMode.presets[0]?.sample || 'pages');
-              }}
-              className="text-[10px] font-black text-blue-600 hover:text-blue-800 flex items-center gap-1 hover:underline cursor-pointer"
-            >
-              <Sparkles className="w-3 h-3" />
-              <span>+ Try {currentMode.shortName} Sample</span>
-            </button>
-          )}
-        </div>
-
-        {/* Quick Mode Preset Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 scrollbar-none px-0.5">
-          {currentMode.presets.map((preset) => {
-            const { SourceIcon, TargetIcon } = preset;
-            const isSelected =
-              primaryFile &&
-              primaryFile.status === 'idle' &&
-              (preset.sourceExt ? primaryFile.sourceFormat === preset.sourceExt : true) &&
-              primaryFile.targetFormat === preset.target;
-
-            return (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => handlePresetClick(preset)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer shadow-2xs border ${
-                  isSelected
-                    ? 'avero-dark-glossy text-white border-white/20 shadow-md scale-[1.02]'
-                    : 'avero-light-glossy text-[#161618] border-black/5 hover:scale-[1.03] active:scale-95'
-                }`}
-                title={`Quick Passage: ${preset.label}`}
-              >
-                {SourceIcon && <SourceIcon className="w-3.5 h-3.5 shrink-0" />}
-                <ArrowRight className={`w-2.5 h-2.5 ${isSelected ? 'text-white/70' : 'text-[#71717A]'}`} />
-                {TargetIcon && <TargetIcon className="w-3.5 h-3.5 shrink-0" />}
-                <span className="truncate">{preset.label}</span>
-              </button>
-            );
-          })}
         </div>
       </div>
 
